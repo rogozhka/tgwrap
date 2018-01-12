@@ -1,0 +1,4 @@
+language: go
+
+env:
+    - TGWRAP_TOKEN=449538617:AAG7dPcdkNp0ddxHNAu032vqKMLI2GD_MCg
