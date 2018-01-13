@@ -6,6 +6,10 @@ import "time"
 // Telegram API object
 //
 type Message struct {
+
+	//
+	// Unique message identifier inside this chat
+	//
 	ID uint64 `json:"message_id"`
 
 	//

@@ -4,6 +4,10 @@ package tgwrap
 // Telegram API object
 //
 type Chat struct {
+
+	//
+	// Unique identifier for this chat.
+	//
 	ID uint64 `json:"id"`
 
 	//
