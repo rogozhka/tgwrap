@@ -27,7 +27,11 @@ func Test_SendMessage(t *testing.T) {
 	up := arr[0]
 	chatID := up.Message.From.ID
 
-	m, err4 := bot.SendMessage(chatID, fmt.Sprintf(";) %v", up.Message.Text), nil)
+	m, err4 := bot.SendMessage(chatID, fmt.Sprintf(";) %v", up.Message.Text),
+		&SendMessageOpt{
+			DisableNotification: true,
+		})
+
 	assert.Nil(t, err4, "SendMessage err")
 	assert.NotNil(t, m, "Message present")
 }
