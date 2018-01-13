@@ -4,6 +4,7 @@ package tgwrap
 // Telegram API object
 //
 type MessageEntity struct {
+
 	//
 	// Type of the entity. Can be
 	// mention (@username),
