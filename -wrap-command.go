@@ -75,7 +75,7 @@ func (p *bot) getResponse(methodName string, bodyStruct interface{}, resultStruc
 	}
 
 	if !resp.OK {
-		return fmt.Errorf("API Error(%v)[%v]:%v", methodName, resp.ErrorCode, resp.Description)
+		return fmt.Errorf("API ERROR(%v)[%v]:%v", methodName, resp.ErrorCode, resp.Description)
 	}
 
 	return nil
