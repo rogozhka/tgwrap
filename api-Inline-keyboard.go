@@ -1,30 +1,20 @@
 package tgwrap
 
-type ReplyKeyboardMarkup struct {
-	Keyboard       [][]*KeyboardButton `json:"keyboard"`
-	ResizeKeyboard [][]*KeyboardButton `json:"resize_keyboard"`
-
-	OneTimeKeyboard bool `json:"one_time_keyboard"`
-	Selective       bool `json:"selective"`
-}
-
-type ReplyKeyboardRemove struct {
-	RemoveKeyboard [][]*InlineKeyboardButton `json:"remove_keyboard"`
-
-	Selective bool `json:"selective"`
-}
-
-type ForceReply struct {
-	ForceReply bool `json:"force_reply"`
-	Selective  bool `json:"selective"`
-}
-
-type KeyboardButton struct {
-}
-
+//
+// This object represents an inline keyboard that appears
+// right next to the message it belongs to.
+//
 type InlineKeyboardMarkup struct {
+
+	//
+	// Array of button rows, each represented
+	// by an Array of InlineKeyboardButton objects
+	//
 	InlineKeyboard [][]*InlineKeyboardButton `json:"inline_keyboard"`
 }
 
+//
+//
+//
 type InlineKeyboardButton struct {
 }
