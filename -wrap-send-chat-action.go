@@ -35,7 +35,7 @@ func (p *bot) SendChatAction(chatID interface{}, action ChatActions) (bool, erro
 		Result bool `json:"result"`
 	}
 
-	err := p.getResponse("sendChatAction", dataSend, &resp)
+	err := p.getResponse("sendChatAction", p.sendJSON, dataSend, &resp)
 	if err != nil {
 		return false, err
 	}

@@ -29,7 +29,7 @@ func (p *bot) ForwardMessage(chatID interface{}, fromChatID interface{},
 		Result *Message `json:"result"`
 	}
 
-	err := p.getResponse("forwardMessage", dataSend, &respStruct)
+	err := p.getResponse("forwardMessage", p.sendJSON, dataSend, &respStruct)
 	if err != nil {
 		return nil, err
 	}

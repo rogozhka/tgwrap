@@ -68,7 +68,7 @@ func (p *bot) SendMessage(chatID interface{}, text string, opt *SendMessageOpt) 
 		Result *Message `json:"result"`
 	}
 
-	err := p.getResponse("sendMessage", dataSend, &resp)
+	err := p.getResponse("sendMessage", p.sendJSON, dataSend, &resp)
 	if err != nil {
 		return nil, err
 	}
