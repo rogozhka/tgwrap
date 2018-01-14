@@ -11,7 +11,7 @@ func (p *bot) GetMe() (*User, error) {
 		Result *User `json:"result"`
 	}
 
-	err := p.getResponse("getMe", nil, &resp)
+	err := p.getResponse("getMe", p.sendJSON, nil, &resp)
 	if err != nil {
 		return nil, err
 	}

@@ -4,18 +4,13 @@ import (
 	"fmt"
 )
 
-type SendMessageOpt struct {
-	//
-	// Send Markdown or HTML, if you want Telegram apps
-	// to show bold, italic, fixed-width text or inline URLs
-	// in your bot's message.
-	//
-	ParseMode ParseModes `json:"parse_mode,omitempty"`
+type SendPhotoOpt struct {
 
 	//
-	// Disables link previews for links in this message
+	// Photo caption (may also be used when resending photos by file_id),
+	// 0-200 characters
 	//
-	DisableWebPreview bool `json:"disable_web_page_preview,omitempty"`
+	Caption string `json:"caption,omitempty"`
 
 	//
 	// Sends the message silently. Users will receive a notification with no sound.
@@ -36,30 +31,31 @@ type SendMessageOpt struct {
 	ReplyMarkup interface{} `json:"reply_markup,omitempty"`
 }
 
-type ParseModes string
-
-const (
-	ParseModeDefault  ParseModes = ""
-	ParseModeHTML     ParseModes = "HTML"
-	ParseModeMarkdown ParseModes = "Markdown"
-)
-
-func (p *bot) SendMessage(chatID interface{}, text string, opt *SendMessageOpt) (*Message, error) {
+func (p *bot) SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt) (*Message, error) {
 
 	type sendFormat struct {
 		ChatID string `json:"chat_id"`
-		Text   string `json:"text"`
 
-		SendMessageOpt // optional part
+		SendPhotoOpt `json:",omitempty"`
+
+		//
+		// Photo to send. Pass a file_id as String to send a photo that exists
+		// on the Telegram servers (recommended), pass an HTTP URL as a String
+		// for Telegram to get a photo from the Internet,
+		// or upload a new photo using multipart/form-data.
+		//
+		// InputFile should have MarshalText interface
+		//
+		Photo interface{} `json:"photo" form:"file"`
 	}
 
 	dataSend := sendFormat{
 		ChatID: fmt.Sprint(chatID), // don't care about checking fmt, Telegram will response with error if invalid ID
-		Text:   text,
+		Photo:  photo,
 	}
 
 	if opt != nil {
-		dataSend.SendMessageOpt = *opt
+		dataSend.SendPhotoOpt = *opt
 	}
 
 	var resp struct {
@@ -68,9 +64,9 @@ func (p *bot) SendMessage(chatID interface{}, text string, opt *SendMessageOpt) 
 		Result *Message `json:"result"`
 	}
 
-	err := p.getResponse("sendMessage", p.sendJSON, dataSend, &resp)
+	err := p.getResponse("sendPhoto", p.sendFormData, dataSend, &resp)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("getResponse ERROR:%v", err)
 	}
 
 	return resp.Result, nil
