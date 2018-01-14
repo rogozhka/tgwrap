@@ -14,4 +14,5 @@ type IBot interface {
 	IBotUpdates
 	IBotMessages
 	IBotChat
+	IBotMedia
 }
