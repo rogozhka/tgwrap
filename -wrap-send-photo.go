@@ -67,12 +67,10 @@ func (p *bot) SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt
 		Result *Message `json:"result"`
 	}
 
-	var sender fCommandSender
+	var sender fCommandSender = p.sendJSON
 
 	tt := thestruct.Type(reflect.TypeOf(photo))
-	if "string" == tt.Name() {
-		sender = p.sendJSON
-	} else {
+	if "InputFile" == tt.Name() && len(photo.(*InputFile).Name()) > 0 {
 		sender = p.sendFormData
 	}
 
