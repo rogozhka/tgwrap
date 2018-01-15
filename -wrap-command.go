@@ -40,7 +40,17 @@ func (p *bot) sendJSON(methodName string, bodyStruct interface{}) ([]byte, error
 		return res, err
 	}
 
-	resp, err := http.Post(url, "application/json", &buf)
+	return p.postRequest(url, "application/json", &buf)
+}
+
+//
+// postRequest makes request and reads result
+//
+func (p *bot) postRequest(url string, contentType string, body io.Reader) ([]byte, error) {
+
+	var res []byte
+
+	resp, err := http.Post(url, contentType, body)
 	if resp != nil {
 		defer resp.Body.Close()
 		resp.Close = true
@@ -50,7 +60,7 @@ func (p *bot) sendJSON(methodName string, bodyStruct interface{}) ([]byte, error
 	}
 
 	if res, err := ioutil.ReadAll(resp.Body); err != nil {
-		return res, fmt.Errorf("ReadAll error:%v", err)
+		return res, fmt.Errorf("POST ReadAll error:%v", err)
 	} else {
 		return res, nil
 	}
@@ -133,25 +143,11 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 
 		mpw.WriteField(jsonTag.Value, fmt.Sprintf("%v", v.Interface()))
 	}
-	//
-	//
+
+	// write closing boundary into buf
 	mpw.Close()
-	//
 
-	resp, err := http.Post(url, mpw.FormDataContentType(), &buf)
-	if resp != nil {
-		defer resp.Body.Close()
-		resp.Close = true
-	}
-	if err != nil {
-		return res, fmt.Errorf("POST error:%v", err)
-	}
-
-	if res, err := ioutil.ReadAll(resp.Body); err != nil {
-		return res, fmt.Errorf("ReadAll error:%v", err)
-	} else {
-		return res, nil
-	}
+	return p.postRequest(url, mpw.FormDataContentType(), &buf)
 }
 
 func isEmptyValue(v reflect.Value) bool {
