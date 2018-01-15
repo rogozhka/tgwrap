@@ -75,3 +75,14 @@ func (p *InputFile) MarshalText() (text []byte, err error) {
 
 	return []byte(""), nil
 }
+
+func (p *InputFile) String() string {
+
+	bytes, err := p.MarshalText()
+
+	if err != nil {
+		return ""
+	}
+
+	return string(bytes)
+}
