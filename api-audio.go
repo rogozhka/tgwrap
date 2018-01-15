@@ -30,7 +30,7 @@ type Audio struct {
 	//
 	// Optional. MIME type of the file as defined by sender
 	//
-	MimeType string `json:"mime_type,omitempty"`
+	MIMEType string `json:"mime_type,omitempty"`
 
 	//
 	// Optional. File size
