@@ -24,8 +24,8 @@ type GenericResponse struct {
 type fCommandSender func(methodName string, bodyStruct interface{}) ([]byte, error)
 
 //
-// Generic method wrapper for any command
-// encodes body as JSON
+// Generic fCommandSender method for any command.
+// Encodes bodyStruct w/ nested structures as JSON
 //
 func (p *bot) sendJSON(methodName string, bodyStruct interface{}) ([]byte, error) {
 
@@ -40,7 +40,17 @@ func (p *bot) sendJSON(methodName string, bodyStruct interface{}) ([]byte, error
 		return res, err
 	}
 
-	resp, err := http.Post(url, "application/json", &buf)
+	return p.postRequest(url, "application/json", &buf)
+}
+
+//
+// postRequest makes request and reads result
+//
+func (p *bot) postRequest(url string, contentType string, body io.Reader) ([]byte, error) {
+
+	var res []byte
+
+	resp, err := http.Post(url, contentType, body)
 	if resp != nil {
 		defer resp.Body.Close()
 		resp.Close = true
@@ -50,21 +60,23 @@ func (p *bot) sendJSON(methodName string, bodyStruct interface{}) ([]byte, error
 	}
 
 	if res, err := ioutil.ReadAll(resp.Body); err != nil {
-		return res, fmt.Errorf("ReadAll error:%v", err)
+		return res, fmt.Errorf("POST ReadAll error:%v", err)
 	} else {
 		return res, nil
 	}
 }
 
 //
-// Wrapper for file upload commands
-// encodes body as multipart/form-data
+// fCommandSender method for file/media upload commands.
+// Encodes body as multipart/form-data
 //
 // NOTE:
-// 1) recommended for use with file upload commands only;
+// 1) recommended for use w/ upload commands only,
+// although should work with other API methods w/o
+// nested structures
 //
 // 2) it's unknown how to encode request with
-//    nested structures like ReplyMarkup - they are ignored.
+//    nested structures like ReplyMarkup so they are ignored.
 //
 func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, error) {
 
@@ -78,26 +90,30 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 	t := reflect.TypeOf(bodyStruct)
 	r := reflect.ValueOf(bodyStruct)
 
-	arr := thestruct.Fields(t)
-
-	for _, fieldT := range arr {
+	// iterate over bodyStruct fields including contents
+	// of the embedded struct
+	for _, fieldT := range thestruct.Fields(t) {
 
 		v := r.FieldByName(fieldT.Name)
 
+		// ignore fields w/o struct tags
 		if len(fieldT.Tag) < 1 {
 			continue
 		}
-		typeName := thestruct.Type(v.Type()).Name()
 
-		tags, err := thestruct.ParseLiteral(string(fieldT.Tag))
+		stags, err := thestruct.ParseLiteral(string(fieldT.Tag))
 		if err != nil {
 			return res, err
 		}
 
-		jsonTag := tags.Tag("json")
-		formTag := tags.Tag("form")
+		jsonTag := stags.Tag("json")
+		formTag := stags.Tag("form")
 
-		// do not encode fields w/o json: struct tag
+		//
+		// do not encode fields w/o "json" struct tag
+		// it's form encoding but we use json tags
+		// as universal encoding markup
+		//
 		if jsonTag == nil {
 			continue
 		}
@@ -106,16 +122,26 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 			continue
 		}
 
+		typeName := thestruct.Type(v.Type()).Name()
 		if len(typeName) == 0 && formTag != nil && formTag.Value == "file" {
 
 			inputFile := v.Interface().(*InputFile)
 			path := inputFile.Name()
+
+			if len(path) < 1 {
+				// file member has all the tags
+				// but initialized as file_id || url
+				// and should be treated as MarshalText()
+				goto writeField
+			}
 
 			f, err := os.Open(path)
 			if err != nil {
 				return res, err
 			}
 			if f != nil {
+				// defer is not recommended in loop
+				// but there can be not so many files in request struct ;)
 				defer f.Close()
 			}
 
@@ -131,27 +157,15 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 			continue
 		}
 
+	writeField:
+
 		mpw.WriteField(jsonTag.Value, fmt.Sprintf("%v", v.Interface()))
 	}
-	//
-	//
+
+	// write closing boundary into buf
 	mpw.Close()
-	//
 
-	resp, err := http.Post(url, mpw.FormDataContentType(), &buf)
-	if resp != nil {
-		defer resp.Body.Close()
-		resp.Close = true
-	}
-	if err != nil {
-		return res, fmt.Errorf("POST error:%v", err)
-	}
-
-	if res, err := ioutil.ReadAll(resp.Body); err != nil {
-		return res, fmt.Errorf("ReadAll error:%v", err)
-	} else {
-		return res, nil
-	}
+	return p.postRequest(url, mpw.FormDataContentType(), &buf)
 }
 
 func isEmptyValue(v reflect.Value) bool {
@@ -189,7 +203,13 @@ func isEmptyValue(v reflect.Value) bool {
 	return false
 }
 
-func (p *bot) getResponse(methodName string, sender fCommandSender, bodyStruct interface{}, resultStruct interface{}) error {
+//
+// Makes request and decodes API result
+// into GenericResponse-based object
+//
+// returns error if API result decoded and not OK
+//
+func (p *bot) getAPIResponse(methodName string, sender fCommandSender, bodyStruct interface{}, resultStruct interface{}) error {
 
 	data, err := sender(methodName, bodyStruct)
 	if err != nil {

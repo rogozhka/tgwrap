@@ -2,6 +2,9 @@ package tgwrap
 
 import (
 	"fmt"
+	"reflect"
+
+	"github.com/rogozhka/tgwrap/internal/thestruct"
 )
 
 type SendPhotoOpt struct {
@@ -64,9 +67,16 @@ func (p *bot) SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt
 		Result *Message `json:"result"`
 	}
 
-	err := p.getResponse("sendPhoto", p.sendFormData, dataSend, &resp)
+	var sender fCommandSender = p.sendJSON
+
+	tt := thestruct.Type(reflect.TypeOf(photo))
+	if "InputFile" == tt.Name() && len(photo.(*InputFile).Name()) > 0 {
+		sender = p.sendFormData
+	}
+
+	err := p.getAPIResponse("sendPhoto", sender, dataSend, &resp)
 	if err != nil {
-		return nil, fmt.Errorf("getResponse ERROR:%v", err)
+		return nil, fmt.Errorf("getAPIResponse ERROR:%v", err)
 	}
 
 	return resp.Result, nil
