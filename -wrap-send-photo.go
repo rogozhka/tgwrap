@@ -76,9 +76,9 @@ func (p *bot) SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt
 		sender = p.sendFormData
 	}
 
-	err := p.getResponse("sendPhoto", sender, dataSend, &resp)
+	err := p.getAPIResponse("sendPhoto", sender, dataSend, &resp)
 	if err != nil {
-		return nil, fmt.Errorf("getResponse ERROR:%v", err)
+		return nil, fmt.Errorf("getAPIResponse ERROR:%v", err)
 	}
 
 	return resp.Result, nil

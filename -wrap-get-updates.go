@@ -61,7 +61,7 @@ func (p *bot) GetUpdates(opt *GetUpdatesOpt) ([]*Update, error) {
 		Result []*Update `json:"result"`
 	}
 
-	err := p.getResponse("getUpdates", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse("getUpdates", p.sendJSON, dataSend, &resp)
 	if err != nil {
 		return arrRes, err
 	}

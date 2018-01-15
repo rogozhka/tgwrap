@@ -189,7 +189,13 @@ func isEmptyValue(v reflect.Value) bool {
 	return false
 }
 
-func (p *bot) getResponse(methodName string, sender fCommandSender, bodyStruct interface{}, resultStruct interface{}) error {
+//
+// Makes request and decodes API result
+// into GenericResponse-based object
+//
+// returns error if API result decoded and not OK
+//
+func (p *bot) getAPIResponse(methodName string, sender fCommandSender, bodyStruct interface{}, resultStruct interface{}) error {
 
 	data, err := sender(methodName, bodyStruct)
 	if err != nil {
