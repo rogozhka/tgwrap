@@ -5,6 +5,7 @@ go:
 
 before_install:
   - go get -t -v ./...
+  - curl -s -o video.mov $TGWRAP_DOWNLOAD_URL_VIDEO
 
 script:
   - go test -race -coverprofile=coverage.txt -covermode=atomic
