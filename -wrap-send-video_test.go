@@ -1,7 +1,6 @@
 package tgwrap
 
 import (
-	"fmt"
 	"testing"
 
 	"os"
@@ -20,7 +19,8 @@ func Test_SendVideoWrap(t *testing.T) {
 	envFilePath := "TGWRAP_TEST_VIDEO_PATH"
 	filePath := os.Getenv(envFilePath)
 	if len(filePath) < 1 {
-		panic(fmt.Errorf("Cannot find token env:%v", envFilePath))
+		return
+		//panic(fmt.Errorf("Cannot find token env:%v", envFilePath))
 	}
 
 	arr, err2 := bot.GetUpdates(&GetUpdatesOpt{Limit: 1})
