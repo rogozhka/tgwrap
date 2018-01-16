@@ -1,7 +1,7 @@
 [![GoDoc](https://godoc.org/github.com/rogozhka/tgwrap?status.svg)](https://godoc.org/github.com/rogozhka/tgwrap)
 [![Travis](https://travis-ci.org/rogozhka/tgwrap.svg?branch=master)](https://travis-ci.org/rogozhka/tgwrap)
 
-**TgWrap** is a Go library with [Telegram Bot API](https://core.telegram.org/bots/api) bindings. General approach is to keep objects as close as possible to API structures with respect to optional params. Library does not pretend to be framework with tons of handlers and application strategy in mind. But there are some private helpers w/ reflection and struct tags under the hood. The aim is to cover step by step all the methods including Payment section.
+**TgWrap** is a Go library with [Telegram Bot API](https://core.telegram.org/bots/api) bindings. General approach is to keep objects as close as possible to the API structures with respect to optional params. Results of the methods are the same as noted in API documentation. Library does not pretend to be framework with tons of handlers and application strategy in mind. But there are some private helpers w/ reflection and struct tags under the hood. The aim is to cover step by step all the methods including Payment section.
 
 
 
@@ -91,9 +91,14 @@ func main() {
 [IBotUpdates](https://godoc.org/github.com/rogozhka/tgwrap#IBotUpdates) to get updates and setup hooks:
 
 - [x] [getUpdates](https://core.telegram.org/bots/api#getupdates)
+
 - [ ] setWebhook
+
 - [ ] deleteWebhook
+
 - [ ] getWebhookInfo
+
+
 
 
 
@@ -104,22 +109,32 @@ func main() {
 
 
 
+
 [IBotChat](https://godoc.org/github.com/rogozhka/tgwrap#IBotChat) to interact with chat state and settings:
 
 - [x] [sendChatAction](https://core.telegram.org/bots/api#sendchataction)
+
 - [ ] ...
+
 
 
 
 [IBotMedia](https://godoc.org/github.com/rogozhka/tgwrap#IBotMedia) for sending media objects, encoding local files, by url, file_id:
 
 - [x] [sendPhoto](https://core.telegram.org/bots/api#sendphoto)
+
 - [x] [sendAudio](https://core.telegram.org/bots/api#sendaudio)
+
 - [x] [sendVideo](https://core.telegram.org/bots/api#sendvideo)
+
 - [x] [sendVoice](https://core.telegram.org/bots/api#sendvoice)
+
 - [ ] sendDocument
+
 - [ ] sendVideoNote
+
 - [ ] sendMediaGroup
+
 - [ ] ...
 
 
