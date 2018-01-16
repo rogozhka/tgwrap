@@ -23,7 +23,7 @@ type Invoice struct {
 	StartParameter string `json:"start_parameter"`
 
 	//
-	// Three-letter ISO 4217 currency code (https://core.telegram.org/bots/payments#supported-currencies)
+	// Three-letter ISO 4217 [currency code](https://core.telegram.org/bots/payments#supported-currencies)
 	//
 	Currency string `json:"currency"`
 
