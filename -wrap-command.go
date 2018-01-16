@@ -137,7 +137,7 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 
 			f, err := os.Open(path)
 			if err != nil {
-				return res, err
+				return res, fmt.Errorf("Sender cannot open [%v]:%v", path, err)
 			}
 			if f != nil {
 				// defer is not recommended in loop
