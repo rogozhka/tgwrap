@@ -1,4 +1,4 @@
-/*
-   Go bindings for Telegram Bot API
-*/
+//
+//  Package TgWrap provides bindings for Telegram Bot API
+//
 package tgwrap

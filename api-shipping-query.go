@@ -1,7 +1,8 @@
 package tgwrap
 
 //
-// Telegram API object
+// ShippingQuery is a Telegram API object
+// TODO: implement fields
 //
 type ShippingQuery struct {
 }

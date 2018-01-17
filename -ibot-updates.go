@@ -1,11 +1,15 @@
 package tgwrap
 
+//
+// IBotUpdates is a group of methods related to getting updates
+// used as a part of common IBot API interface
+//
 type IBotUpdates interface {
+
 	//
-	// Use GetUpdates method to receive incoming updates using long polling
+	// GetUpdates is used to receive incoming updates using [long] polling
 	//
-	// @param opt (optional, can be nil) GetUpdatesOpt with other optional params:
-	// see struct description
+	// opt: (can be nil) optional params
 	//
 	GetUpdates(opt *GetUpdatesOpt) ([]*Update, error)
 }

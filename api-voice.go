@@ -1,8 +1,6 @@
 package tgwrap
 
 //
-// Telegram API object
-//
 // Voice represents a voice note.
 //
 type Voice struct {

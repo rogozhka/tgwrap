@@ -1,13 +1,14 @@
 package tgwrap
 
 //
-// Telegram bot interface
+// IBot is a declaration for nominal Telegram Bot API interface
 //
 type IBot interface {
 
 	//
-	// A simple method for testing your bot's auth token.
-	// Requires no parameters. Returns basic information about the bot
+	// GetMe is used for testing your bot's auth token.
+	// Requires no parameters. Returns basic information
+	// about the bot in form of a User object.Telegram API method
 	//
 	GetMe() (*User, error)
 

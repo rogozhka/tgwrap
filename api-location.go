@@ -1,8 +1,6 @@
 package tgwrap
 
 //
-// Telegram API object
-//
 // Location represents a point on the map.
 //
 type Location struct {

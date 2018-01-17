@@ -7,6 +7,9 @@ import (
 	"github.com/rogozhka/tgwrap/internal/thestruct"
 )
 
+//
+// SendVideoOpt represents optional params for SendVideo
+//
 type SendVideoOpt struct {
 
 	//
@@ -48,6 +51,22 @@ type SendVideoOpt struct {
 	ReplyMarkup interface{} `json:"reply_markup,omitempty"`
 }
 
+//
+// SendVideo is used to send video files, Telegram clients support mp4 videos
+// (other formats may be sent as Document). On success, the sent Message is returned.
+// Bots can currently send video files of up to 50 MB in size,
+// this limit may be changed in the future.
+//
+// chatID: (uint64 or string) Unique identifier for the target chat
+// or username of the target channel (in the format @channelusername)
+//
+// video: (*InputFile or string) Video to send. Pass a file_id as string to send
+// a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a string
+// for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data
+// using &NewInputFileLocal("<file path>")
+//
+// opt: (can be nil) optional params
+//
 func (p *bot) SendVideo(chatID interface{}, video interface{}, opt *SendVideoOpt) (*Message, error) {
 
 	type sendFormat struct {

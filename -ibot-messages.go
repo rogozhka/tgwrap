@@ -1,34 +1,38 @@
 package tgwrap
 
+//
+// IBotMessages is just a group of methods
+// to have smaller interface files
+//
 type IBotMessages interface {
+
 	//
-	// Use SendMessage method to send text messages.
+	// SendMessage is used method to send text messages.
 	//
-	// @param chatID Unique identifier for the target chat
+	// chatID: unique identifier for the target chat
 	// or username(!) of the target channel (in the format @channelusername)
 	//
-	// @param text Text of the message to be sent
+	// text: text of the message to be sent
 	//
-	// @param opt (optional, can be nil) SendMessageOpt with other optional params:
-	// see struct description
+	// opt: (can be nil) optional params
 	//
 	SendMessage(chatID interface{}, text string, opt *SendMessageOpt) (*Message, error)
 
 	//
-	// Use ForwardMessage to forward messages of any kind.
+	// ForwardMessage is used to forward messages of any kind.
 	// On success, the sent Message is returned.
 	//
-	// @param chatID Unique identifier for the target chat
+	// chatID: unique identifier for the target chat
 	// or username of the target channel (in the format @channelusername)
 	//
-	// @param fromChatID Unique identifier for the chat
+	// fromChatID: unique identifier for the chat
 	// where the original message was sent (or channel username
 	// in the format @channelusername)
 	//
-	// @param disableNotification Sends the message silently.
+	// disableNotification: sends the message silently.
 	// Users will receive a notification with no sound.
 	//
-	// @param messageID Message identifier in the chat
+	// messageID: message identifier in the chat
 	// specified in fromChatID
 	//
 	ForwardMessage(chatID interface{}, fromChatID interface{},

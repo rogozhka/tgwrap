@@ -1,7 +1,7 @@
 package tgwrap
 
 //
-// This object represents an inline keyboard that appears
+// InlineKeyboardMarkup represents an inline keyboard that appears
 // right next to the message it belongs to.
 //
 type InlineKeyboardMarkup struct {

@@ -1,8 +1,6 @@
 package tgwrap
 
 //
-// Telegram API object
-//
 // Video represents a video file.
 //
 type Video struct {

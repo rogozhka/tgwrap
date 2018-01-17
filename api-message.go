@@ -3,7 +3,7 @@ package tgwrap
 import "time"
 
 //
-// Telegram API object
+// Message is a Telegram API object
 //
 type Message struct {
 
