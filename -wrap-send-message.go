@@ -4,6 +4,9 @@ import (
 	"fmt"
 )
 
+//
+// SendMessageOpt represents optional params for SendMessage
+//
 type SendMessageOpt struct {
 	//
 	// Send Markdown or HTML, if you want Telegram apps
@@ -44,6 +47,16 @@ const (
 	ParseModeMarkdown ParseModes = "Markdown"
 )
 
+//
+// SendMessage is used method to send text messages.
+//
+// chatID: unique identifier for the target chat
+// or username(!) of the target channel (in the format @channelusername)
+//
+// text: text of the message to be sent
+//
+// opt: (can be nil) optional params
+//
 func (p *bot) SendMessage(chatID interface{}, text string, opt *SendMessageOpt) (*Message, error) {
 
 	type sendFormat struct {

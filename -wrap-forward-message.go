@@ -4,6 +4,23 @@ import (
 	"fmt"
 )
 
+//
+// ForwardMessage is used to forward messages of any kind.
+// On success, the sent Message is returned.
+//
+// chatID: unique identifier for the target chat
+// or username of the target channel (in the format @channelusername)
+//
+// fromChatID: unique identifier for the chat
+// where the original message was sent (or channel username
+// in the format @channelusername)
+//
+// disableNotification: sends the message silently.
+// Users will receive a notification with no sound.
+//
+// messageID: message identifier in the chat
+// specified in fromChatID
+//
 func (p *bot) ForwardMessage(chatID interface{}, fromChatID interface{},
 	disableNotification bool, messageID uint64) (*Message, error) {
 
