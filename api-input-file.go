@@ -1,5 +1,9 @@
 package tgwrap
 
+//
+// InputFile is used to store file_id, URL,
+// or localFileName to encode as multipart/form-data
+//
 type InputFile struct {
 	url    string
 	fileID string
@@ -7,20 +11,31 @@ type InputFile struct {
 	fileNameLocal string
 }
 
+//
+// Name returns stored localFileName or empty string
+// used as an indicator that InputFile
+// needs special treatment. In other cases standard
+// Marshalling procedures are applied. No need to extract
+// URL or file_id so there are no URL() and FileID() methods.
+//
 func (p *InputFile) Name() string {
 	return p.fileNameLocal
 }
 
-func NewInputFile() *InputFile {
-	return &InputFile{}
-}
-
+//
+// NewInputFileFromURL is used to create InputFile
+// with URL stored inside
+//
 func NewInputFileFromURL(url string) *InputFile {
 	return &InputFile{
 		url: url,
 	}
 }
 
+//
+// NewInputFileLocal is used to create InputFile
+// with localFileName stored inside
+//
 func NewInputFileLocal(path string) *InputFile {
 
 	o := &InputFile{}
@@ -36,18 +51,27 @@ func (p *InputFile) reset() *InputFile {
 	return p
 }
 
+//
+// Switch InputFile into URL keeping mode
+//
 func (p *InputFile) SetURL(url string) *InputFile {
 	p.reset()
 	p.url = url
 	return p
 }
 
+//
+// Switch InputFile into file_id keeping mode
+//
 func (p *InputFile) SetFileID(fileID string) *InputFile {
 	p.reset()
 	p.fileID = fileID
 	return p
 }
 
+//
+// Switch InputFile into localFileName keeping mode
+//
 func (p *InputFile) SetFileName(fileName string) *InputFile {
 	p.reset()
 	p.fileNameLocal = fileName
@@ -76,6 +100,9 @@ func (p *InputFile) MarshalText() (text []byte, err error) {
 	return []byte(""), nil
 }
 
+//
+// String implements stringer interface
+//
 func (p *InputFile) String() string {
 
 	bytes, err := p.MarshalText()
