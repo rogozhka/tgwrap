@@ -7,6 +7,9 @@ import (
 	"github.com/rogozhka/tgwrap/internal/thestruct"
 )
 
+//
+// SendPhotoOpt represents optional params for SendPhoto
+//
 type SendPhotoOpt struct {
 
 	//
@@ -34,6 +37,19 @@ type SendPhotoOpt struct {
 	ReplyMarkup interface{} `json:"reply_markup,omitempty"`
 }
 
+//
+// SendPhoto is used to send photos.
+//
+// chatID: (Integer or String) Unique identifier
+// for the target chat or username of the target channel (in the format @channelusername)
+//
+// photo: (*InputFile or string) Photo to send. Pass a file_id as string to send
+// a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a string
+// for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data
+// using &NewInputFileLocal("<file path>")
+//
+// opt: (can be nil) optional params
+//
 func (p *bot) SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt) (*Message, error) {
 
 	type sendFormat struct {

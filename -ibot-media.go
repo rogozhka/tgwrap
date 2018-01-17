@@ -1,44 +1,60 @@
 package tgwrap
 
+//
+// IBotMedia is a group of methods for sending media
+// used as a part of common IBot API interface
+//
 type IBotMedia interface {
 
 	//
-	// SendPhoto to send photos.
+	// SendPhoto is used to send photos.
 	//
-	// @param chatID (Integer or String) Unique identifier
+	// chatID: (Integer or String) Unique identifier
 	// for the target chat or username of the target channel (in the format @channelusername)
 	//
-	// @param photo (InputFile or String) Photo to send. Pass a file_id as String to send
-	// a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String
-	// for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data.
+	// photo: (*InputFile or string) Photo to send. Pass a file_id as string to send
+	// a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a string
+	// for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data
+	// using &NewInputFileLocal("<file path>")
+	//
+	// opt: (can be nil) optional params
 	//
 	SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt) (*Message, error)
 
 	//
-	// SendVideo to send video files, Telegram clients support mp4 videos
+	// SendVideo is used to send video files, Telegram clients support mp4 videos
 	// (other formats may be sent as Document). On success, the sent Message is returned.
 	// Bots can currently send video files of up to 50 MB in size,
 	// this limit may be changed in the future.
 	//
-	// @param chatID (Integer or String) Unique identifier
-	// for the target chat or username of the target channel (in the format @channelusername)
+	// chatID: (uint64 or string) Unique identifier for the target chat
+	// or username of the target channel (in the format @channelusername)
 	//
-	// @param video (InputFile or String) Video to send. Pass a file_id as String to send
-	// a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String
-	// for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data.
+	// video: (*InputFile or string) Video to send. Pass a file_id as string to send
+	// a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a string
+	// for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data
+	// using &NewInputFileLocal("<file path>")
+	//
+	// opt: (can be nil) optional params
 	//
 	SendVideo(chatID interface{}, video interface{}, opt *SendVideoOpt) (*Message, error)
 
 	//
-	// SendAudio to send audio files, if you want Telegram clients to display them in the music player.
+	// SendAudio is used to send audio files, if you want Telegram clients to display them in the music player.
 	// Your audio must be in the .mp3 format. On success, the sent Message is returned. Bots can currently
 	// send audio files of up to 50 MB in size, this limit may be changed in the future.
 	//
-	// For sending voice messages, use the sendVoice method instead.
+	// For sending voice messages, use the SendVoice method instead.
 	//
-	// @param audio (InputFile or String) Audio to send. Pass a file_id as String to send
-	// a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String
-	// for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data.
+	// chatID: (uint64 or string) Unique identifier for the target chat
+	// or username of the target channel (in the format @channelusername)
+	//
+	// audio: (*InputFile or string) Audio to send. Pass a file_id as string to send
+	// an audio that exists on the Telegram servers (recommended), pass an HTTP URL as a string
+	// for Telegram to get an audio from the Internet, or upload a new file using multipart/form-data.
+	// using &NewInputFileLocal("<file path>")
+	//
+	// opt: (can be nil) optional params
 	//
 	SendAudio(chatID interface{}, audio interface{}, opt *SendAudioOpt) (*Message, error)
 
@@ -48,6 +64,16 @@ type IBotMedia interface {
 	// encoded with OPUS (other formats may be sent as Audio or Document).
 	// On success, the sent Message is returned. Bots can currently send voice messages
 	// of up to 50 MB in size, this limit may be changed in the future.
+	//
+	// chatID: (uint64 or string) Unique identifier for the target chat
+	// or username of the target channel (in the format @channelusername)
+	//
+	// voice: (*InputFile or string) Audio to send. Pass a file_id as String to send
+	// an audio that exists on the Telegram servers (recommended), pass an HTTP URL as a String
+	// for Telegram to get an audio from the Internet, or upload a new file using multipart/form-data.
+	// using &NewInputFileLocal("<file path>")
+	//
+	// opt: (can be nil) optional params
 	//
 	SendVoice(chatID interface{}, voice interface{}, opt *SendVoiceOpt) (*Message, error)
 }

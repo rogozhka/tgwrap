@@ -7,6 +7,9 @@ import (
 	"github.com/rogozhka/tgwrap/internal/thestruct"
 )
 
+//
+// SendVoiceOpt represents optional params for SendVoice
+//
 type SendVoiceOpt struct {
 
 	//
@@ -45,6 +48,16 @@ type SendVoiceOpt struct {
 // encoded with OPUS (other formats may be sent as Audio or Document).
 // On success, the sent Message is returned. Bots can currently send voice messages
 // of up to 50 MB in size, this limit may be changed in the future.
+//
+// chatID: (uint64 or string) Unique identifier for the target chat
+// or username of the target channel (in the format @channelusername)
+//
+// voice: (*InputFile or string) Audio to send. Pass a file_id as String to send
+// an audio that exists on the Telegram servers (recommended), pass an HTTP URL as a String
+// for Telegram to get an audio from the Internet, or upload a new file using multipart/form-data.
+// using &NewInputFileLocal("<file path>")
+//
+// opt: (can be nil) optional params
 //
 func (p *bot) SendVoice(chatID interface{}, voice interface{}, opt *SendVoiceOpt) (*Message, error) {
 

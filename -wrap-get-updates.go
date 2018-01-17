@@ -1,5 +1,8 @@
 package tgwrap
 
+//
+// GetUpdatesOpt represents optional params for GetUpdates
+//
 type GetUpdatesOpt struct {
 	//
 	// Identifier of the first update to be returned.
@@ -41,15 +44,20 @@ type GetUpdatesOpt struct {
 	Allowed []string `json:"allowed_updates,omitempty"`
 }
 
-type getUpdatesStruct struct {
-	GetUpdatesOpt
-}
-
+//
+// GetUpdates is used to receive incoming updates using [long] polling
+//
+// opt: (can be nil) optional params
+//
 func (p *bot) GetUpdates(opt *GetUpdatesOpt) ([]*Update, error) {
 
 	var arrRes []*Update
 
-	dataSend := getUpdatesStruct{}
+	type sendFormat struct {
+		GetUpdatesOpt
+	}
+
+	dataSend := sendFormat{}
 
 	if opt != nil {
 		dataSend.GetUpdatesOpt = *opt

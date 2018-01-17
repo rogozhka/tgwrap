@@ -7,6 +7,9 @@ import (
 	"github.com/rogozhka/tgwrap/internal/thestruct"
 )
 
+//
+// SendAudioOpt represents optional params for SendAudio
+//
 type SendAudioOpt struct {
 
 	//
@@ -50,11 +53,21 @@ type SendAudioOpt struct {
 }
 
 //
-// Use this method to send audio files, if you want Telegram clients to display them in the music player.
+// SendAudio is used to send audio files, if you want Telegram clients to display them in the music player.
 // Your audio must be in the .mp3 format. On success, the sent Message is returned. Bots can currently
 // send audio files of up to 50 MB in size, this limit may be changed in the future.
 //
-// For sending voice messages, use the sendVoice method instead.
+// For sending voice messages, use the SendVoice method instead.
+//
+// chatID: (uint64 or string) Unique identifier for the target chat
+// or username of the target channel (in the format @channelusername)
+//
+// audio: (*InputFile or string) Audio to send. Pass a file_id as string to send
+// an audio that exists on the Telegram servers (recommended), pass an HTTP URL as a string
+// for Telegram to get an audio from the Internet, or upload a new file using multipart/form-data.
+// using &NewInputFileLocal("<file path>")
+//
+// opt: (can be nil) optional params
 //
 func (p *bot) SendAudio(chatID interface{}, audio interface{}, opt *SendAudioOpt) (*Message, error) {
 
