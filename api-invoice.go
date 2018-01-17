@@ -1,8 +1,6 @@
 package tgwrap
 
 //
-// Telegram API object
-//
 // Invoice contains basic information about an invoice.
 //
 type Invoice struct {

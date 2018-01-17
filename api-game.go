@@ -1,8 +1,6 @@
 package tgwrap
 
 //
-// Telegram API object
-//
 // Game represents a game. Use BotFather to create and edit games,
 // their short names will act as unique identifiers.
 //

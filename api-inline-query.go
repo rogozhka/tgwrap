@@ -1,9 +1,7 @@
 package tgwrap
 
 //
-// Telegram API object
-//
-// This object represents an incoming inline query.
+// InlineQuery represents an incoming inline query.
 // When the user sends an empty query, your bot could return some default or trending results.
 //
 type InlineQuery struct {

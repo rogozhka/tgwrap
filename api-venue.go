@@ -1,8 +1,6 @@
 package tgwrap
 
 //
-// Telegram API object
-//
 // Venue represents a place, meeting point, event point
 //
 type Venue struct {

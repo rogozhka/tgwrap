@@ -1,7 +1,7 @@
 package tgwrap
 
 //
-// Telegram API object
+// ChatPhoto is a Telegram API object
 //
 type ChatPhoto struct {
 

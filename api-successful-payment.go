@@ -1,8 +1,6 @@
 package tgwrap
 
 //
-// Telegram API object
-//
 // SuccessfulPayment contains basic information about a successful payment.
 //
 type SuccessfulPayment struct {

@@ -1,7 +1,8 @@
 package tgwrap
 
 //
-// Telegram API object
+// OrderInfo is a Telegram API object
+// TODO: add fields
 //
 type OrderInfo struct {
 }

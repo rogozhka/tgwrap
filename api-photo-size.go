@@ -1,8 +1,6 @@
 package tgwrap
 
 //
-// Telegram API object
-//
 // PhotoSize represents one size of a photo or a file / sticker thumbnail.
 //
 type PhotoSize struct {

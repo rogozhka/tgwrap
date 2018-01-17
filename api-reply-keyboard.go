@@ -1,8 +1,6 @@
 package tgwrap
 
 //
-// Telegram API object
-//
 // ReplyKeyboardMarkup represents a custom keyboard with reply options
 // (see Introduction to bots for details and examples).
 //

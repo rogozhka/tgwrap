@@ -1,9 +1,7 @@
 package tgwrap
 
 //
-// Telegram API object
-//
-// This object represents a general file
+// Document represents a general file
 // (as opposed to photos, voice messages and audio files).
 //
 type Document struct {

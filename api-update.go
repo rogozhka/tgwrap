@@ -1,7 +1,7 @@
 package tgwrap
 
 //
-// Telegram API object
+// Update is a Telegram API object
 //
 type Update struct {
 

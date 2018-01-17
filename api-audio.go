@@ -1,9 +1,7 @@
 package tgwrap
 
 //
-// Telegram API object
-//
-// This object represents an audio file to be treated as music by the Telegram clients.
+// Audio represents an audio file to be treated as music by the Telegram clients.
 //
 type Audio struct {
 

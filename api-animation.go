@@ -1,7 +1,7 @@
 package tgwrap
 
 //
-// Telegram API object
+// Animation is a Telegram API object
 //
 // You can provide an animation for your game so that
 // it looks stylish in chats (check out Lumberjack for an example).

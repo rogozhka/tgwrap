@@ -1,9 +1,7 @@
 package tgwrap
 
 //
-// Telegram API object
-//
-// Represents a result of an inline query that was chosen
+// ChosenInlineResult represents a result of an inline query that was chosen
 // by the user and sent to their chat partner.
 //
 type ChosenInlineResult struct {

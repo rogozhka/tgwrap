@@ -1,8 +1,6 @@
 package tgwrap
 
 //
-// Telegram API object
-//
 // Contact represents a phone contact.
 //
 type Contact struct {

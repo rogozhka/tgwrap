@@ -1,8 +1,6 @@
 package tgwrap
 
 //
-// Telegram API object
-//
 // User represents a Telegram user or bot.
 //
 type User struct {
