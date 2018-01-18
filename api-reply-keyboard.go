@@ -39,7 +39,7 @@ type ReplyKeyboardMarkup struct {
 }
 
 //
-// Telegram API object
+// ReplyKeyboardRemove is a Telegram API object
 //
 // Upon receiving a message with this object, Telegram clients will
 // remove the current custom keyboard and display the default letter-keyboard.
@@ -54,7 +54,7 @@ type ReplyKeyboardRemove struct {
 }
 
 //
-// This object represents one button of the reply keyboard.
+// KeyboardButton represents one button of the reply keyboard.
 // For simple text buttons String can be used instead of this object
 // to specify text of the button. Optional fields are mutually exclusive.
 //
