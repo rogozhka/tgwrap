@@ -52,7 +52,7 @@ func (p *InputFile) reset() *InputFile {
 }
 
 //
-// Switch InputFile into URL keeping mode
+// SetURL is used to switch InputFile into URL keeping mode
 //
 func (p *InputFile) SetURL(url string) *InputFile {
 	p.reset()
@@ -79,7 +79,7 @@ func (p *InputFile) SetFileName(fileName string) *InputFile {
 }
 
 //
-// MarshalText() implements TextMarshaler
+// MarshalText implements TextMarshaler
 // and returns fileID or URL
 //
 // Note: fileName is ignored and should be used
