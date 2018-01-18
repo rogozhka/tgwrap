@@ -1,3 +1,7 @@
+//
+// Package thestruct provides helpers
+// to parse struct tag literal and list of actual struct fields w/ types
+//
 package thestruct
 
 //

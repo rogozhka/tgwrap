@@ -39,11 +39,56 @@ type SendMessageOpt struct {
 	ReplyMarkup interface{} `json:"reply_markup,omitempty"`
 }
 
+//
+// ParseModes represents formatting optiona for SendMessage()
+//
+// The Bot API supports basic formatting for messages.
+// You can use bold and italic text, as well as inline links
+// and pre-formatted code in your bots' messages.
+// Telegram clients will render them accordingly.
+// You can use either markdown-style or HTML-style formatting.
+//
+// Note that Telegram clients will display an alert to the user
+// before opening an inline link (‘Open this link?’ together with the full URL).
+//
+// Links 'tg://user?id=<user_id>' can be used to mention
+// a user by their id without using a username.
+// Please note:  These links will work only if they are used
+// inside an inline link. These mentions are only guaranteed
+// to work if the user has contacted the bot in the past
+// or is a member in the group where he was mentioned.
+//
 type ParseModes string
 
 const (
-	ParseModeDefault  ParseModes = ""
-	ParseModeHTML     ParseModes = "HTML"
+
+	// Text is simply text by default
+	//
+	ParseModeDefault ParseModes = ""
+
+	// The following tags are currently supported:
+	//
+	//  <b>bold</b>, <strong>bold</strong>
+	//  <i>italic</i>, <em>italic</em>
+	//  <a href="http://www.example.com/">inline URL</a>
+	//  <a href="tg://user?id=123456789">inline mention of a user</a>
+	//  <code>inline fixed-width code</code>
+	//  <pre>pre-formatted fixed-width code block</pre>
+	//
+	ParseModeHTML ParseModes = "HTML"
+
+	//
+	// Use the following syntax in your message:
+	//
+	//  *bold text*
+	//  _italic text_
+	//  [inline URL](http://www.example.com/)
+	//  [inline mention of a user](tg://user?id=123456789)
+	//  `inline fixed-width code`
+	//  ```block_language
+	//  pre-formatted fixed-width code block
+	//  ```
+	//
 	ParseModeMarkdown ParseModes = "Markdown"
 )
 

@@ -61,7 +61,7 @@ func (p *InputFile) SetURL(url string) *InputFile {
 }
 
 //
-// Switch InputFile into file_id keeping mode
+// SetFileID is used to switch InputFile into file_id keeping mode
 //
 func (p *InputFile) SetFileID(fileID string) *InputFile {
 	p.reset()
@@ -70,7 +70,7 @@ func (p *InputFile) SetFileID(fileID string) *InputFile {
 }
 
 //
-// Switch InputFile into localFileName keeping mode
+// SetFileName is used to switch InputFile into localFileName keeping mode
 //
 func (p *InputFile) SetFileName(fileName string) *InputFile {
 	p.reset()

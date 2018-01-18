@@ -4,16 +4,37 @@ import (
 	"fmt"
 )
 
+//
+// ChatActions type represent argument
+// for SendChatAction
+// (hello linter)
+//
 type ChatActions string
 
 const (
-	ChatActionTyping          ChatActions = "typing"
-	ChatActionUploadPhoto     ChatActions = "upload_photo"
-	ChatActionRecordVideo     ChatActions = "record_video"
-	ChatActionRecordAudio     ChatActions = "record_audio"
-	ChatActionUploadDocument  ChatActions = "upload_document"
-	ChatActionFindLocation    ChatActions = "find_location"
+
+	// Indicates bot is typing (this looks frighteningly sometimes)
+	ChatActionTyping ChatActions = "typing"
+
+	// Indicates bot is uploading photo
+	ChatActionUploadPhoto ChatActions = "upload_photo"
+
+	// Indicates bot is recording video
+	ChatActionRecordVideo ChatActions = "record_video"
+
+	// Indicates bot is recording audio
+	ChatActionRecordAudio ChatActions = "record_audio"
+
+	// Indicates bot is uploading document
+	ChatActionUploadDocument ChatActions = "upload_document"
+
+	// Indicates bot is in search for location (is it really working on any tg client?)
+	ChatActionFindLocation ChatActions = "find_location"
+
+	// Indicates bot is recording video note
 	ChatActionRecordVideoNote ChatActions = "record_video_note"
+
+	// Indicates bot is uploading note
 	ChatActionUploadVideoNote ChatActions = "upload_video_note"
 )
 

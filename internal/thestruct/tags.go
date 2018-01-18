@@ -24,7 +24,6 @@ func (p *Tags) Sections() []string {
 // Example: IsSection("json") returns true
 // for`json:name,omitempty`
 //
-
 func (p *Tags) IsSection(name string) bool {
 
 	if _, is := p.tagsMap[name]; is {

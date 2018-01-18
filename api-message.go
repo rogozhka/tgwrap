@@ -246,17 +246,23 @@ type Message struct {
 	SuccessfulPayment *SuccessfulPayment `json:"successful_payment,omitempty"`
 }
 
-// Message.Date in time.Time format
+//
+// Time returns Message.Date in time.Time format
+//
 func (p *Message) Time() time.Time {
 	return time.Unix(p.Date, 0)
 }
 
-// Message.ForwardDate in time.Time format
+//
+// ForwardTime returns Message.ForwardDate in time.Time format
+//
 func (p *Message) ForwardTime() time.Time {
 	return time.Unix(p.ForwardDate, 0)
 }
 
-// Message.EditDate in time.Time format
+//
+// EditTime returns Message.EditDate in time.Time format
+//
 func (p *Message) EditTime() time.Time {
 	return time.Unix(p.EditDate, 0)
 }
