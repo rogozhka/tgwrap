@@ -2,6 +2,10 @@ package thestruct
 
 import "reflect"
 
+//
+// Fields is used to list all the fields
+// of the reflect.Type including embedded structures
+//
 func Fields(reflectType reflect.Type) []reflect.StructField {
 	var arr []reflect.StructField
 
@@ -21,6 +25,9 @@ func Fields(reflectType reflect.Type) []reflect.StructField {
 	return arr
 }
 
+//
+// Type is used to unwrap pointer types to their original names
+//
 func Type(reflectType reflect.Type) reflect.Type {
 	for reflect.Slice == reflectType.Kind() || reflect.Ptr == reflectType.Kind() {
 		reflectType = reflectType.Elem()
