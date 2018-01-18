@@ -13,28 +13,31 @@ type ChatActions string
 
 const (
 
-	// Indicates bot is typing (this looks frighteningly sometimes)
+	// ChatActionTyping indicates bot is typing (this looks frighteningly sometimes)
 	ChatActionTyping ChatActions = "typing"
 
-	// Indicates bot is uploading photo
+	// ChatActionUploadPhoto indicates bot is uploading photo
 	ChatActionUploadPhoto ChatActions = "upload_photo"
 
-	// Indicates bot is recording video
+	// ChatActionRecordVideo indicates bot is recording video
 	ChatActionRecordVideo ChatActions = "record_video"
 
-	// Indicates bot is recording audio
+	// ChatActionRecordAudio indicates bot is recording audio
 	ChatActionRecordAudio ChatActions = "record_audio"
 
-	// Indicates bot is uploading document
+	// ChatActionUploadDocument indicates bot is uploading document
 	ChatActionUploadDocument ChatActions = "upload_document"
 
-	// Indicates bot is in search for location (is it really working on any tg client?)
+	//
+	// ChatActionFindLocation indicates bot is in search
+	// for location (is it really working on any tg client?)
+	//
 	ChatActionFindLocation ChatActions = "find_location"
 
-	// Indicates bot is recording video note
+	// ChatActionRecordVideoNote indicates bot is recording video note
 	ChatActionRecordVideoNote ChatActions = "record_video_note"
 
-	// Indicates bot is uploading note
+	// ChatActionUploadVideoNote indicates bot is uploading note
 	ChatActionUploadVideoNote ChatActions = "upload_video_note"
 )
 

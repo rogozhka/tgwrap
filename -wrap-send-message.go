@@ -62,11 +62,13 @@ type ParseModes string
 
 const (
 
-	// Text is simply text by default
+	//
+	// ParseModeDefault is simple text by default
 	//
 	ParseModeDefault ParseModes = ""
 
-	// The following tags are currently supported:
+	//
+	// ParseModeHTML, the following tags are currently supported:
 	//
 	//  <b>bold</b>, <strong>bold</strong>
 	//  <i>italic</i>, <em>italic</em>
@@ -78,7 +80,7 @@ const (
 	ParseModeHTML ParseModes = "HTML"
 
 	//
-	// Use the following syntax in your message:
+	// ParseModeMarkdown: use the following syntax in your message:
 	//
 	//  *bold text*
 	//  _italic text_
