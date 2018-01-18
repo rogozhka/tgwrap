@@ -1,7 +1,7 @@
 package tgwrap
 
 //
-// GetUpdatesOpt represents optional params for GetUpdates
+// GetUpdatesOpt represents optional params for GetUpdates()
 //
 type GetUpdatesOpt struct {
 	//
