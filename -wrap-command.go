@@ -63,11 +63,12 @@ func (p *bot) postRequest(url string, contentType string, body io.Reader) ([]byt
 		return res, fmt.Errorf("POST error:%v", err)
 	}
 
-	if res, err := ioutil.ReadAll(resp.Body); err != nil {
+	res, err = ioutil.ReadAll(resp.Body)
+	if err != nil {
 		return res, fmt.Errorf("POST ReadAll error:%v", err)
-	} else {
-		return res, nil
 	}
+
+	return res, nil
 }
 
 //
