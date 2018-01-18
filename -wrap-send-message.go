@@ -68,7 +68,7 @@ const (
 	ParseModeDefault ParseModes = ""
 
 	//
-	// ParseModeHTML, the following tags are currently supported:
+	// ParseModeHTML The following tags are currently supported:
 	//
 	//  <b>bold</b>, <strong>bold</strong>
 	//  <i>italic</i>, <em>italic</em>
@@ -80,7 +80,7 @@ const (
 	ParseModeHTML ParseModes = "HTML"
 
 	//
-	// ParseModeMarkdown: use the following syntax in your message:
+	// ParseModeMarkdown Use the following syntax in your message:
 	//
 	//  *bold text*
 	//  _italic text_
