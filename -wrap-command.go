@@ -15,6 +15,10 @@ import (
 	"github.com/rogozhka/tgwrap/internal/thestruct"
 )
 
+//
+// GenericResponse is a common part of all the API responses
+// Description and ErrorCode are provided in case of error
+//
 type GenericResponse struct {
 	OK          bool   `json:"ok"`
 	Description string `json:"description,omitempty"`
