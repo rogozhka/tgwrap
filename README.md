@@ -1,5 +1,6 @@
 [![GoDoc](https://godoc.org/github.com/rogozhka/tgwrap?status.svg)](https://godoc.org/github.com/rogozhka/tgwrap)
 [![Travis](https://travis-ci.org/rogozhka/tgwrap.svg?branch=master)](https://travis-ci.org/rogozhka/tgwrap)
+[![Go Report Card](https://goreportcard.com/badge/github.com/rogozhka/tgwrap)](https://goreportcard.com/report/github.com/rogozhka/tgwrap)
 
 **TgWrap** is a Go library with [Telegram Bot API](https://core.telegram.org/bots/api) bindings. General approach is to keep objects as close as possible to the API structures with respect to optional params. Results of the methods are the same as noted in API documentation. Library does not pretend to be framework with tons of handlers and application strategy in mind. But there are some private helpers w/ reflection and struct tags under the hood. The aim is to cover step by step all the methods including Payment section.
 
