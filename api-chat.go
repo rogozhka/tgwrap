@@ -8,7 +8,7 @@ type Chat struct {
 	//
 	// Unique identifier for this chat.
 	//
-	ID uint64 `json:"id"`
+	ID int64 `json:"id"`
 
 	//
 	// Type of chat, can be either “private”, “group”, “supergroup” or “channel”
