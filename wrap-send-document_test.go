@@ -24,7 +24,7 @@ func Test_SendDocument(t *testing.T) {
 	up := arr[0]
 	chatID := up.Message.From.ID
 
-	inputFile := NewInputFileLocal("-wrap-send-document.go")
+	inputFile := NewInputFileLocal("wrap-send-document.go")
 
 	_, err4 := bot.SendDocument(chatID, inputFile,
 		&SendDocumentOpt{
