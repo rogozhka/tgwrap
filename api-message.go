@@ -10,7 +10,7 @@ type Message struct {
 	//
 	// Unique message identifier inside this chat
 	//
-	ID uint64 `json:"message_id"`
+	ID int64 `json:"message_id"`
 
 	//
 	// Optional. Sender, empty for messages sent to channels
