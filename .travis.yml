@@ -5,11 +5,11 @@ go:
 
 before_install:
   - go get -t -v ./...
-  - curl -s -o video.mp4 $TGWRAP_DOWNLOAD_URL_VIDEO
+  - curl -s -o $TGWRAP_TEST_VIDEO_PATH $TGWRAP_DOWNLOAD_URL_VIDEO
 
 script:
   - go test -race -coverprofile=coverage.txt -covermode=atomic
-  - curl -s -o video.mp4 $TGWRAP_DOWNLOAD_URL_VIDEO
+  - curl -s -o $TGWRAP_TEST_VIDEO_PATH $TGWRAP_DOWNLOAD_URL_VIDEO
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
