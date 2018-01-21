@@ -130,7 +130,7 @@ func main() {
 
 - [x] [sendVoice](https://core.telegram.org/bots/api#sendvoice)
 
-- [ ] sendDocument
+- [x] [sendDocument](https://core.telegram.org/bots/api#senddocument)
 
 - [ ] sendVideoNote
 
