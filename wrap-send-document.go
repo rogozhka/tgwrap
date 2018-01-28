@@ -46,7 +46,7 @@ type SendDocumentOpt struct {
 // or username of the target channel (in the format @channelusername)
 //
 // document: (*InputFile or string) File to send. Pass a file_id as String to send
-// an audio that exists on the Telegram servers (recommended), pass an HTTP URL as a String
+// a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String
 // for Telegram to get an audio from the Internet, or upload a new file using multipart/form-data.
 // using &NewInputFileLocal("<file path>")
 //
@@ -80,7 +80,7 @@ func (p *bot) SendDocument(chatID interface{}, document interface{}, opt *SendDo
 	var sender fCommandSender = p.sendJSON
 
 	tt := thestruct.Type(reflect.TypeOf(document))
-	if "InputFile" == tt.Name() && len(document.(*InputFile).Name()) > 0 {
+	if "InputFileLocal" == tt.Name() {
 		sender = p.sendFormData
 	}
 
