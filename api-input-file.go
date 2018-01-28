@@ -7,19 +7,14 @@ package tgwrap
 type InputFile struct {
 	url    string
 	fileID string
-
-	fileNameLocal string
 }
 
 //
-// Name returns stored localFileName or empty string
-// used as an indicator that InputFile
-// needs special treatment. In other cases standard
-// Marshalling procedures are applied. No need to extract
-// URL or file_id so there are no URL() and FileID() methods.
+// InputFile is used to store localFileName
+// to encode as multipart/form-data
 //
-func (p *InputFile) Name() string {
-	return p.fileNameLocal
+type InputFileLocal struct {
+	pathLocal string
 }
 
 //
@@ -33,57 +28,29 @@ func NewInputFileFromURL(url string) *InputFile {
 }
 
 //
+// NewInputFileFromURL is used to create InputFile
+// with file_id stored inside
+//
+func NewInputFileFromID(fileID string) *InputFile {
+	return &InputFile{
+		fileID: fileID,
+	}
+}
+
+//
 // NewInputFileLocal is used to create InputFile
 // with localFileName stored inside
 //
-func NewInputFileLocal(path string) *InputFile {
+func NewInputFileLocal(path string) *InputFileLocal {
 
-	o := &InputFile{}
-
-	return o.SetFileName(path)
-}
-
-func (p *InputFile) reset() *InputFile {
-	p.url = ""
-	p.fileID = ""
-	p.fileNameLocal = ""
-
-	return p
-}
-
-//
-// SetURL is used to switch InputFile into URL keeping mode
-//
-func (p *InputFile) SetURL(url string) *InputFile {
-	p.reset()
-	p.url = url
-	return p
-}
-
-//
-// SetFileID is used to switch InputFile into file_id keeping mode
-//
-func (p *InputFile) SetFileID(fileID string) *InputFile {
-	p.reset()
-	p.fileID = fileID
-	return p
-}
-
-//
-// SetFileName is used to switch InputFile into localFileName keeping mode
-//
-func (p *InputFile) SetFileName(fileName string) *InputFile {
-	p.reset()
-	p.fileNameLocal = fileName
-	return p
+	return &InputFileLocal{
+		pathLocal: path,
+	}
 }
 
 //
 // MarshalText implements TextMarshaler
 // and returns fileID or URL
-//
-// Note: fileName is ignored and should be used
-// by multipart-form encoder
 //
 func (p *InputFile) MarshalText() (text []byte, err error) {
 
@@ -93,10 +60,6 @@ func (p *InputFile) MarshalText() (text []byte, err error) {
 		return []byte(p.url), nil
 	}
 
-	if len(p.fileNameLocal) < 1 {
-		return []byte(""), nil
-	}
-
 	return []byte(""), nil
 }
 
@@ -104,6 +67,28 @@ func (p *InputFile) MarshalText() (text []byte, err error) {
 // String implements stringer interface
 //
 func (p *InputFile) String() string {
+
+	bytes, err := p.MarshalText()
+
+	if err != nil {
+		return ""
+	}
+
+	return string(bytes)
+}
+
+//
+// MarshalText implements TextMarshaler
+//
+func (p *InputFileLocal) MarshalText() (text []byte, err error) {
+
+	return []byte(p.pathLocal), nil
+}
+
+//
+// String implements stringer interface
+//
+func (p *InputFileLocal) String() string {
 
 	bytes, err := p.MarshalText()
 

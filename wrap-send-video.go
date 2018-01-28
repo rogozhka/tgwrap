@@ -61,7 +61,7 @@ type SendVideoOpt struct {
 // or username of the target channel (in the format @channelusername)
 //
 // video: (*InputFile or string) Video to send. Pass a file_id as string to send
-// a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a string
+// a video that exists on the Telegram servers (recommended), pass an HTTP URL as a string
 // for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data
 // using &NewInputFileLocal("<file path>")
 //
@@ -103,7 +103,7 @@ func (p *bot) SendVideo(chatID interface{}, video interface{}, opt *SendVideoOpt
 	var sender fCommandSender = p.sendJSON
 
 	tt := thestruct.Type(reflect.TypeOf(video))
-	if "InputFile" == tt.Name() && len(video.(*InputFile).Name()) > 0 {
+	if "InputFileLocal" == tt.Name() {
 		sender = p.sendFormData
 	}
 

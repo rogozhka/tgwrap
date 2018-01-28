@@ -95,7 +95,7 @@ func (p *bot) SendVoice(chatID interface{}, voice interface{}, opt *SendVoiceOpt
 	var sender fCommandSender = p.sendJSON
 
 	tt := thestruct.Type(reflect.TypeOf(voice))
-	if "InputFile" == tt.Name() && len(voice.(*InputFile).Name()) > 0 {
+	if "InputFileLocal" == tt.Name() {
 		sender = p.sendFormData
 	}
 

@@ -130,8 +130,7 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 		typeName := thestruct.Type(v.Type()).Name()
 		if len(typeName) == 0 && formTag != nil && formTag.Value == "file" {
 
-			inputFile := v.Interface().(*InputFile)
-			path := inputFile.Name()
+			path := fmt.Sprint(v.Interface())
 
 			if len(path) < 1 {
 				// file member has all the tags

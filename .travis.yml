@@ -1,6 +1,7 @@
 language: go
 
 go:
+  - 1.8.x
   - 1.9.x
 
 before_install:
@@ -9,7 +10,6 @@ before_install:
 
 script:
   - go test -race -coverprofile=coverage.txt -covermode=atomic
-  - curl -s -o $TGWRAP_TEST_VIDEO_PATH $TGWRAP_DOWNLOAD_URL_VIDEO
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
