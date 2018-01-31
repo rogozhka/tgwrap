@@ -12,7 +12,7 @@ import (
 	"path/filepath"
 	"reflect"
 
-	"github.com/rogozhka/tgwrap/internal/thestruct"
+	"github.com/rogozhka/tgwrap/thestruct"
 )
 
 //
