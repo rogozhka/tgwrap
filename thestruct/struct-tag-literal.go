@@ -5,9 +5,9 @@
 package thestruct
 
 //
-// ParseLiteral is used to extract definitions from struct tag string
+// ParseStructTagLiteral is used to extract definitions from struct tag string
 //
-func ParseLiteral(s string) (*Tags, error) {
+func ParseStructTagLiteral(s string) (*Tags, error) {
 
 	o := Tags{}
 
