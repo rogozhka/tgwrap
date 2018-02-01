@@ -10,7 +10,7 @@ func TestTags_index(t *testing.T) {
 
 	tag := `json:"name,string" xml:"title" gorm:"primary_key" bigquery:",nullable"`
 
-	tags, err := ParseLiteral(tag)
+	tags, err := ParseStructTagLiteral(tag)
 
 	assert.Nil(t, err, "ParseLiteral")
 	assert.NotNil(t, tags, "notnil tags")

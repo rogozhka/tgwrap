@@ -59,14 +59,14 @@ func getStructValue(val string) string {
 
 func getStructNameValue(s string) (string, string) {
 
-	arr := strings.Split(s, ":")
+	pos := strings.Index(s, ":")
 
-	if len(arr) < 2 {
+	if -1 == pos {
 		return "", ""
 	}
 
-	name := arr[0]
-	rawVal := arr[1]
+	name := s[:pos]
+	rawVal := s[pos+1:]
 	runes := []rune(rawVal)
 
 	if len(runes) < 3 || runes[0] != '"' || runes[len(runes)-1] != '"' {

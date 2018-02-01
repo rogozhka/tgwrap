@@ -97,7 +97,7 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 
 	// iterate over bodyStruct fields including contents
 	// of the embedded struct
-	for _, fieldT := range thestruct.Fields(t) {
+	for _, fieldT := range thestruct.Fields(t, thestruct.FieldsFilterDefault) {
 
 		v := r.FieldByName(fieldT.Name)
 
@@ -106,7 +106,7 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 			continue
 		}
 
-		stags, err := thestruct.ParseLiteral(string(fieldT.Tag))
+		stags, err := thestruct.ParseStructTagLiteral(string(fieldT.Tag))
 		if err != nil {
 			return res, err
 		}
