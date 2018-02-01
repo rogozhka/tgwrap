@@ -123,7 +123,7 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 			continue
 		}
 
-		if jsonTag.IsOpt("omitempty") && isEmptyValue(v) {
+		if jsonTag.IsOpt("omitempty") && thestruct.IsEmptyValue(v) {
 			continue
 		}
 
@@ -170,41 +170,6 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 	mpw.Close()
 
 	return p.postRequest(url, mpw.FormDataContentType(), &buf)
-}
-
-func isEmptyValue(v reflect.Value) bool {
-
-	switch v.Kind() {
-	case reflect.Bool:
-		return v.Bool() == false
-	case reflect.Int,
-		reflect.Int8,
-		reflect.Int16,
-		reflect.Int32,
-		reflect.Int64,
-		reflect.Uint,
-		reflect.Uint8,
-		reflect.Uint16,
-		reflect.Uint32,
-		reflect.Uint64,
-		reflect.Float32,
-		reflect.Float64:
-
-		return fmt.Sprintf("%v", v.Interface()) == "0"
-
-	case reflect.String:
-		return fmt.Sprintf("%v", v.Interface()) == ""
-
-	case
-		reflect.Uintptr,
-		reflect.Interface,
-		reflect.Ptr,
-		reflect.UnsafePointer:
-
-		return v.Interface() == nil
-	}
-
-	return false
 }
 
 //
