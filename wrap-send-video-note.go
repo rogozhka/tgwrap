@@ -2,8 +2,8 @@ package tgwrap
 
 import (
 	"fmt"
-	"github.com/rogozhka/tgwrap/thestruct"
 	"reflect"
+	"tgwrap/internal/thestruct"
 )
 
 //
