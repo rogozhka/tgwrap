@@ -72,7 +72,7 @@ func (p *bot) postRequest(url string, contentType string, body io.Reader) ([]byt
 }
 
 //
-// fCommandSender method for file/media upload commands.
+// sendFormData is fCommandSender method for file/media upload commands.
 // Encodes body as multipart/form-data
 //
 // NOTE:
@@ -173,7 +173,7 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 }
 
 //
-// Makes request and decodes API result
+// getAPIResponse makes request and decodes API result
 // into GenericResponse-based object
 //
 // returns error if API result decoded and not OK
@@ -185,14 +185,12 @@ func (p *bot) getAPIResponse(methodName string, sender fCommandSender, bodyStruc
 		return err
 	}
 
-	//	log.Printf("[%s]%s", methodName, data)
-
 	if err := json.Unmarshal(data, resultStruct); err != nil {
 		return fmt.Errorf("Unmarshal error:%v | %s", err, data)
 	}
 
 	// name of embedded struct with common fields (OK, ErrorCode, ...)
-	commonStruct := "GenericResponse"
+	const commonStruct = "GenericResponse"
 
 	r := reflect.ValueOf(resultStruct).Elem()
 	f := r.FieldByName(commonStruct)
