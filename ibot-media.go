@@ -5,7 +5,6 @@ package tgwrap
 // used as a part of common IBot API interface
 //
 type IBotMedia interface {
-
 	//
 	// SendPhoto is used to send photos.
 	//
@@ -93,4 +92,18 @@ type IBotMedia interface {
 	// opt: (can be nil) optional params
 	//
 	SendDocument(chatID interface{}, document interface{}, opt *SendDocumentOpt) (*Message, error)
+
+	// SendLocation is used to send point on the map.
+	// On success, the sent Message is returned.
+	//
+	// chatID: (uint64 or string) Unique identifier for the target chat
+	// or username of the target channel (in the format @channelusername)
+	//
+	// latitude: (float64) Latitude of the location.
+	//
+	// longitude: (float64) Longitude of the location.
+	//
+	// opt: (can be nil) optional params
+	//
+	SendLocation(chatID interface{}, latitude float64, longitude float64, opt *SendLocationOpt) (*Message, error)
 }
