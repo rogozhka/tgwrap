@@ -5,7 +5,6 @@ package tgwrap
 // used as a part of common IBot API interface
 //
 type IBotMedia interface {
-
 	//
 	// SendPhoto is used to send photos.
 	//
