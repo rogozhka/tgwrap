@@ -5,7 +5,6 @@ package tgwrap
 // used as a part of common IBot API interface
 //
 type IBotMedia interface {
-
 	//
 	// SendPhoto is used to send photos.
 	//
@@ -93,4 +92,20 @@ type IBotMedia interface {
 	// opt: (can be nil) optional params
 	//
 	SendDocument(chatID interface{}, document interface{}, opt *SendDocumentOpt) (*Message, error)
+
+	// SendVideoNote is used to send video notes.
+	// As of v.4.0, Telegram clients support rounded square mp4 videos of up to 1 minute long.
+	// Use this method to send video messages. On success, the sent Message is returned.
+	//
+	// chatID: (uint64 or string) Unique identifier for the target chat
+	// or username of the target channel (in the format @channelusername)
+	//
+	// video: (*InputFile or string) Video note to send.
+	// Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or
+	// upload a new video using multipart/form-data.
+	// Sending video notes by a URL is currently unsupported
+	//
+	// opt: (can be nil) optional params
+	//
+	SendVideoNote(chatID interface{}, video interface{}, opt *SendVideoNoteOpt) (*Message, error)
 }
