@@ -16,4 +16,5 @@ type IBot interface {
 	IBotMessages
 	IBotChat
 	IBotMedia
+	IBotLocation
 }
