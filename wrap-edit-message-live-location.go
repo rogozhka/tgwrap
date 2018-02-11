@@ -1,5 +1,9 @@
 package tgwrap
 
+import (
+	"fmt"
+)
+
 //
 // EditMessageLiveLocationOpt represents optional params for EditMessageLiveLocation
 //
@@ -45,4 +49,35 @@ type EditMessageLiveLocationOpt struct {
 //
 func (p *bot) EditMessageLiveLocation(latitude float64, longitude float64, opt *EditMessageLiveLocationOpt) (interface{}, error) {
 
+	type sendFormat struct {
+		EditMessageLiveLocationOpt `json:",omitempty"`
+
+		Latitude float64 `json:"latitude"`
+
+		Longitude float64 `json:"longitude"`
+	}
+
+	dataSend := sendFormat{
+		Latitude:  latitude,
+		Longitude: longitude,
+	}
+
+	if opt != nil {
+		dataSend.EditMessageLiveLocationOpt = *opt
+	}
+
+	var resp struct {
+		GenericResponse
+
+		Result *Message `json:"result"`
+	}
+
+	var sender fCommandSender = p.sendJSON
+
+	err := p.getAPIResponse("editMessageLiveLocation", sender, dataSend, &resp)
+	if err != nil {
+		return nil, fmt.Errorf("getAPIResponse ERROR:%v", err)
+	}
+
+	return resp.Result, nil
 }
