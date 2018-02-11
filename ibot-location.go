@@ -37,4 +37,12 @@ type IBotLocation interface {
 	// opt: (can be nil) optional params
 	//
 	SendVenue(chatID interface{}, latitude float64, longitude float64, title string, address string, opt *SendVenueOpt) (*Message, error)
+
+	//
+	// StopMessageLiveLocation is used to stop updating a live location message sent by the bot or via the bot (for inline bots) before live_period expires.
+	// On success, if the message was sent by the bot, the sent Message is returned, otherwise True is returned.
+	//
+	// opt: (can be nil) optional params
+	//
+	StopMessageLiveLocation(opt *StopMessageLiveLocationOpt) (interface{}, error)
 }
