@@ -108,19 +108,4 @@ type IBotMedia interface {
 	// opt: (can be nil) optional params
 	//
 	SendVideoNote(chatID interface{}, video interface{}, opt *SendVideoNoteOpt) (*Message, error)
-
-	//
-	// SendContact is used to to send phone contacts.
-	// On success, the sent Message is returned.
-	//
-	// chatID: (uint64 or string) Unique identifier for the target chat
-	// or username of the target channel (in the format @channelusername)
-	//
-	// phoneNumber: (string) Contact's phone number.
-	//
-	// firstName: (string) Contact's first name.
-	//
-	// opt: (can be nil) optional params
-	//
-	SendContact(chatID interface{}, phoneNumber string, firstName string, opt *SendContactOpt) (*Message, error)
 }
