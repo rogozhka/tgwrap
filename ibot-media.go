@@ -108,4 +108,14 @@ type IBotMedia interface {
 	// opt: (can be nil) optional params
 	//
 	SendVideoNote(chatID interface{}, video interface{}, opt *SendVideoNoteOpt) (*Message, error)
+
+	//
+	// GetUserProfilePhotos is used to get a list of profile pictures for a user.
+	// Returns a UserProfilePhotos object.
+	//
+	// userID: (int64) Unique identifier of the target user
+	//
+	// opt: (can be nil) optional params
+	//
+	GetUserProfilePhotos(userID uint64, opt *GetUserProfilePhotosOpt) (*UserProfilePhotos, error)
 }
