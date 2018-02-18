@@ -11,6 +11,14 @@ type bot struct {
 // and this is stupid comment to make linter happy
 //
 func NewBot(token string) IBot {
+	return createBot(token)
+}
+
+//
+// createBot is used for testing purposes
+// to test new methods still unexposed in IBot
+//
+func createBot(token string) *bot {
 	return &bot{
 		token: token,
 	}

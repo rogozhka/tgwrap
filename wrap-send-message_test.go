@@ -9,13 +9,8 @@ import (
 )
 
 func Test_SendMessage(t *testing.T) {
-	token, err := getTokenEnv()
-	assert.Nil(t, err, "Token")
-	if len(token) < 1 {
-		return
-	}
-
-	bot := NewBot(token)
+	token := getTokenEnv()
+	bot := createBot(token)
 
 	arr, err2 := bot.GetUpdates(&GetUpdatesOpt{Limit: 1})
 	assert.Nil(t, err2, "GetUpdates err")
