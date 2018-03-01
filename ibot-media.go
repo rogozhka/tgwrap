@@ -108,4 +108,14 @@ type IBotMedia interface {
 	// opt: (can be nil) optional params
 	//
 	SendVideoNote(chatID interface{}, video interface{}, opt *SendVideoNoteOpt) (*Message, error)
+
+	// GetFile is used to get basic info about a file and prepare it for downloading.
+	// For the moment, bots can download files of up to 20MB in size. On success, a File object is returned.
+	// The file can then be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>, where <file_path> is taken from the response.
+	// It is guaranteed that the link will be valid for at least 1 hour.
+	// When the link expires, a new one can be requested by calling getFile again.
+	//
+	// fileID: (string) File identifier to get info about
+	//
+	GetFile(fileID string) (*File, error)
 }
