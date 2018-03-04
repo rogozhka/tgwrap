@@ -13,27 +13,27 @@ type RestrictChatMemberOpt struct {
 	// Date when the user will be unbanned, unix time.
 	// If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever
 	//
-	UntilDate int64
+	UntilDate int64 `json:"until_date"`
 
 	//
 	// Pass True, if the user can send text messages, contacts, locations and venues
 	//
-	CanSendMessages bool
+	CanSendMessages bool `json:"can_send_messages"`
 
 	//
 	// Pass True, if the user can send audios, documents, photos, videos, video notes and voice notes, implies can_send_messages
 	//
-	CanSendMediaMessages bool
+	CanSendMediaMessages bool `json:"can_send_media_messages"`
 
 	//
 	// Pass True, if the user can send animations, games, stickers and use inline bots, implies can_send_media_messages
 	//
-	CanSendOtherMessages bool
+	CanSendOtherMessages bool `json:"can_send_other_messages"`
 
 	//
 	// Pass True, if the user may add web page previews to their messages, implies can_send_media_messages
 	//
-	CanAddWebPagePreviews bool
+	CanAddWebPagePreviews bool `json:"can_add_web_page_previews"`
 }
 
 // RestrictChatMember is used to restrict a user in a supergroup.
