@@ -121,5 +121,5 @@ type IBotMedia interface {
 	//
 	// opt: (can be nil) optional params
 	//
-	KickChatMember(chatID interface{}, userID int64, opt *KickChatMemberOpt) (bool, error)
+	KickChatMember(chatID interface{}, userID uint64, opt *KickChatMemberOpt) (bool, error)
 }

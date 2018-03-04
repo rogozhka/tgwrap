@@ -28,12 +28,12 @@ type KickChatMemberOpt struct {
 //
 // opt: (can be nil) optional params
 //
-func (p *bot) KickChatMember(chatID interface{}, userID int64, opt *KickChatMemberOpt) (bool, error) {
+func (p *bot) KickChatMember(chatID interface{}, userID uint64, opt *KickChatMemberOpt) (bool, error) {
 
 	type sendFormat struct {
 		ChatID string `json:"chat_id"`
 
-		UserID int64 `json:"user_id"`
+		UserID uint64 `json:"user_id"`
 
 		KickChatMemberOpt `json:",omitempty"`
 	}

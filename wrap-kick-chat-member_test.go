@@ -26,8 +26,9 @@ func Test_KickChatMember(t *testing.T) {
 	fmt.Println(arr)
 	up := arr[0]
 	chatID := up.Message.From.ID
+	userID := up.Message.From.ID
 	opts := KickChatMemberOpt{UntilDate: 60}
 
-	_, err4 := bot.KickChatMember(chatID, 0, &opts)
+	_, err4 := bot.KickChatMember(chatID, userID, &opts)
 	assert.Nil(t, err4, "KickChatMember err")
 }
