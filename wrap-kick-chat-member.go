@@ -13,7 +13,7 @@ type KickChatMemberOpt struct {
 	// Date when the user will be unbanned, unix time.
 	// If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever
 	//
-	UntilDate int64
+	UntilDate int64 `json:"until_date"`
 }
 
 // KickChatMember is used to kick a user from a group, a supergroup or a channel.
