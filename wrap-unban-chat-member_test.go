@@ -3,29 +3,23 @@ package tgwrap
 import (
 	"testing"
 
+	"strconv"
+
 	"github.com/stretchr/testify/assert"
 )
 
 func Test_UnbanChatMember(t *testing.T) {
-	token, err := getTokenEnv()
-	assert.Nil(t, err, "Token")
-	if len(token) < 1 {
-		return
-	}
 
-	bot := NewBot(token)
+	token := getTokenEnv()
+	bot := createBot(token)
+	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	strUserID := requireEnv("TGWRAP_TEST_USER_ID")
 
-	arr, err2 := bot.GetUpdates(&GetUpdatesOpt{Limit: 1})
-	assert.Nil(t, err2, "GetUpdates err")
+	return // till decision how to test supergroups
 
-	if len(arr) < 1 {
-		return
-	}
-	up := arr[0]
+	userID, err := strconv.Atoi(strUserID)
+	assert.Nil(t, err, "Atoi err")
 
-	chatID := up.Message.From.ID
-	userID := up.Message.From.ID
-
-	_, err4 := bot.UnbanChatMember(chatID, userID)
+	_, err4 := bot.UnbanChatMember(chatID, uint64(userID))
 	assert.Nil(t, err4, "UnbanChatMember err")
 }

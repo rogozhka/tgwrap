@@ -11,23 +11,9 @@ import (
 )
 
 func Test_SendPhotoWrap(t *testing.T) {
-	token, err := getTokenEnv()
-	assert.Nil(t, err, "Token")
-	if len(token) < 1 {
-		return
-	}
-
-	bot := NewBot(token)
-
-	arr, err2 := bot.GetUpdates(&GetUpdatesOpt{Limit: 1})
-	assert.Nil(t, err2, "GetUpdates err")
-
-	if len(arr) < 1 {
-		return
-	}
-
-	up := arr[0]
-	chatID := up.Message.From.ID
+	token := getTokenEnv()
+	bot := createBot(token)
+	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
 
 	photo := NewInputFileLocal("test/gray.png")
 
@@ -41,23 +27,9 @@ func Test_SendPhotoWrap(t *testing.T) {
 }
 
 func Test_SendPhotoURL(t *testing.T) {
-	token, err := getTokenEnv()
-	assert.Nil(t, err, "Token")
-	if len(token) < 1 {
-		return
-	}
-
-	bot := NewBot(token)
-
-	arr, err2 := bot.GetUpdates(&GetUpdatesOpt{Limit: 1})
-	assert.Nil(t, err2, "GetUpdates err")
-
-	if len(arr) < 1 {
-		return
-	}
-
-	up := arr[0]
-	chatID := up.Message.From.ID
+	token := getTokenEnv()
+	bot := createBot(token)
+	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
 
 	photo := NewInputFileFromURL("https://raw.githubusercontent.com/rogozhka/tgwrap/master/test/rogozhka-digital.png")
 

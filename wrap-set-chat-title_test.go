@@ -2,7 +2,6 @@ package tgwrap
 
 import (
 	"crypto/md5"
-	"os"
 	"testing"
 	"time"
 
@@ -12,20 +11,9 @@ import (
 )
 
 func Test_SetChatTitle(t *testing.T) {
-	token, err := getTokenEnv()
-	assert.Nil(t, err, "Token")
-	if len(token) < 1 {
-		return
-	}
-	bot := &bot{
-		token: token,
-	}
-
-	envName := "TGWRAP_TEST_CHAT_ID"
-	chatID := os.Getenv(envName)
-	if len(chatID) < 1 {
-		return
-	}
+	token := getTokenEnv()
+	bot := createBot(token)
+	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
 
 	newTitle := fmt.Sprintf("Title: %v", md5.Sum([]byte(time.Now().String())))
 

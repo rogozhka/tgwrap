@@ -8,13 +8,8 @@ import (
 
 func Test_getMe(t *testing.T) {
 
-	token, err := getTokenEnv()
-	assert.Nil(t, err, "Token")
-	if len(token) < 1 {
-		return
-	}
-
-	bot := NewBot(token)
+	token := getTokenEnv()
+	bot := createBot(token)
 
 	u, err2 := bot.GetMe()
 	assert.Nil(t, err2, "GetMe err")
