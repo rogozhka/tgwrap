@@ -29,7 +29,7 @@ func Test_SendPhotoWrap(t *testing.T) {
 	up := arr[0]
 	chatID := up.Message.From.ID
 
-	photo := NewInputFileLocal("test/gray.png")
+	photo := NewInputFileLocal("testdata/gray.png")
 
 	_, err4 := bot.SendPhoto(chatID, photo,
 		&SendPhotoOpt{
@@ -59,7 +59,7 @@ func Test_SendPhotoURL(t *testing.T) {
 	up := arr[0]
 	chatID := up.Message.From.ID
 
-	photo := NewInputFileFromURL("https://raw.githubusercontent.com/rogozhka/tgwrap/master/test/rogozhka-digital.png")
+	photo := NewInputFileFromURL("https://raw.githubusercontent.com/rogozhka/tgwrap/master/testdata/rogozhka-digital.png")
 
 	_, err4 := bot.SendPhoto(chatID, photo,
 		&SendPhotoOpt{

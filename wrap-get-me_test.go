@@ -4,17 +4,12 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/SergeyDonskoy/tgwrap/config"
 )
 
 func Test_getMe(t *testing.T) {
 
-	token, err := getTokenEnv()
-	assert.Nil(t, err, "Token")
-	if len(token) < 1 {
-		return
-	}
-
-	bot := NewBot(token)
+	bot := NewBot(config.Token)
 
 	u, err2 := bot.GetMe()
 	assert.Nil(t, err2, "GetMe err")
