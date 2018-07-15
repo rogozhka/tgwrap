@@ -9,6 +9,8 @@ import (
 var (
 	Token  string
 	ChatID string
+	FromChatID string
+	MessageID uint64
 )
 
 func init() {
@@ -26,4 +28,6 @@ func init() {
 
 	Token = viper.GetString("Token")
 	ChatID = viper.GetString("ChatID")
+	FromChatID = viper.GetString("FromChatID")
+	MessageID = uint64(viper.GetInt64("MessageID"))
 }
