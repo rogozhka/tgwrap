@@ -4,17 +4,12 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/SergeyDonskoy/tgwrap/config"
 )
 
 func Test_GetUpdates(t *testing.T) {
 
-	token, err := getTokenEnv()
-	assert.Nil(t, err, "Token")
-	if len(token) < 1 {
-		return
-	}
-
-	bot := NewBot(token)
+	bot := NewBot(config.Token)
 
 	arr, err2 := bot.GetUpdates(&GetUpdatesOpt{Limit: 1})
 	assert.Nil(t, err2, "GetUpdates err")
