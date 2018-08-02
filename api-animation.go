@@ -16,6 +16,21 @@ type Animation struct {
 	FileID string `json:"file_id"`
 
 	//
+	// Video width as defined by sender
+	//
+	Width uint `json:"width"`
+
+	//
+	// Video height as defined by sender
+	//
+	Height uint `json:"height"`
+
+	//
+	// Duration of the video in seconds as defined by sender
+	//
+	Duration uint `json:"duration"`
+
+	//
 	// Optional. Animation thumbnail as defined by sender
 	//
 	Thumb *PhotoSize `json:"thumb,omitempty"`
