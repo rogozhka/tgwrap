@@ -14,13 +14,15 @@ var (
 )
 
 func init() {
-	log.Println("initializing config")
-	viper.SetConfigFile("config/config.json")
-	err := viper.ReadInConfig()
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Printf("config initiazlized using file: %s\n", viper.ConfigFileUsed())
+	log.Println("initializing config using env variables")
+
+	viper.SetEnvPrefix("tgwrap")
+
+	viper.BindEnv("token")
+	viper.BindEnv("ChatID")
+	viper.BindEnv("FromChatID")
+	viper.BindEnv("MessageID")
+
 	Token = viper.GetString("Token")
 	ChatID = viper.GetString("ChatID")
 	FromChatID = viper.GetString("FromChatID")
