@@ -8,7 +8,7 @@ type Audio struct {
 	//
 	// Unique identifier for this file
 	//
-	ID string `json:"file_id"`
+	FileID string `json:"file_id"`
 
 	//
 	// Duration of the audio in seconds as defined by sender
@@ -33,5 +33,10 @@ type Audio struct {
 	//
 	// Optional. File size
 	//
-	TitleSize uint `json:"file_size,omitempty"`
+	FileSize uint `json:"file_size,omitempty"`
+
+	//
+	// Optional. Thumbnail of the album cover to which the music file belongs
+	//
+	Thumb *PhotoSize `json:"thumb,omitempty"`
 }
