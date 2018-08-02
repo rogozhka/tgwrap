@@ -24,4 +24,9 @@ type Contact struct {
 	// Optional. Contact's user identifier in Telegram
 	//
 	UserID uint64 `json:"user_id,omitempty"`
+
+	//
+	// Optional. Additional data about the contact in the form of a vCard
+	//
+	Vcard string `json:"vcard,omitempty"`
 }
