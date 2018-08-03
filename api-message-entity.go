@@ -35,10 +35,10 @@ type MessageEntity struct {
 	//
 	// Optional. For “text_link” only, url that will be opened after user taps on the text
 	//
-	URL string `json:"url"`
+	URL string `json:"url,omitempty"`
 
 	//
 	// Optional. For “text_mention” only, the mentioned user
 	//
-	User *User `json:"user"`
+	User *User `json:"user,omitempty"`
 }
