@@ -17,7 +17,7 @@ type ReplyKeyboardMarkup struct {
 	// Defaults to false, in which case the custom keyboard is always
 	// of the same height as the app's standard keyboard.
 	//
-	ResizeKeyboard [][]*KeyboardButton `json:"resize_keyboard,omitempty"`
+	ResizeKeyboard bool `json:"resize_keyboard,omitempty"`
 
 	//
 	// Optional. Requests clients to hide the keyboard as soon as it's been used.
@@ -48,7 +48,7 @@ type ReplyKeyboardMarkup struct {
 // the user presses a button (see ReplyKeyboardMarkup).
 //
 type ReplyKeyboardRemove struct {
-	RemoveKeyboard [][]*InlineKeyboardButton `json:"remove_keyboard"`
+	RemoveKeyboard bool `json:"remove_keyboard"`
 
 	Selective bool `json:"selective"`
 }
@@ -73,11 +73,11 @@ type KeyboardButton struct {
 	// Optional. If True, the user's phone number will be sent
 	// as a contact when the button is pressed. Available in private chats only
 	//
-	RequestContact string `json:"request_contact,omitempty"`
+	RequestContact bool `json:"request_contact,omitempty"`
 
 	//
 	// Optional. If True, the user's current location will be sent
 	// when the button is pressed. Available in private chats only
 	//
-	RequestLocation string `json:"request_location,omitempty"`
+	RequestLocation bool `json:"request_location,omitempty"`
 }
