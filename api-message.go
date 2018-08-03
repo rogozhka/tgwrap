@@ -10,7 +10,7 @@ type Message struct {
 	//
 	// Unique message identifier inside this chat
 	//
-	ID int64 `json:"message_id"`
+	MessageID int64 `json:"message_id"`
 
 	//
 	// Optional. Sender, empty for messages sent to channels
@@ -244,6 +244,17 @@ type Message struct {
 	// a successful payment, information about the payment.
 	//
 	SuccessfulPayment *SuccessfulPayment `json:"successful_payment,omitempty"`
+
+	//
+	// Optional. The domain name of the website on which the user has logged in. More about Telegram Login:
+	// https://core.telegram.org/widgets/login
+	//
+	ConnectedWebsite string `json:"connected_website,omitempty"`
+
+	//
+	// Optional. Telegram Passport data
+	//
+	PassportData *PassportData `json:"passport_data,omitempty"`
 }
 
 //
