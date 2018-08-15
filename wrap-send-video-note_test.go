@@ -9,8 +9,7 @@ import (
 )
 
 func Test_SendVideoNoteWrap(t *testing.T) {
-	token := getTokenEnv()
-	bot := createBot(token)
+	bot := createTestBotFromEnv()
 
 	envFilePath := "TGWRAP_TEST_VIDEO_PATH"
 	filePath := os.Getenv(envFilePath)

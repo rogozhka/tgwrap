@@ -6,6 +6,7 @@ import (
 )
 
 const telegramBotAPI = "https://api.telegram.org/bot"
+const defaultClientTimeout = time.Second * 50
 
 type bot struct {
 	token string
@@ -39,7 +40,7 @@ func NewBotWithClientAndURL(token string, client *http.Client, apiURL string) IB
 //
 func createBot(token string) *bot {
 	return createBotWithClient(token, &http.Client{
-		Timeout: time.Second * 10,
+		Timeout: defaultClientTimeout,
 	})
 }
 

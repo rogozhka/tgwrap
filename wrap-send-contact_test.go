@@ -7,8 +7,8 @@ import (
 )
 
 func Test_SendContactWrap(t *testing.T) {
-	token := getTokenEnv()
-	bot := createBot(token)
+	bot := createTestBotFromEnv()
+
 	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
 
 	firstName := "CIA"

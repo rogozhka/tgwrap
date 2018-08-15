@@ -9,9 +9,8 @@ import (
 )
 
 func Test_UnbanChatMember(t *testing.T) {
+	bot := createTestBotFromEnv()
 
-	token := getTokenEnv()
-	bot := createBot(token)
 	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
 	strUserID := requireEnv("TGWRAP_TEST_USER_ID")
 

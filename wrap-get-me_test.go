@@ -7,9 +7,7 @@ import (
 )
 
 func Test_getMe(t *testing.T) {
-
-	token := getTokenEnv()
-	bot := createBot(token)
+	bot := createTestBotFromEnv()
 
 	u, err2 := bot.GetMe()
 	assert.Nil(t, err2, "GetMe err")
