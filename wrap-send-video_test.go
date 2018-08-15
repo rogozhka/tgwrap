@@ -7,8 +7,8 @@ import (
 )
 
 func Test_SendVideoWrap(t *testing.T) {
-	token := getTokenEnv()
-	bot := createBot(token)
+	bot := createTestBotFromEnv()
+
 	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
 	filePath := requireEnv("TGWRAP_TEST_VIDEO_PATH")
 

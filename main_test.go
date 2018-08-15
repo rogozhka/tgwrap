@@ -2,6 +2,7 @@ package tgwrap
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 )
 
@@ -16,4 +17,20 @@ func requireEnv(name string) string {
 	}
 
 	return v
+}
+
+func createTestBotFromEnv() *bot {
+
+	var url string
+
+	v := os.Getenv("TGWRAP_API_URL")
+	if len(v) < 1 {
+		url = telegramBotAPI
+	} else {
+		url = v
+	}
+
+	return createBotWithClientAndURL(getTokenEnv(), &http.Client{
+		Timeout: defaultClientTimeout,
+	}, url)
 }

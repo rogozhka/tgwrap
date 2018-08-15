@@ -11,8 +11,8 @@ import (
 )
 
 func Test_SetChatTitle(t *testing.T) {
-	token := getTokenEnv()
-	bot := createBot(token)
+	bot := createTestBotFromEnv()
+
 	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
 
 	newTitle := fmt.Sprintf("Title: %v", md5.Sum([]byte(time.Now().String())))

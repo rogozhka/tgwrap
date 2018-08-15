@@ -3,26 +3,15 @@ package tgwrap
 import (
 	"testing"
 
-	"fmt"
-
 	"github.com/stretchr/testify/assert"
 )
 
 func Test_SendMessage(t *testing.T) {
-	token := getTokenEnv()
-	bot := createBot(token)
+	bot := createTestBotFromEnv()
 
-	arr, err2 := bot.GetUpdates(&GetUpdatesOpt{Limit: 1})
-	assert.Nil(t, err2, "GetUpdates err")
+	chatID := requireEnv("TGWRAP_TEST_PERSONAL_CHAT_ID")
 
-	if len(arr) < 1 {
-		return
-	}
-
-	up := arr[0]
-	chatID := up.Message.From.ID
-
-	m, err4 := bot.SendMessage(chatID, fmt.Sprintf(";) %v", up.Message.Text),
+	m, err4 := bot.SendMessage(chatID, "test message ;) %v",
 		&SendMessageOpt{
 			DisableNotification: true,
 		})
