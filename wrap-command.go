@@ -7,7 +7,6 @@ import (
 	"io"
 	"io/ioutil"
 	"mime/multipart"
-	"net/http"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -36,7 +35,7 @@ func (p *bot) sendJSON(methodName string, bodyStruct interface{}) ([]byte, error
 	// empty result to return with errors
 	res := []byte{}
 
-	url := fmt.Sprintf("https://api.telegram.org/bot%s/%s", p.token, methodName)
+	url := fmt.Sprintf("%s%s/%s", p.apiURL, p.token, methodName)
 
 	var buf bytes.Buffer
 
@@ -54,7 +53,7 @@ func (p *bot) postRequest(url string, contentType string, body io.Reader) ([]byt
 
 	var res []byte
 
-	resp, err := http.Post(url, contentType, body)
+	resp, err := p.client.Post(url, contentType, body)
 	if resp != nil {
 		defer resp.Body.Close()
 		resp.Close = true
@@ -87,7 +86,7 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 
 	// empty result to return with errors
 	res := []byte{}
-	url := fmt.Sprintf("https://api.telegram.org/bot%s/%s", p.token, methodName)
+	url := fmt.Sprintf("%s%s/%s", p.apiURL, p.token, methodName)
 
 	var buf bytes.Buffer
 	mpw := multipart.NewWriter(&buf)
