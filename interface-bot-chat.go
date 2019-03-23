@@ -1,10 +1,10 @@
 package tgwrap
 
 //
-// IBotChat is a group of methods for chat manipulation
-// used as a part of common IBot API interface
+// BotChatInterface is a group of methods for chat manipulation
+// used as a part of common BotInterface API interface
 //
-type IBotChat interface {
+type BotChatInterface interface {
 
 	//
 	// SendChatAction is used when you need to tell the user

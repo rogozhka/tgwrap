@@ -1,10 +1,11 @@
 package tgwrap
 
 //
-// IBotMedia is a group of methods for sending media
-// used as a part of common IBot API interface
+// BotMediaInterface is a group of methods for sending media
+// used as a part of common BotInterface API interface
 //
-type IBotMedia interface {
+type BotMediaInterface interface {
+
 	//
 	// SendPhoto is used to send photos.
 	//

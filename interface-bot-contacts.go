@@ -1,10 +1,10 @@
 package tgwrap
 
 //
-// IBotContacts is a group of methods for sending contact-related
-// information; used as a part of common IBot API interface
+// BotContactsInterface is a group of methods for sending contact-related
+// information; used as a part of common BotInterface API interface
 //
-type IBotContacts interface {
+type BotContactsInterface interface {
 
 	//
 	// SendContact is used to to send phone contacts.
