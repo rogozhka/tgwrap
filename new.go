@@ -5,8 +5,8 @@ import (
 	"time"
 )
 
-const telegramBotAPI = "https://api.telegram.org/bot"
-const defaultClientTimeout = time.Second * 50
+const TelegramBotAPI = "https://api.telegram.org/bot"
+const DefaultClientTimeout = time.Second * 50
 
 type bot struct {
 	token string
@@ -19,43 +19,44 @@ type bot struct {
 //
 // NewBot creates new object with associated token inside
 //
-// note: object is object, new is new
-// and this is stupid comment to make linter happy
-//
-func NewBot(token string) IBot {
-	return createBot(token)
-}
-
-func NewBotWithClient(token string, client *http.Client) IBot {
-	return createBotWithClient(token, client)
-}
-
-func NewBotWithClientAndURL(token string, client *http.Client, apiURL string) IBot {
-	return createBotWithClientAndURL(token, client, apiURL)
-}
-
-//
-// createBot is used for testing purposes
-// to test new methods still unexposed in IBot
-//
-func createBot(token string) *bot {
+func NewBot(token string) *bot {
 	return createBotWithClient(token, &http.Client{
-		Timeout: defaultClientTimeout,
+		Timeout: DefaultClientTimeout,
 	})
 }
 
+//
+// NewBotWithClient creates bot w/ associated token and optional HTTP client
+//
+func NewBotWithClient(token string, client *http.Client) *bot {
+	return createBotWithClient(token, client)
+}
+
+func NewBotWithClientAndURL(token string, client *http.Client, apiURL string) *bot {
+	return createBotWithClientAndURL(token, client, apiURL)
+}
+
 func createBotWithClient(token string, client *http.Client) *bot {
-	return &bot{
+
+	p := &bot{
 		token:  token,
 		client: client,
-		apiURL: telegramBotAPI,
+		apiURL: TelegramBotAPI,
 	}
+
+	if nil == p.client {
+		p.client = &http.Client{
+			Timeout: DefaultClientTimeout,
+		}
+	}
+
+	return p
 }
 
 func createBotWithClientAndURL(token string, client *http.Client, apiURL string) *bot {
-	return &bot{
-		token:  token,
-		client: client,
-		apiURL: apiURL,
-	}
+
+	p := createBotWithClient(token, client)
+	p.apiURL = apiURL
+
+	return p
 }
