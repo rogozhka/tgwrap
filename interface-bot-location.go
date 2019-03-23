@@ -1,10 +1,10 @@
 package tgwrap
 
 //
-// IBotLocation is a group of methods for location
-// used as a part of common IBot API interface
+// BotLocationInterface is a group of methods for location
+// used as a part of common BotInterface API interface
 //
-type IBotLocation interface {
+type BotLocationInterface interface {
 
 	// SendLocation is used to send point on the map.
 	// On success, the sent Message is returned.
@@ -46,8 +46,8 @@ type IBotLocation interface {
 	//
 	StopMessageLiveLocation(opt *StopMessageLiveLocationOpt) (interface{}, error)
 
-  //
-  // EditMessageLiveLocation is used to edit live location messages sent by the bot or via the bot (for inline bots).
+	//
+	// EditMessageLiveLocation is used to edit live location messages sent by the bot or via the bot (for inline bots).
 	// A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation.
 	// On success, if the edited message was sent by the bot, the edited Message is returned, otherwise True is returned.
 	//

@@ -1,10 +1,10 @@
 package tgwrap
 
 //
-// IBotMessages is just a group of methods
+// BotMessagesInterface is just a group of methods
 // to have smaller interface files
 //
-type IBotMessages interface {
+type BotMessagesInterface interface {
 
 	//
 	// SendMessage is used method to send text messages.

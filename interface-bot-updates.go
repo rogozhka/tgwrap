@@ -1,10 +1,10 @@
 package tgwrap
 
 //
-// IBotUpdates is a group of methods related to getting updates
-// used as a part of common IBot API interface
+// BotUpdatesInterface is a group of methods related to getting updates
+// used as a part of common BotInterface API interface
 //
-type IBotUpdates interface {
+type BotUpdatesInterface interface {
 
 	//
 	// GetUpdates is used to receive incoming updates using [long] polling
