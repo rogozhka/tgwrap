@@ -25,12 +25,12 @@ func createTestBotFromEnv() *bot {
 
 	v := os.Getenv("TGWRAP_API_URL")
 	if len(v) < 1 {
-		url = telegramBotAPI
+		url = TelegramBotAPI
 	} else {
 		url = v
 	}
 
 	return createBotWithClientAndURL(getTokenEnv(), &http.Client{
-		Timeout: defaultClientTimeout,
+		Timeout: DefaultClientTimeout,
 	}, url)
 }
