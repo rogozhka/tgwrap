@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"reflect"
 
-	"github.com/rogozhka/tgwrap/thestruct"
+	"github.com/rogozhka/thestruct"
 )
 
 //
