@@ -1,0 +1,8 @@
+module github.com/rogozhka/tgwrap
+
+go 1.12
+
+require (
+	github.com/rogozhka/thestruct v1.0.1
+	github.com/stretchr/testify v1.3.0
+)

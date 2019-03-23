@@ -8,11 +8,6 @@ import "reflect"
 type FieldsFilterOpt uint
 
 const (
-
-	//
-	// FieldsFilterDefault iterate all the fields
-	// all the structures
-	//
 	FieldsFilterDefault = 0
 
 	//

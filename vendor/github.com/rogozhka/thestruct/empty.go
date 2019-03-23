@@ -5,7 +5,7 @@ import (
 )
 
 //
-// IsEmptyValue returns true if the value is untouched
+// IsEmptyValue returns false if the value is untouched
 //
 func IsEmptyValue(v reflect.Value) bool {
 

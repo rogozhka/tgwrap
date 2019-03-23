@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/rogozhka/tgwrap/thestruct"
+	"github.com/rogozhka/thestruct"
 )
 
 //
