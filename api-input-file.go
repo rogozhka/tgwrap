@@ -10,7 +10,7 @@ type InputFile struct {
 }
 
 //
-// InputFile is used to store localFileName
+// InputFileLocal is used to store localFileName
 // to encode as multipart/form-data
 //
 type InputFileLocal struct {
@@ -28,7 +28,7 @@ func NewInputFileFromURL(url string) *InputFile {
 }
 
 //
-// NewInputFileFromURL is used to create InputFile
+// NewInputFileFromID is used to create InputFile
 // with file_id stored inside
 //
 func NewInputFileFromID(fileID string) *InputFile {
