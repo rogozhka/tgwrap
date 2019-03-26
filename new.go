@@ -5,7 +5,16 @@ import (
 	"time"
 )
 
+//
+// TelegramBotAPI is default api address
+// used in default client
+//
 const TelegramBotAPI = "https://api.telegram.org/bot"
+
+//
+// DefaultClientTimeout is waiting for result interval
+// used by default in default client
+//
 const DefaultClientTimeout = time.Second * 50
 
 type bot struct {
@@ -32,6 +41,9 @@ func NewBotWithClient(token string, client *http.Client) *bot {
 	return createBotWithClient(token, client)
 }
 
+//
+// NewBotWithClientAndURL creates bot w/ token, client and different API URL (proxy)
+//
 func NewBotWithClientAndURL(token string, client *http.Client, apiURL string) *bot {
 	return createBotWithClientAndURL(token, client, apiURL)
 }
