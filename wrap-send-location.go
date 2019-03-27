@@ -79,12 +79,6 @@ func (p *bot) SendLocation(chatID interface{}, latitude float64, longitude float
 		Result *Message `json:"result"`
 	}
 
-	var sender fCommandSender = p.sendJSON
-
-	err := p.getAPIResponse("sendLocation", sender, dataSend, &resp)
-	if err != nil {
-		return nil, fmt.Errorf("getAPIResponse ERROR:%v", err)
-	}
-
-	return resp.Result, nil
+	err := p.getAPIResponse("sendLocation", p.sendJSON, dataSend, &resp)
+	return resp.Result, err
 }

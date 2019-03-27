@@ -1,9 +1,5 @@
 package tgwrap
 
-import (
-	"fmt"
-)
-
 //
 // EditMessageLiveLocationOpt represents optional params for EditMessageLiveLocation
 //
@@ -72,12 +68,6 @@ func (p *bot) EditMessageLiveLocation(latitude float64, longitude float64, opt *
 		Result *Message `json:"result"`
 	}
 
-	var sender fCommandSender = p.sendJSON
-
-	err := p.getAPIResponse("editMessageLiveLocation", sender, dataSend, &resp)
-	if err != nil {
-		return nil, fmt.Errorf("getAPIResponse ERROR:%v", err)
-	}
-
-	return resp.Result, nil
+	err := p.getAPIResponse("editMessageLiveLocation", p.sendJSON, dataSend, &resp)
+	return resp.Result, err
 }

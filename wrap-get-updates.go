@@ -51,8 +51,6 @@ type GetUpdatesOpt struct {
 //
 func (p *bot) GetUpdates(opt *GetUpdatesOpt) ([]*Update, error) {
 
-	var arrRes []*Update
-
 	type sendFormat struct {
 		GetUpdatesOpt
 	}
@@ -70,9 +68,5 @@ func (p *bot) GetUpdates(opt *GetUpdatesOpt) ([]*Update, error) {
 	}
 
 	err := p.getAPIResponse("getUpdates", p.sendJSON, dataSend, &resp)
-	if err != nil {
-		return arrRes, err
-	}
-
-	return resp.Result, nil
+	return resp.Result, err
 }

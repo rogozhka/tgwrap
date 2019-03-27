@@ -21,10 +21,12 @@ func Test_SendVideoNoteWrap(t *testing.T) {
 
 	inputFile := NewInputFileLocal(filePath)
 
-	_, err4 := bot.SendVideoNote(chatID, inputFile,
+	r, err := bot.SendVideoNote(chatID, inputFile,
 		&SendVideoNoteOpt{
 			DisableNotification: false,
 		})
 
-	assert.Nil(t, err4, "SendMessage err")
+	assert.Nil(t, err, "err")
+	assert.NotNil(t, r, "result")
+	assert.True(t, r.ID > 0, "positive message id")
 }

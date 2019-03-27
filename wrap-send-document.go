@@ -77,7 +77,7 @@ func (p *bot) SendDocument(chatID interface{}, document interface{}, opt *SendDo
 		Result *Message `json:"result"`
 	}
 
-	var sender fCommandSender = p.sendJSON
+	sender := p.sendJSON
 
 	tt := thestruct.Type(reflect.TypeOf(document))
 	if "InputFileLocal" == tt.Name() {
@@ -85,9 +85,5 @@ func (p *bot) SendDocument(chatID interface{}, document interface{}, opt *SendDo
 	}
 
 	err := p.getAPIResponse("sendDocument", sender, dataSend, &resp)
-	if err != nil {
-		return nil, fmt.Errorf("getAPIResponse ERROR:%v", err)
-	}
-
-	return resp.Result, nil
+	return resp.Result, err
 }

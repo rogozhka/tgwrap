@@ -74,12 +74,6 @@ func (p *bot) SendContact(chatID interface{}, phoneNumber string, firstName stri
 		Result *Message `json:"result"`
 	}
 
-	var sender fCommandSender = p.sendJSON
-
-	err := p.getAPIResponse("sendContact", sender, dataSend, &resp)
-	if err != nil {
-		return nil, fmt.Errorf("getAPIResponse ERROR:%v", err)
-	}
-
-	return resp.Result, nil
+	err := p.getAPIResponse("sendContact", p.sendJSON, dataSend, &resp)
+	return resp.Result, err
 }

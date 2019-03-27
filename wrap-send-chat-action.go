@@ -72,9 +72,5 @@ func (p *bot) SendChatAction(chatID interface{}, action ChatActions) (bool, erro
 	}
 
 	err := p.getAPIResponse("sendChatAction", p.sendJSON, dataSend, &resp)
-	if err != nil {
-		return false, err
-	}
-
-	return resp.Result, nil
+	return resp.Result, err
 }

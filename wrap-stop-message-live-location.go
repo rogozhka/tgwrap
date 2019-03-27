@@ -1,9 +1,5 @@
 package tgwrap
 
-import (
-	"fmt"
-)
-
 //
 // StopMessageLiveLocationOpt represents optional params for StopMessageLiveLocation
 //
@@ -60,12 +56,6 @@ func (p *bot) StopMessageLiveLocation(opt *StopMessageLiveLocationOpt) (interfac
 		Result *Message `json:"result"`
 	}
 
-	var sender fCommandSender = p.sendJSON
-
-	err := p.getAPIResponse("stopMessageLiveLocation", sender, dataSend, &resp)
-	if err != nil {
-		return nil, fmt.Errorf("getAPIResponse ERROR:%v", err)
-	}
-
-	return resp.Result, nil
+	err := p.getAPIResponse("stopMessageLiveLocation", p.sendJSON, dataSend, &resp)
+	return resp.Result, err
 }

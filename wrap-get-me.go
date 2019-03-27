@@ -14,9 +14,5 @@ func (p *bot) GetMe() (*User, error) {
 	}
 
 	err := p.getAPIResponse("getMe", p.sendJSON, nil, &resp)
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Result, nil
+	return resp.Result, err
 }

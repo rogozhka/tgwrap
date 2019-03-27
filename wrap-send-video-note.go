@@ -88,7 +88,7 @@ func (p *bot) SendVideoNote(chatID interface{}, video interface{}, opt *SendVide
 		Result *Message `json:"result"`
 	}
 
-	var sender fCommandSender = p.sendJSON
+	sender := p.sendJSON
 
 	tt := thestruct.Type(reflect.TypeOf(video))
 	if "InputFileLocal" == tt.Name() {
@@ -96,9 +96,5 @@ func (p *bot) SendVideoNote(chatID interface{}, video interface{}, opt *SendVide
 	}
 
 	err := p.getAPIResponse("sendVideoNote", sender, dataSend, &resp)
-	if err != nil {
-		return nil, fmt.Errorf("getAPIResponse ERROR:%v", err)
-	}
-
-	return resp.Result, nil
+	return resp.Result, err
 }
