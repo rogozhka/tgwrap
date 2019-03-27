@@ -59,12 +59,12 @@ func (p *bot) postRequest(url string, contentType string, body io.Reader) ([]byt
 		resp.Close = true
 	}
 	if err != nil {
-		return res, fmt.Errorf("POST error:%v", err)
+		return res, err
 	}
 
 	res, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return res, fmt.Errorf("POST ReadAll error:%v", err)
+		return res, fmt.Errorf("read resp.Body | %v", err)
 	}
 
 	return res, nil
@@ -140,7 +140,7 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 
 			f, err := os.Open(path)
 			if err != nil {
-				return res, fmt.Errorf("Sender cannot open [%v]:%v", path, err)
+				return res, fmt.Errorf("cannot open | %v | %v", path, err)
 			}
 			if f != nil {
 				// defer is not recommended in loop
@@ -181,11 +181,11 @@ func (p *bot) getAPIResponse(methodName string, sender fCommandSender, bodyStruc
 
 	data, err := sender(methodName, bodyStruct)
 	if err != nil {
-		return err
+		return fmt.Errorf("%s | %v", methodName, err)
 	}
 
 	if err := json.Unmarshal(data, resultStruct); err != nil {
-		return fmt.Errorf("Unmarshal error:%v | %s", err, data)
+		return fmt.Errorf("unmarshal | %v | %s", err, data)
 	}
 
 	// name of embedded struct with common fields (OK, ErrorCode, ...)
@@ -194,18 +194,18 @@ func (p *bot) getAPIResponse(methodName string, sender fCommandSender, bodyStruc
 	r := reflect.ValueOf(resultStruct).Elem()
 	f := r.FieldByName(commonStruct)
 	if !f.IsValid() {
-		return fmt.Errorf("%v not found in target struct: %T", commonStruct, resultStruct)
+		return fmt.Errorf("%v not found in target struct | %T", commonStruct, resultStruct)
 	}
 
 	// see "type assertion" topic ;)
 	resp, ok := f.Interface().(GenericResponse)
 	if !ok {
 		// field is not embedded but has (commonStruct) name
-		return fmt.Errorf("ERROR: unmarshal target field is not %v type:%T", commonStruct, resultStruct)
+		return fmt.Errorf("unmarshal target field is not %v | %T", commonStruct, resultStruct)
 	}
 
 	if !resp.OK {
-		return fmt.Errorf("API ERROR(%v)[%v]:%v", methodName, resp.ErrorCode, resp.Description)
+		return fmt.Errorf("API | %v | %v | %v", methodName, resp.ErrorCode, resp.Description)
 	}
 
 	return nil
