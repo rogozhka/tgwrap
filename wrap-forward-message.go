@@ -40,16 +40,12 @@ func (p *bot) ForwardMessage(chatID interface{}, fromChatID interface{},
 		dataSend.DisableNotification = true
 	}
 
-	var respStruct struct {
+	var resp struct {
 		GenericResponse
 
 		Result *Message `json:"result"`
 	}
 
-	err := p.getAPIResponse("forwardMessage", p.sendJSON, dataSend, &respStruct)
-	if err != nil {
-		return nil, err
-	}
-
-	return respStruct.Result, nil
+	err := p.getAPIResponse("forwardMessage", p.sendJSON, dataSend, &resp)
+	return resp.Result, err
 }

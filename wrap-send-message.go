@@ -114,7 +114,7 @@ func (p *bot) SendMessage(chatID interface{}, text string, opt *SendMessageOpt) 
 	}
 
 	dataSend := sendFormat{
-		ChatID: fmt.Sprint(chatID), // don't care about checking fmt, Telegram will response with error if invalid ID
+		ChatID: fmt.Sprint(chatID), // don't care about valid format, Telegram will response with error if invalid ID
 		Text:   text,
 	}
 
@@ -129,9 +129,5 @@ func (p *bot) SendMessage(chatID interface{}, text string, opt *SendMessageOpt) 
 	}
 
 	err := p.getAPIResponse("sendMessage", p.sendJSON, dataSend, &resp)
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Result, nil
+	return resp.Result, err
 }

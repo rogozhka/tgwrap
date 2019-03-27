@@ -83,12 +83,6 @@ func (p *bot) SendVenue(chatID interface{}, latitude float64, longitude float64,
 		Result *Message `json:"result"`
 	}
 
-	var sender fCommandSender = p.sendJSON
-
-	err := p.getAPIResponse("sendVenue", sender, dataSend, &resp)
-	if err != nil {
-		return nil, fmt.Errorf("getAPIResponse ERROR:%v", err)
-	}
-
-	return resp.Result, nil
+	err := p.getAPIResponse("sendVenue", p.sendJSON, dataSend, &resp)
+	return resp.Result, err
 }

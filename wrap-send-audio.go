@@ -102,7 +102,7 @@ func (p *bot) SendAudio(chatID interface{}, audio interface{}, opt *SendAudioOpt
 		Result *Message `json:"result"`
 	}
 
-	var sender fCommandSender = p.sendJSON
+	sender := p.sendJSON
 
 	tt := thestruct.Type(reflect.TypeOf(audio))
 	if "InputFileLocal" == tt.Name() {
@@ -110,9 +110,5 @@ func (p *bot) SendAudio(chatID interface{}, audio interface{}, opt *SendAudioOpt
 	}
 
 	err := p.getAPIResponse("sendAudio", sender, dataSend, &resp)
-	if err != nil {
-		return nil, fmt.Errorf("getAPIResponse ERROR:%v", err)
-	}
-
-	return resp.Result, nil
+	return resp.Result, err
 }

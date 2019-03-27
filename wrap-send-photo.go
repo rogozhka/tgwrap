@@ -83,7 +83,7 @@ func (p *bot) SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt
 		Result *Message `json:"result"`
 	}
 
-	var sender fCommandSender = p.sendJSON
+	sender := p.sendJSON
 
 	tt := thestruct.Type(reflect.TypeOf(photo))
 	if "InputFileLocal" == tt.Name() {
@@ -91,9 +91,5 @@ func (p *bot) SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt
 	}
 
 	err := p.getAPIResponse("sendPhoto", sender, dataSend, &resp)
-	if err != nil {
-		return nil, fmt.Errorf("getAPIResponse ERROR:%v", err)
-	}
-
-	return resp.Result, nil
+	return resp.Result, err
 }

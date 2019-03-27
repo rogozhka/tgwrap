@@ -33,9 +33,5 @@ func (p *bot) SetChatTitle(chatID interface{}, title string) (bool, error) {
 	}
 
 	err := p.getAPIResponse("setChatTitle", p.sendJSON, dataSend, &resp)
-	if err != nil {
-		return false, err
-	}
-
-	return resp.Result, nil
+	return resp.Result, err
 }
