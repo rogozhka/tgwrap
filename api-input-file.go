@@ -1,5 +1,7 @@
 package tgwrap
 
+import "strings"
+
 //
 // InputFile is used to store file_id, URL,
 // or localFileName to encode as multipart/form-data
@@ -44,7 +46,7 @@ func NewInputFileFromID(fileID string) *InputFile {
 func NewInputFileLocal(path string) *InputFileLocal {
 
 	return &InputFileLocal{
-		pathLocal: path,
+		pathLocal: strings.TrimSpace(path),
 	}
 }
 
