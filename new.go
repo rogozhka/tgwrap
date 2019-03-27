@@ -29,7 +29,7 @@ type bot struct {
 // NewBot creates new object with associated token inside
 //
 func NewBot(token string) *bot {
-	return createBotWithClient(token, &http.Client{
+	return NewBotWithClient(token, &http.Client{
 		Timeout: DefaultClientTimeout,
 	})
 }
@@ -38,18 +38,6 @@ func NewBot(token string) *bot {
 // NewBotWithClient creates bot w/ associated token and optional HTTP client
 //
 func NewBotWithClient(token string, client *http.Client) *bot {
-	return createBotWithClient(token, client)
-}
-
-//
-// NewBotWithClientAndURL creates bot w/ token, client and different API URL (proxy)
-//
-func NewBotWithClientAndURL(token string, client *http.Client, apiURL string) *bot {
-	return createBotWithClientAndURL(token, client, apiURL)
-}
-
-func createBotWithClient(token string, client *http.Client) *bot {
-
 	p := &bot{
 		token:  token,
 		client: client,
@@ -65,9 +53,12 @@ func createBotWithClient(token string, client *http.Client) *bot {
 	return p
 }
 
-func createBotWithClientAndURL(token string, client *http.Client, apiURL string) *bot {
+//
+// NewBotWithClientAndURL creates bot w/ token, client and different API URL (proxy)
+//
+func NewBotWithClientAndURL(token string, client *http.Client, apiURL string) *bot {
 
-	p := createBotWithClient(token, client)
+	p := NewBotWithClient(token, client)
 	p.apiURL = apiURL
 
 	return p

@@ -30,7 +30,7 @@ func createTestBotFromEnv() *bot {
 		url = v
 	}
 
-	return createBotWithClientAndURL(getTokenEnv(), &http.Client{
+	return NewBotWithClientAndURL(getTokenEnv(), &http.Client{
 		Timeout: DefaultClientTimeout,
 	}, url)
 }
