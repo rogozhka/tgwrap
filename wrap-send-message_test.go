@@ -11,11 +11,11 @@ func Test_SendMessage(t *testing.T) {
 
 	chatID := requireEnv("TGWRAP_TEST_PERSONAL_CHAT_ID")
 
-	m, err4 := bot.SendMessage(chatID, "test message ;)",
+	m, err := bot.SendMessage(chatID, "test message ;)",
 		&SendMessageOpt{
 			DisableNotification: true,
 		})
 
-	assert.Nil(t, err4, "SendMessage err")
+	assert.Nil(t, err, "SendMessage err")
 	assert.NotNil(t, m, "Message present")
 }

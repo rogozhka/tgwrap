@@ -11,7 +11,7 @@ func Test_SendChatAction(t *testing.T) {
 
 	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
 
-	b2, err4 := bot.SendChatAction(chatID, ChatActionUploadPhoto)
-	assert.Nil(t, err4, "SendChatAction err")
+	b2, err := bot.SendChatAction(chatID, ChatActionUploadPhoto)
+	assert.Nil(t, err, "SendChatAction err")
 	assert.True(t, b2, "ChatActionTyping")
 }

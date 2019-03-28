@@ -16,10 +16,10 @@ func Test_SendVenueWrap(t *testing.T) {
 	title := "Rome"
 	address := "Center"
 
-	_, err4 := bot.SendVenue(chatID, latitude, longitude, title, address,
+	_, err := bot.SendVenue(chatID, latitude, longitude, title, address,
 		&SendVenueOpt{
 			DisableNotification: false,
 		})
 
-	assert.Nil(t, err4, "SendMessage err")
+	assert.Nil(t, err, "SendVenue err")
 }

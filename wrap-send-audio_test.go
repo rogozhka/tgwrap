@@ -14,12 +14,12 @@ func Test_SendAudio(t *testing.T) {
 
 	inputFile := NewInputFileLocal(filePath)
 
-	_, err4 := bot.SendAudio(chatID, inputFile,
+	_, err := bot.SendAudio(chatID, inputFile,
 		&SendAudioOpt{
 			DisableNotification: true,
 			Duration:            uint(3),
 			Caption:             "TGWRAP_TEST_AUDIO_PATH",
 		})
 
-	assert.Nil(t, err4, "SendAudio")
+	assert.Nil(t, err, "SendAudio")
 }
