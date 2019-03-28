@@ -26,7 +26,7 @@ func Test_SendVideoNoteWrap(t *testing.T) {
 			DisableNotification: false,
 		})
 
-	assert.Nil(t, err, "err")
+	assert.Nil(t, err, "SendVideoNote err")
 	assert.NotNil(t, r, "result")
 	assert.True(t, r.ID > 0, "positive message id")
 }

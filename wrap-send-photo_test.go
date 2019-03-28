@@ -23,7 +23,7 @@ func Test_SendPhotoWrap(t *testing.T) {
 			Caption:             fmt.Sprintf("Background: gray %v", md5.Sum([]byte(time.Now().String()))),
 		})
 
-	assert.Nil(t, err4, "SendMessage err")
+	assert.Nil(t, err4, "SendPhoto err")
 }
 
 func Test_SendPhotoURL(t *testing.T) {
@@ -33,11 +33,11 @@ func Test_SendPhotoURL(t *testing.T) {
 
 	photo := NewInputFileFromURL("https://raw.githubusercontent.com/rogozhka/tgwrap/master/test/rogozhka-digital.png")
 
-	_, err4 := bot.SendPhoto(chatID, photo,
+	_, err := bot.SendPhoto(chatID, photo,
 		&SendPhotoOpt{
 			DisableNotification: true,
-			Caption:             fmt.Sprintf("Background: rogozhka %v", md5.Sum([]byte(time.Now().String()))),
+			Caption:             fmt.Sprintf("Background:%v", md5.Sum([]byte(time.Now().String()))),
 		})
 
-	assert.Nil(t, err4, "SendMessage err")
+	assert.Nil(t, err, "SendPhoto err")
 }

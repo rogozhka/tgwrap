@@ -14,11 +14,28 @@ func Test_SendLocationWrap(t *testing.T) {
 	longitude := 12.50
 	latitude := 41.89
 
-	_, err4 := bot.SendLocation(chatID, latitude, longitude,
+	_, e := bot.SendLocation(chatID, latitude, longitude,
 		&SendLocationOpt{
 			DisableNotification: false,
 			LivePeriod:          65,
 		})
 
-	assert.Nil(t, err4, "SendMessage err")
+	assert.Nil(t, e, "SendLocation err")
+}
+
+func Test_SendLocationWrap_outOfRange(t *testing.T) {
+	bot := createTestBotFromEnv()
+
+	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+
+	longitude := 12.50
+	latitude := 41.89
+
+	_, err := bot.SendLocation(chatID, latitude, longitude,
+		&SendLocationOpt{
+			DisableNotification: false,
+			LivePeriod:          10,
+		})
+
+	assert.NotNil(t, err, "SendLocation err")
 }

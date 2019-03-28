@@ -17,7 +17,7 @@ func Test_SetChatTitle(t *testing.T) {
 
 	newTitle := fmt.Sprintf("Title: %v", md5.Sum([]byte(time.Now().String())))
 
-	_, err4 := bot.SetChatTitle(chatID, newTitle)
+	_, err := bot.SetChatTitle(chatID, newTitle)
 
-	assert.Nil(t, err4, "SetChatTitle err")
+	assert.Nil(t, err, "SetChatTitle err")
 }

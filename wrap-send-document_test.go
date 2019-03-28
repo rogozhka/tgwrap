@@ -13,10 +13,10 @@ func Test_SendDocument(t *testing.T) {
 
 	inputFile := NewInputFileLocal("wrap-send-document.go")
 
-	_, err4 := bot.SendDocument(chatID, inputFile,
+	_, err := bot.SendDocument(chatID, inputFile,
 		&SendDocumentOpt{
 			DisableNotification: true,
 		})
 
-	assert.Nil(t, err4, "SendMessage err")
+	assert.Nil(t, err, "SendDocument err")
 }

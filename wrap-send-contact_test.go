@@ -14,10 +14,10 @@ func Test_SendContactWrap(t *testing.T) {
 	firstName := "CIA"
 	phoneNumber := "(703) 482-0623"
 
-	_, err4 := bot.SendContact(chatID, phoneNumber, firstName,
+	_, err := bot.SendContact(chatID, phoneNumber, firstName,
 		&SendContactOpt{
 			LastName: "Official",
 		})
 
-	assert.Nil(t, err4, "SendContact err")
+	assert.Nil(t, err, "SendContact err")
 }

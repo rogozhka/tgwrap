@@ -14,10 +14,10 @@ func Test_SendVideoWrap(t *testing.T) {
 
 	inputFile := NewInputFileLocal(filePath)
 
-	_, err4 := bot.SendVideo(chatID, inputFile,
+	_, err := bot.SendVideo(chatID, inputFile,
 		&SendVideoOpt{
 			DisableNotification: true,
 		})
 
-	assert.Nil(t, err4, "SendMessage err")
+	assert.Nil(t, err, "SendVideo err")
 }
