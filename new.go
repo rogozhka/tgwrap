@@ -2,6 +2,7 @@ package tgwrap
 
 import (
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -39,7 +40,7 @@ func NewBot(token string) *bot {
 //
 func NewBotWithClient(token string, client *http.Client) *bot {
 	p := &bot{
-		token:  token,
+		token:  strings.TrimSpace(token),
 		client: client,
 		apiURL: TelegramBotAPI,
 	}
