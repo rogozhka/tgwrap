@@ -11,6 +11,7 @@ import (
 // SendPhotoOpt represents optional params for SendPhoto
 //
 type SendPhotoOpt struct {
+	commonRequestOptions
 
 	//
 	// Photo caption (may also be used when resending photos by file_id),
@@ -90,6 +91,6 @@ func (p *bot) SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt
 		sender = p.sendFormData
 	}
 
-	err := p.getAPIResponse("sendPhoto", sender, dataSend, &resp)
+	err := p.getAPIResponse(opt.Context, "sendPhoto", sender, dataSend, &resp)
 	return resp.Result, err
 }

@@ -8,6 +8,7 @@ import (
 // SendVenueOpt represents optional params for SendVenue
 //
 type SendVenueOpt struct {
+	commonRequestOptions
 
 	//
 	// Foursquare identifier of the venue.
@@ -83,6 +84,6 @@ func (p *bot) SendVenue(chatID interface{}, latitude float64, longitude float64,
 		Result *Message `json:"result"`
 	}
 
-	err := p.getAPIResponse("sendVenue", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(opt.Context, "sendVenue", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

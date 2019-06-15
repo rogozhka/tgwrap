@@ -11,6 +11,7 @@ import (
 // SendVideoOpt represents optional params for SendVideo
 //
 type SendVideoOpt struct {
+	commonRequestOptions
 
 	//
 	// Video caption (may also be used when resending photos by file_id),
@@ -107,6 +108,6 @@ func (p *bot) SendVideo(chatID interface{}, video interface{}, opt *SendVideoOpt
 		sender = p.sendFormData
 	}
 
-	err := p.getAPIResponse("sendVideo", sender, dataSend, &resp)
+	err := p.getAPIResponse(opt.Context, "sendVideo", sender, dataSend, &resp)
 	return resp.Result, err
 }

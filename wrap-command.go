@@ -2,11 +2,13 @@ package tgwrap
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
+	"net/http"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -24,13 +26,24 @@ type GenericResponse struct {
 	ErrorCode   int    `json:"error_code,omitempty"`
 }
 
-type fCommandSender func(methodName string, bodyStruct interface{}) ([]byte, error)
+type commonRequestOptions struct {
+	//
+	// Context is optional request context
+	//
+	Context context.Context
+}
+
+type fCommandSender func(ctx context.Context, methodName string, bodyStruct interface{}) ([]byte, error)
 
 //
 // Generic fCommandSender method for any command.
 // Encodes bodyStruct w/ nested structures as JSON
 //
-func (p *bot) sendJSON(methodName string, bodyStruct interface{}) ([]byte, error) {
+func (p *bot) sendJSON(ctx context.Context, methodName string, bodyStruct interface{}) ([]byte, error) {
+
+	if nil == ctx {
+		ctx = context.Background()
+	}
 
 	// empty result to return with errors
 	res := []byte{}
@@ -43,17 +56,24 @@ func (p *bot) sendJSON(methodName string, bodyStruct interface{}) ([]byte, error
 		return res, err
 	}
 
-	return p.postRequest(url, "application/json", &buf)
+	return p.postRequest(ctx, url, "application/json", &buf)
 }
 
 //
 // postRequest makes request and reads result
 //
-func (p *bot) postRequest(url string, contentType string, body io.Reader) ([]byte, error) {
+func (p *bot) postRequest(ctx context.Context, url string, contentType string, body io.Reader) ([]byte, error) {
 
 	var res []byte
 
-	resp, err := p.client.Post(url, contentType, body)
+	req, err := http.NewRequest("POST", url, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", contentType)
+	req = req.WithContext(ctx)
+
+	resp, err := p.client.Do(req)
 	if resp != nil {
 		defer resp.Body.Close()
 		resp.Close = true
@@ -82,7 +102,7 @@ func (p *bot) postRequest(url string, contentType string, body io.Reader) ([]byt
 // 2) it's unknown how to encode request with
 //    nested structures like ReplyMarkup so they are ignored.
 //
-func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, error) {
+func (p *bot) sendFormData(ctx context.Context, methodName string, bodyStruct interface{}) ([]byte, error) {
 
 	// empty result to return with errors
 	res := []byte{}
@@ -168,7 +188,7 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 	// write closing boundary into buf
 	mpw.Close()
 
-	return p.postRequest(url, mpw.FormDataContentType(), &buf)
+	return p.postRequest(ctx, url, mpw.FormDataContentType(), &buf)
 }
 
 //
@@ -177,9 +197,19 @@ func (p *bot) sendFormData(methodName string, bodyStruct interface{}) ([]byte, e
 //
 // returns error if API result decoded and not OK
 //
-func (p *bot) getAPIResponse(methodName string, sender fCommandSender, bodyStruct interface{}, resultStruct interface{}) error {
+func (p *bot) getAPIResponse(
+	ctx context.Context,
+	methodName string,
+	sender fCommandSender,
+	bodyStruct interface{},
+	resultStruct interface{},
+) error {
 
-	data, err := sender(methodName, bodyStruct)
+	if nil == ctx {
+		ctx = context.Background()
+	}
+
+	data, err := sender(ctx, methodName, bodyStruct)
 	if err != nil {
 		return fmt.Errorf("%s | %v", methodName, err)
 	}

@@ -11,6 +11,7 @@ import (
 // SendVoiceOpt represents optional params for SendVoice
 //
 type SendVoiceOpt struct {
+	commonRequestOptions
 
 	//
 	// Audio caption, 0-200 characters
@@ -99,6 +100,6 @@ func (p *bot) SendVoice(chatID interface{}, voice interface{}, opt *SendVoiceOpt
 		sender = p.sendFormData
 	}
 
-	err := p.getAPIResponse("sendVoice", sender, dataSend, &resp)
+	err := p.getAPIResponse(opt.Context, "sendVoice", sender, dataSend, &resp)
 	return resp.Result, err
 }

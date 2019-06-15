@@ -9,6 +9,7 @@ import (
 // SendLocationOpt represents optional params for SendLocation
 //
 type SendLocationOpt struct {
+	commonRequestOptions
 
 	//
 	// Period in seconds for which the location will be updated (see Live Locations), should be between 60 and 86400.
@@ -79,6 +80,6 @@ func (p *bot) SendLocation(chatID interface{}, latitude float64, longitude float
 		Result *Message `json:"result"`
 	}
 
-	err := p.getAPIResponse("sendLocation", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(opt.Context, "sendLocation", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

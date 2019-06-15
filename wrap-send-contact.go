@@ -8,6 +8,7 @@ import (
 // SendContactOpt represents optional params for SendContact
 //
 type SendContactOpt struct {
+	commonRequestOptions
 
 	//
 	// Contact's last name
@@ -74,6 +75,6 @@ func (p *bot) SendContact(chatID interface{}, phoneNumber string, firstName stri
 		Result *Message `json:"result"`
 	}
 
-	err := p.getAPIResponse("sendContact", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(opt.Context, "sendContact", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

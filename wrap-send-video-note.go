@@ -11,6 +11,7 @@ import (
 // SendVideoNoteOpt represents optional params for SendVideoNote
 //
 type SendVideoNoteOpt struct {
+	commonRequestOptions
 
 	//
 	// Duration of sent video in seconds
@@ -95,6 +96,6 @@ func (p *bot) SendVideoNote(chatID interface{}, video interface{}, opt *SendVide
 		sender = p.sendFormData
 	}
 
-	err := p.getAPIResponse("sendVideoNote", sender, dataSend, &resp)
+	err := p.getAPIResponse(opt.Context, "sendVideoNote", sender, dataSend, &resp)
 	return resp.Result, err
 }

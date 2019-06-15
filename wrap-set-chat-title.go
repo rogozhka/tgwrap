@@ -32,6 +32,6 @@ func (p *bot) SetChatTitle(chatID interface{}, title string) (bool, error) {
 		Result bool `json:"result"`
 	}
 
-	err := p.getAPIResponse("setChatTitle", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(nil, "setChatTitle", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

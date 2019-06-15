@@ -21,8 +21,12 @@ import (
 // messageID: message identifier in the chat
 // specified in fromChatID
 //
-func (p *bot) ForwardMessage(chatID interface{}, fromChatID interface{},
-	disableNotification bool, messageID uint64) (*Message, error) {
+func (p *bot) ForwardMessage(
+	chatID interface{},
+	fromChatID interface{},
+	disableNotification bool,
+	messageID uint64,
+) (*Message, error) {
 
 	type sendFormat struct {
 		ChatID              string `json:"chat_id"`
@@ -46,6 +50,6 @@ func (p *bot) ForwardMessage(chatID interface{}, fromChatID interface{},
 		Result *Message `json:"result"`
 	}
 
-	err := p.getAPIResponse("forwardMessage", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(nil, "forwardMessage", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

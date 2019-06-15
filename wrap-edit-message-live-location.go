@@ -4,6 +4,7 @@ package tgwrap
 // EditMessageLiveLocationOpt represents optional params for EditMessageLiveLocation
 //
 type EditMessageLiveLocationOpt struct {
+	commonRequestOptions
 
 	//
 	// Required if inline_message_id is not specified.
@@ -68,6 +69,6 @@ func (p *bot) EditMessageLiveLocation(latitude float64, longitude float64, opt *
 		Result *Message `json:"result"`
 	}
 
-	err := p.getAPIResponse("editMessageLiveLocation", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(opt.Context, "editMessageLiveLocation", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

@@ -6,6 +6,7 @@ import "fmt"
 // SetWebhookOpt represents optional params for SetWebhook
 //
 type SetWebhookOpt struct {
+	commonRequestOptions
 
 	//
 	// Upload your public key certificate
