@@ -4,6 +4,8 @@ package tgwrap
 // GetUpdatesOpt represents optional params for GetUpdates()
 //
 type GetUpdatesOpt struct {
+	commonRequestOptions
+
 	//
 	// Identifier of the first update to be returned.
 	// Must be greater by one than the highest among the identifiers
@@ -67,6 +69,6 @@ func (p *bot) GetUpdates(opt *GetUpdatesOpt) ([]*Update, error) {
 		Result []*Update `json:"result"`
 	}
 
-	err := p.getAPIResponse("getUpdates", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(opt.Context, "getUpdates", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

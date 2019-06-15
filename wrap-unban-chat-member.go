@@ -34,6 +34,6 @@ func (p *bot) UnbanChatMember(chatID interface{}, userID uint64) (bool, error) {
 		Result bool `json:"result"`
 	}
 
-	err := p.getAPIResponse("unbanChatMember", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(nil, "unbanChatMember", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

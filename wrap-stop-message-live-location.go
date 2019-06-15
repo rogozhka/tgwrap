@@ -4,6 +4,7 @@ package tgwrap
 // StopMessageLiveLocationOpt represents optional params for StopMessageLiveLocation
 //
 type StopMessageLiveLocationOpt struct {
+	commonRequestOptions
 
 	//
 	// Required if inline_message_id is not specified.
@@ -56,6 +57,6 @@ func (p *bot) StopMessageLiveLocation(opt *StopMessageLiveLocationOpt) (interfac
 		Result *Message `json:"result"`
 	}
 
-	err := p.getAPIResponse("stopMessageLiveLocation", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(opt.Context, "stopMessageLiveLocation", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

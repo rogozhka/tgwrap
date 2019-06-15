@@ -13,6 +13,6 @@ func (p *bot) GetMe() (*User, error) {
 		Result *User `json:"result"`
 	}
 
-	err := p.getAPIResponse("getMe", p.sendJSON, nil, &resp)
+	err := p.getAPIResponse(nil, "getMe", p.sendJSON, nil, &resp)
 	return resp.Result, err
 }

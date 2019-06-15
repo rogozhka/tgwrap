@@ -71,6 +71,6 @@ func (p *bot) SendChatAction(chatID interface{}, action ChatActions) (bool, erro
 		Result bool `json:"result"`
 	}
 
-	err := p.getAPIResponse("sendChatAction", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(nil, "sendChatAction", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

@@ -8,6 +8,8 @@ import (
 // SendMessageOpt represents optional params for SendMessage
 //
 type SendMessageOpt struct {
+	commonRequestOptions
+
 	//
 	// Send Markdown or HTML, if you want Telegram apps
 	// to show bold, italic, fixed-width text or inline URLs
@@ -128,6 +130,6 @@ func (p *bot) SendMessage(chatID interface{}, text string, opt *SendMessageOpt) 
 		Result *Message `json:"result"`
 	}
 
-	err := p.getAPIResponse("sendMessage", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(opt.Context, "sendMessage", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

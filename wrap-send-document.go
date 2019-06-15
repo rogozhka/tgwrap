@@ -11,6 +11,7 @@ import (
 // SendDocumentOpt represents optional params for SendDocument
 //
 type SendDocumentOpt struct {
+	commonRequestOptions
 
 	//
 	// Document caption, 0-200 characters
@@ -84,6 +85,6 @@ func (p *bot) SendDocument(chatID interface{}, document interface{}, opt *SendDo
 		sender = p.sendFormData
 	}
 
-	err := p.getAPIResponse("sendDocument", sender, dataSend, &resp)
+	err := p.getAPIResponse(opt.Context, "sendDocument", sender, dataSend, &resp)
 	return resp.Result, err
 }
