@@ -21,22 +21,13 @@ const DefaultClientTimeout = time.Second * 50
 
 type BotOpt struct {
 
-	//
-	// Client is optional http.Client
-	// used default if nil
-	//
+	// Client is optional http.Client, used default if nil.
 	Client *http.Client
 
-	//
-	// API is optional apiURL
-	// used default if ""
-	//
+	// API is optional apiURL; used default if "".
 	API string
 
-	//
-	// HideToken if set,
-	// real apiKey should be excluded from logs
-	//
+	// HideToken indicates apiKey should be excluded from logs.
 	HideToken bool
 }
 
