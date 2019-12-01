@@ -79,7 +79,7 @@ func (p *bot) postRequest(ctx context.Context, url string, contentType string, b
 		resp.Close = true
 	}
 	if err != nil {
-		return res, err
+		return res, p.maskToken(err)
 	}
 
 	res, err = ioutil.ReadAll(resp.Body)
