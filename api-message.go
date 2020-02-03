@@ -212,7 +212,7 @@ type Message struct {
 	// integer or double-precision float type are safe
 	// for storing this identifier.
 	//
-	MigrateChatID uint64 `json:"migrate_to_chat_id,omitempty"`
+	MigrateChatID int64 `json:"migrate_to_chat_id,omitempty"`
 
 	//
 	// Optional. The supergroup has been migrated from a group
@@ -223,7 +223,7 @@ type Message struct {
 	// integer or double-precision float type are safe
 	// for storing this identifier.
 	//
-	MigrateFromChatID uint64 `json:"migrate_from_chat_id,omitempty"`
+	MigrateFromChatID int64 `json:"migrate_from_chat_id,omitempty"`
 
 	//
 	// Optional. Specified message was pinned.
