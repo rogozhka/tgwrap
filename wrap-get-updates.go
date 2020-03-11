@@ -46,12 +46,10 @@ type GetUpdatesOpt struct {
 	Allowed []string `json:"allowed_updates,omitempty"`
 }
 
+// GetUpdates is used to receive incoming updates using [long] polling.
 //
-// GetUpdates is used to receive incoming updates using [long] polling
-//
-// opt: (can be nil) optional params
-//
-func (p *bot) GetUpdates(opt *GetUpdatesOpt) ([]*Update, error) {
+// opt: (can be nil) optional params.
+func (p *bot) GetUpdates(opt *GetUpdatesOpt) ([]Update, error) {
 
 	type sendFormat struct {
 		GetUpdatesOpt
@@ -66,7 +64,7 @@ func (p *bot) GetUpdates(opt *GetUpdatesOpt) ([]*Update, error) {
 	var resp struct {
 		GenericResponse
 
-		Result []*Update `json:"result"`
+		Result []Update `json:"result"`
 	}
 
 	err := p.getAPIResponse(opt.Context, "getUpdates", p.sendJSON, dataSend, &resp)

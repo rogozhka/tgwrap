@@ -11,5 +11,5 @@ type BotUpdatesInterface interface {
 	//
 	// opt: (can be nil) optional params
 	//
-	GetUpdates(opt *GetUpdatesOpt) ([]*Update, error)
+	GetUpdates(opt *GetUpdatesOpt) ([]Update, error)
 }
