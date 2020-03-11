@@ -1,7 +1,6 @@
 package tgwrap
 
 import (
-	"fmt"
 	"net/http"
 	"strings"
 	"time"
@@ -110,11 +109,27 @@ func NewBotWithOpt(token string, optRaw *BotOpt) *bot {
 	return p
 }
 
+type wrapError struct {
+	msg string
+	err error
+}
+
+func (e *wrapError) Error() string {
+	return e.msg
+}
+
+func (e *wrapError) Unwrap() error {
+	return e.err
+}
+
 func (p *bot) maskToken(err error) error {
 
 	if !p.hideToken {
 		return err
 	}
 
-	return fmt.Errorf(strings.Replace(err.Error(), p.token, "Token", -1))
+	return &wrapError{
+		msg: strings.Replace(err.Error(), p.token, "Token", -1),
+		err: err,
+	}
 }

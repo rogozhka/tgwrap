@@ -84,7 +84,7 @@ func (p *bot) postRequest(ctx context.Context, url string, contentType string, b
 
 	res, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return res, fmt.Errorf("read resp.Body | %v", err)
+		return res, fmt.Errorf("read resp.Body | %w", err)
 	}
 
 	return res, nil
@@ -160,7 +160,7 @@ func (p *bot) sendFormData(ctx context.Context, methodName string, bodyStruct in
 
 			f, err := os.Open(path)
 			if err != nil {
-				return res, fmt.Errorf("cannot open | %v | %v", path, err)
+				return res, fmt.Errorf("cannot open | %v | %w", path, err)
 			}
 			if f != nil {
 				// defer is not recommended in loop
@@ -211,11 +211,11 @@ func (p *bot) getAPIResponse(
 
 	data, err := sender(ctx, methodName, bodyStruct)
 	if err != nil {
-		return fmt.Errorf("%s | %v", methodName, err)
+		return fmt.Errorf("%s | %w", methodName, err)
 	}
 
 	if err := json.Unmarshal(data, resultStruct); err != nil {
-		return fmt.Errorf("unmarshal | %v | %s", err, data)
+		return fmt.Errorf("unmarshal | %w | %s", err, data)
 	}
 
 	// name of embedded struct with common fields (OK, ErrorCode, ...)
