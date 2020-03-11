@@ -6,16 +6,12 @@ import (
 	"time"
 )
 
-//
 // TelegramBotAPI is default api address
-// used in default client
-//
+// used in default client.
 const TelegramBotAPI = "https://api.telegram.org/bot"
 
-//
-// DefaultClientTimeout is waiting for result interval
-// used by default in default client
-//
+// DefaultClientTimeout is result waiting interval
+// used by default in default client.
 const DefaultClientTimeout = time.Second * 50
 
 type BotOpt struct {
@@ -59,16 +55,12 @@ type bot struct {
 	hideToken bool
 }
 
-//
-// NewBot creates new object with associated token inside
-//
+// NewBot creates new object with associated token inside.
 func NewBot(token string) *bot {
 	return NewBotWithOpt(token, nil)
 }
 
-//
-// NewBotWithClient creates bot w/ associated token and optional HTTP client
-//
+// NewBotWithClient creates bot w/ associated token and optional HTTP client.
 func NewBotWithClient(token string, client *http.Client) *bot {
 	return NewBotWithOpt(
 		token,
@@ -78,9 +70,7 @@ func NewBotWithClient(token string, client *http.Client) *bot {
 	)
 }
 
-//
-// NewBotWithClientAndURL creates bot w/ token, client and different API URL (proxy)
-//
+// NewBotWithClientAndURL creates bot w/ token, client and different API URL (proxy).
 func NewBotWithClientAndURL(token string, client *http.Client, apiURL string) *bot {
 	return NewBotWithOpt(
 		token,
@@ -91,10 +81,7 @@ func NewBotWithClientAndURL(token string, client *http.Client, apiURL string) *b
 	)
 }
 
-//
-// NewBotWithOpt is general method
-// for creating bot w/ options
-//
+// NewBotWithOpt is general method for creating bot w/ options.
 func NewBotWithOpt(token string, optRaw *BotOpt) *bot {
 
 	opt := optRefined(optRaw)
@@ -122,6 +109,7 @@ func (e *wrapError) Unwrap() error {
 	return e.err
 }
 
+// maskToken wraps error replacing token.
 func (p *bot) maskToken(err error) error {
 
 	if !p.hideToken {

@@ -16,10 +16,8 @@ import (
 	"github.com/rogozhka/thestruct"
 )
 
-//
-// GenericResponse is a common part of all the API responses
-// Description and ErrorCode are provided in case of error
-//
+// GenericResponse is a common part of all the API responses.
+// Description and ErrorCode are provided in case of error.
 type GenericResponse struct {
 	OK          bool   `json:"ok"`
 	Description string `json:"description,omitempty"`
@@ -27,18 +25,15 @@ type GenericResponse struct {
 }
 
 type commonRequestOptions struct {
-	//
-	// Context is optional request context
-	//
+
+	// Context is optional request context.
 	Context context.Context
 }
 
 type fCommandSender func(ctx context.Context, methodName string, bodyStruct interface{}) ([]byte, error)
 
-//
 // Generic fCommandSender method for any command.
 // Encodes bodyStruct w/ nested structures as JSON
-//
 func (p *bot) sendJSON(ctx context.Context, methodName string, bodyStruct interface{}) ([]byte, error) {
 
 	if nil == ctx {
@@ -59,9 +54,7 @@ func (p *bot) sendJSON(ctx context.Context, methodName string, bodyStruct interf
 	return p.postRequest(ctx, url, "application/json", &buf)
 }
 
-//
-// postRequest makes request and reads result
-//
+// postRequest makes request and reads result.
 func (p *bot) postRequest(ctx context.Context, url string, contentType string, body io.Reader) ([]byte, error) {
 
 	var res []byte
@@ -90,7 +83,6 @@ func (p *bot) postRequest(ctx context.Context, url string, contentType string, b
 	return res, nil
 }
 
-//
 // sendFormData is fCommandSender method for file/media upload commands.
 // Encodes body as multipart/form-data
 //
@@ -101,7 +93,6 @@ func (p *bot) postRequest(ctx context.Context, url string, contentType string, b
 //
 // 2) it's unknown how to encode request with
 //    nested structures like ReplyMarkup so they are ignored.
-//
 func (p *bot) sendFormData(ctx context.Context, methodName string, bodyStruct interface{}) ([]byte, error) {
 
 	// empty result to return with errors
@@ -191,12 +182,8 @@ func (p *bot) sendFormData(ctx context.Context, methodName string, bodyStruct in
 	return p.postRequest(ctx, url, mpw.FormDataContentType(), &buf)
 }
 
-//
-// getAPIResponse makes request and decodes API result
-// into GenericResponse-based object
-//
-// returns error if API result decoded and not OK
-//
+// getAPIResponse makes request and decodes API result into GenericResponse-based object.
+// returns error if API result decoded and not OK.
 func (p *bot) getAPIResponse(
 	ctx context.Context,
 	methodName string,

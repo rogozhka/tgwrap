@@ -1,13 +1,11 @@
 package tgwrap
 
-//
-// Animation is a Telegram API object
+// Animation represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
 //
 // You can provide an animation for your game so that
 // it looks stylish in chats (check out Lumberjack for an example).
 // This object represents an animation file to be displayed
 // in the message containing a game.
-//
 type Animation struct {
 
 	//
