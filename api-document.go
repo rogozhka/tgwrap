@@ -1,33 +1,23 @@
 package tgwrap
 
-//
-// Document represents a general file
-// (as opposed to photos, voice messages and audio files).
-//
+// Document represents a general file (as opposed to photos, voice messages and audio files).
 type Document struct {
 
-	//
-	// Unique file identifier
-	//
+	// FileID is unique file identifier.
 	FileID string `json:"file_id"`
 
-	//
-	// Optional. Document thumbnail as defined by sender
-	//
+	// Thumb. Optional. Document thumbnail as defined by sender.
 	Thumb *PhotoSize `json:"thumb,omitempty"`
 
-	//
-	// Optional. Original filename as defined by sender
-	//
+	// FileName. Optional. Original filename as defined by sender.
 	FileName string `json:"file_name,omitempty"`
 
-	//
-	// Optional. MIME type of the file as defined by sender
-	//
+	// MIMEType. Optional. MIME type of the file as defined by sender.
 	MIMEType string `json:"mime_type,omitempty"`
 
-	//
-	// Optional. File size
-	//
+	// FileSize. Optional. File size bytes.
 	FileSize uint `json:"file_size,omitempty"`
+
+	// FilePath. Optional. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file.
+	FilePath string `json:"file_path,omitempty"`
 }
