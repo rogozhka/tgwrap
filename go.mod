@@ -1,6 +1,6 @@
 module github.com/rogozhka/tgwrap
 
-go 1.12
+go 1.13
 
 require (
 	github.com/rogozhka/thestruct v1.0.1
