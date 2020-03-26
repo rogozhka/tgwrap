@@ -1,44 +1,32 @@
 package tgwrap
 
-//
-// StopMessageLiveLocationOpt represents optional params for StopMessageLiveLocation
-//
+// StopMessageLiveLocationOpt for StopMessageLiveLocation optional params.
 type StopMessageLiveLocationOpt struct {
 	commonRequestOptions
 
-	//
-	// Required if inline_message_id is not specified.
+	// ChatID is required if inline_message_id is not specified.
 	// Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-	//
 	ChatID interface{} `json:"chat_id,omitempty"`
 
-	//
-	// Required if inline_message_id is not specified.
+	// MessageID is required if inline_message_id is not specified.
 	// Identifier of the sent message
-	//
-	MessageID uint `json:"message_id,omitempty"`
+	MessageID int64 `json:"message_id,omitempty"`
 
-	//
-	// Required if chat_id and message_id are not specified.
+	// InlineMessageID is required if ChatID and MessageID are not specified.
 	// Identifier of the inline message
-	//
 	InlineMessageID string `json:"inline_message_id,omitempty"`
 
-	//
-	// Additional interface options. A JSON-serialized object
+	// ReplyMarkup provides additional interface options.
+	// A JSON-serialized object
 	// for an inline keyboard, custom reply keyboard,
 	// instructions to remove reply keyboard
 	// or to force a reply from the user.
-	//
 	ReplyMarkup interface{} `json:"reply_markup,omitempty"`
 }
 
-//
-// StopMessageLiveLocation is used to stop updating a live location message sent by the bot or via the bot (for inline bots) before live_period expires.
+// StopMessageLiveLocation is used to stop updating a live location message sent by the bot or via the bot
+// (for inline bots) before live_period expires.
 // On success, if the message was sent by the bot, the sent Message is returned, otherwise True is returned.
-//
-// opt: (can be nil) optional params
-//
 func (p *bot) StopMessageLiveLocation(opt *StopMessageLiveLocationOpt) (interface{}, error) {
 
 	type sendFormat struct {

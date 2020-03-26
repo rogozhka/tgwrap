@@ -23,7 +23,7 @@ func Test_EditMessageLiveLocationWrap(t *testing.T) {
 	_, err4 := bot.EditMessageLiveLocation(latitude, longitude,
 		&EditMessageLiveLocationOpt{
 			ChatID:    res.Chat.ID,
-			MessageID: uint(res.ID),
+			MessageID: res.ID,
 		})
 
 	assert.Nil(t, err4, "EditMessageLiveLocation err")

@@ -25,8 +25,8 @@ type GenericResponse struct {
 }
 
 type commonRequestOptions struct {
-
-	// Context is optional request context.
+	// Context is optional request context where applicable.
+	// context.Background() is used by default if nil.
 	Context context.Context
 }
 

@@ -4,11 +4,7 @@ import (
 	"fmt"
 )
 
-//
-// ChatActions type represent argument
-// for SendChatAction
-// (hello linter)
-//
+// ChatActions type defines string arguments range for SendChatAction.
 type ChatActions string
 
 const (
@@ -28,10 +24,8 @@ const (
 	// ChatActionUploadDocument indicates bot is uploading document
 	ChatActionUploadDocument ChatActions = "upload_document"
 
-	//
 	// ChatActionFindLocation indicates bot is in search
 	// for location (is it really working on any tg client?)
-	//
 	ChatActionFindLocation ChatActions = "find_location"
 
 	// ChatActionRecordVideoNote indicates bot is recording video note
@@ -41,7 +35,6 @@ const (
 	ChatActionUploadVideoNote ChatActions = "upload_video_note"
 )
 
-//
 // SendChatAction is used when you need to tell the user
 // that something is happening on the bot's side. The status
 // is set for 5 seconds or less (when a message arrives from
@@ -52,7 +45,6 @@ const (
 // or username of the target channel (in the format @channelusername)
 //
 // action: type of action to broadcast.
-//
 func (p *bot) SendChatAction(chatID interface{}, action ChatActions) (bool, error) {
 
 	type sendFormat struct {

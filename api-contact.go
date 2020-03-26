@@ -13,5 +13,5 @@ type Contact struct {
 	LastName string `json:"last_name,omitempty"`
 
 	// UserID. Optional. Contact's user identifier in Telegram.
-	UserID uint64 `json:"user_id,omitempty"`
+	UserID int64 `json:"user_id,omitempty"`
 }

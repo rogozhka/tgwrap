@@ -16,7 +16,7 @@ type EditMessageLiveLocationOpt struct {
 	// Required if inline_message_id is not specified.
 	// Identifier of the sent message
 	//
-	MessageID uint `json:"message_id,omitempty"`
+	MessageID int64 `json:"message_id,omitempty"`
 
 	//
 	// Required if chat_id and message_id are not specified.

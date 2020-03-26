@@ -20,7 +20,7 @@ func Test_StopMessageLiveLocationWrap(t *testing.T) {
 	_, err2 := bot.StopMessageLiveLocation(
 		&StopMessageLiveLocationOpt{
 			ChatID:    res.Chat.ID,
-			MessageID: uint(res.ID),
+			MessageID: res.ID,
 		})
 
 	assert.Nil(t, err2, "StopMessageLiveLocation err")

@@ -17,5 +17,4 @@ func TestBot_GetFile(t *testing.T) {
 	assert.NotNil(t, file)
 	assert.True(t, len(file.FilePath) > 0)
 	assert.True(t, file.FileSize > 0)
-	assert.Equal(t, fileID, file.FileID)
 }

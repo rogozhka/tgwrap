@@ -9,7 +9,7 @@ type BotLocationInterface interface {
 	// SendLocation is used to send point on the map.
 	// On success, the sent Message is returned.
 	//
-	// chatID: (uint64 or string) Unique identifier for the target chat
+	// chatID: (int64 or string) is unique identifier for the target chat
 	// or username of the target channel (in the format @channelusername)
 	//
 	// latitude: (float64) Latitude of the location.
@@ -23,7 +23,7 @@ type BotLocationInterface interface {
 	// SendVenue is used to send information about a venue.
 	// On success, the sent Message is returned.
 	//
-	// chatID: (uint64 or string) Unique identifier for the target chat
+	// chatID: (int64 or string) is unique identifier for the target chat
 	// or username of the target channel (in the format @channelusername)
 	//
 	// latitude: (float64) Latitude of the venue.

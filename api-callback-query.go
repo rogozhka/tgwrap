@@ -14,7 +14,7 @@ package tgwrap
 // any of the optional parameters).
 type CallbackQuery struct {
 
-	// ID - unique identifier for this query.
+	// ID is unique identifier for this query.
 	ID string `json:"id"`
 
 	// From - sender.

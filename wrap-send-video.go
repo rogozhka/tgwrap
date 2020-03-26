@@ -7,48 +7,33 @@ import (
 	"github.com/rogozhka/thestruct"
 )
 
-//
-// SendVideoOpt represents optional params for SendVideo
-//
+// SendVideoOpt represents optional params for SendVideo.
 type SendVideoOpt struct {
 	commonRequestOptions
 
-	//
-	// Video caption (may also be used when resending photos by file_id),
+	// Caption is video caption (may also be used when resending photos by file_id),
 	// 0-200 characters
-	//
 	Caption string `json:"caption,omitempty"`
 
-	//
-	// Duration of sent video in seconds
-	//
-	Duration uint `json:"duration,omitempty"`
+	// Duration of sent video in seconds.
+	Duration int `json:"duration,omitempty"`
 
-	//
-	// Video width
-	//
-	Width uint `json:"width,omitempty"`
+	// Width is video width
+	Width int `json:"width,omitempty"`
 
-	//
-	// Video height
-	//
-	Height uint `json:"height,omitempty"`
-	//
-	// Sends the message silently. Users will receive a notification with no sound.
-	//
+	// Height is video height.
+	Height int `json:"height,omitempty"`
+
+	// DisableNotification sends the message silently. Users will receive a notification with no sound.
 	DisableNotification bool `json:"disable_notification,omitempty"`
 
-	//
-	// If the message is a reply, ID of the original message
-	//
-	ReplyToID uint64 `json:"reply_to_message_id,omitempty"`
+	// ReplyToID is optional ID of the original message if the message is a reply.
+	ReplyToID int64 `json:"reply_to_message_id,omitempty"`
 
-	//
-	// Additional interface options. A JSON-serialized object
+	// ReplyMarkup - additional interface options. A JSON-serialized object
 	// for an inline keyboard, custom reply keyboard,
 	// instructions to remove reply keyboard
 	// or to force a reply from the user.
-	//
 	ReplyMarkup interface{} `json:"reply_markup,omitempty"`
 }
 
@@ -58,7 +43,7 @@ type SendVideoOpt struct {
 // Bots can currently send video files of up to 50 MB in size,
 // this limit may be changed in the future.
 //
-// chatID: (uint64 or string) Unique identifier for the target chat
+// chatID: (int64 or string) is unique identifier for the target chat
 // or username of the target channel (in the format @channelusername)
 //
 // video: (*InputFile or string) Video to send. Pass a file_id as string to send
