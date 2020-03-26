@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strconv"
+	"strings"
 )
 
 func getTokenEnv() string {
@@ -11,12 +13,40 @@ func getTokenEnv() string {
 }
 
 func requireEnv(name string) string {
-	v := os.Getenv(name)
-	if len(v) < 1 {
-		panic(fmt.Sprintf("ERROR: env variable is not set:%s", name))
+	return testEnvStringValue(name)
+}
+
+func testEnvStringValue(name string) string {
+
+	tr := strings.TrimSpace(name)
+
+	if v := os.Getenv(tr); len(v) < 1 {
+		panic(fmt.Errorf("env not set | %s", tr))
+	} else {
+		return v
+	}
+}
+
+func testEnvIsPresent(name string) bool {
+	return len(os.Getenv(strings.TrimSpace(name))) > 0
+}
+
+func testEnvIntValue(name string) int {
+	return intFromString(testEnvStringValue(name))
+}
+
+func testEnvUintValue(name string) uint {
+	return uint(intFromString(testEnvStringValue(name)))
+}
+
+func intFromString(s string) int {
+
+	res, err := strconv.Atoi(s)
+	if err != nil {
+		panic(err)
 	}
 
-	return v
+	return int(res)
 }
 
 func createTestBotFromEnv() *bot {
