@@ -18,7 +18,7 @@ type SetWebhookOpt struct {
 	// and higher values to increase your bot’s throughput.
 	MaxConnections int `json:"max_connections,omitempty"`
 
-	// AllowedUpdates Lists the types of updates you want your bot to receive.
+	// AllowedUpdates lists the types of updates you want your bot to receive.
 	// For example, specify [“message”, “edited_channel_post”,
 	// “callback_query”] to only receive updates of these types.
 	// See Update for a complete list of available update types.
@@ -29,7 +29,7 @@ type SetWebhookOpt struct {
 	// Please note that this parameter doesn't affect updates
 	// created before the call to the setWebhook, so unwanted
 	// updates may be received for a short period of time.
-	AllowedUpdates []string `json:"allowed_updates,omitempty"`
+	AllowedUpdates []UpdateType `json:"allowed_updates,omitempty"`
 }
 
 // SetWebhook is used to specify a url and receive incoming updates
