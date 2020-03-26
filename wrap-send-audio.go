@@ -11,25 +11,16 @@ import (
 type SendAudioOpt struct {
 	commonRequestOptions
 
-	//
-	// Audio caption, 0-200 characters
-	// 0-200 characters
-	//
+	// Caption is audio caption, 0-200 characters.
 	Caption string `json:"caption,omitempty"`
 
-	//
-	// Duration of the audio in seconds
-	//
+	// Duration of the audio in seconds.
 	Duration uint `json:"duration,omitempty"`
 
-	//
-	// Performer of the track
-	//
+	// Performer of the track.
 	Performer string `json:"performer,omitempty"`
 
-	//
-	// Track name
-	//
+	// Title is track name.
 	Title string `json:"title,omitempty"`
 
 	// DisableNotification sends the message silently. Users will receive a notification with no sound.

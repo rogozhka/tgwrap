@@ -12,6 +12,7 @@ type GetUserProfilePhotosOpt struct {
 	Limit int `json:"limit,omitempty"`
 }
 
+// GetUserProfilePhotos to get a list of profile pictures for a user.
 func (p *bot) GetUserProfilePhotos(userID int64, opt *GetUserProfilePhotosOpt) (*UserProfilePhotos, error) {
 
 	type sendFormat struct {

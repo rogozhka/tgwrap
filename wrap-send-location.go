@@ -11,9 +11,8 @@ import (
 type SendLocationOpt struct {
 	commonRequestOptions
 
-	//
-	// Period in seconds for which the location will be updated (see Live Locations), should be between 60 and 86400.
-	//
+	// LivePeriod is period in seconds for which the location
+	// will be updated (see Live Locations), should be between 60 and 86400.
 	LivePeriod uint `json:"live_period,omitempty"`
 
 	// DisableNotification sends the message silently. Users will receive a notification with no sound.

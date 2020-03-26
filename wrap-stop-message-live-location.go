@@ -16,8 +16,7 @@ type StopMessageLiveLocationOpt struct {
 	// Identifier of the inline message
 	InlineMessageID string `json:"inline_message_id,omitempty"`
 
-	// ReplyMarkup provides additional interface options.
-	// A JSON-serialized object
+	// ReplyMarkup - additional interface options. A JSON-serialized object
 	// for an inline keyboard, custom reply keyboard,
 	// instructions to remove reply keyboard
 	// or to force a reply from the user.

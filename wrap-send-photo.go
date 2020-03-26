@@ -7,16 +7,12 @@ import (
 	"github.com/rogozhka/thestruct"
 )
 
-//
-// SendPhotoOpt represents optional params for SendPhoto
-//
+// SendPhotoOpt represents optional params for SendPhoto.
 type SendPhotoOpt struct {
 	commonRequestOptions
 
-	//
-	// Photo caption (may also be used when resending photos by file_id),
+	// Caption is photo caption (may also be used when resending photos by file_id),
 	// 0-200 characters
-	//
 	Caption string `json:"caption,omitempty"`
 
 	// DisableNotification sends the message silently. Users will receive a notification with no sound.
@@ -32,7 +28,6 @@ type SendPhotoOpt struct {
 	ReplyMarkup interface{} `json:"reply_markup,omitempty"`
 }
 
-//
 // SendPhoto is used to send photos.
 //
 // chatID: (Integer or String) Unique identifier
@@ -44,7 +39,6 @@ type SendPhotoOpt struct {
 // using &NewInputFileLocal("<file path>")
 //
 // opt: (can be nil) optional params
-//
 func (p *bot) SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt) (*Message, error) {
 
 	type sendFormat struct {

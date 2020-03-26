@@ -10,9 +10,7 @@ import (
 type SendContactOpt struct {
 	commonRequestOptions
 
-	//
-	// Contact's last name
-	//
+	// LastName is contact's last name
 	LastName string `json:"last_name,omitempty"`
 
 	// DisableNotification sends the message silently. Users will receive a notification with no sound.
@@ -28,19 +26,13 @@ type SendContactOpt struct {
 	ReplyMarkup interface{} `json:"reply_markup,omitempty"`
 }
 
-//
 // SendContact is used to to send phone contacts.
 // On success, the sent Message is returned.
-//
 // chatID: (int64 or string) is unique identifier for the target chat
 // or username of the target channel (in the format @channelusername)
-//
 // phoneNumber: (string) Contact's phone number.
-//
 // firstName: (string) Contact's first name.
-//
 // opt: (can be nil) optional params
-//
 func (p *bot) SendContact(chatID interface{}, phoneNumber string, firstName string, opt *SendContactOpt) (*Message, error) {
 
 	type sendFormat struct {

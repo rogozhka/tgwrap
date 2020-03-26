@@ -7,16 +7,11 @@ import (
 	"github.com/rogozhka/thestruct"
 )
 
-//
-// SendDocumentOpt represents optional params for SendDocument
-//
+// SendDocumentOpt represents optional params for SendDocument.
 type SendDocumentOpt struct {
 	commonRequestOptions
 
-	//
-	// Document caption, 0-200 characters
-	// 0-200 characters
-	//
+	// Caption is document caption, 0-200 characters
 	Caption string `json:"caption,omitempty"`
 
 	// DisableNotification sends the message silently. Users will receive a notification with no sound.
