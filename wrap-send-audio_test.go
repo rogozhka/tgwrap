@@ -16,9 +16,9 @@ func Test_SendAudio(t *testing.T) {
 
 	_, err := bot.SendAudio(chatID, inputFile,
 		&SendAudioOpt{
-			DisableNotification: true,
-			Duration:            uint(3),
 			Caption:             "TGWRAP_TEST_AUDIO_PATH",
+			Duration:            uint(3),
+			DisableNotification: true,
 		})
 
 	assert.Nil(t, err, "SendAudio")

@@ -1,8 +1,5 @@
 package tgwrap
 
-//
-// Sticker is a Telegram API object
-// TODO: implement fields
-//
+// Sticker is a Telegram API object.
 type Sticker struct {
 }

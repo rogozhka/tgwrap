@@ -1,27 +1,17 @@
 package tgwrap
 
-//
 // PhotoSize represents one size of a photo or a file / sticker thumbnail.
-//
 type PhotoSize struct {
 
-	//
-	// Unique identifier for this file
-	//
+	// FileID - unique identifier for this file.
 	FileID string `json:"file_id"`
 
-	//
-	// Photo width
-	//
-	Width uint `json:"width"`
+	// Width is Photo width.
+	Width int `json:"width"`
 
-	//
-	// Photo height
-	//
-	Height uint `json:"height"`
+	// Height is Photo height.
+	Height int `json:"height"`
 
-	//
-	// Optional. File size
-	//
-	FileSize uint `json:"file_size,omitempty"`
+	// Optional. File size.
+	FileSize int `json:"file_size,omitempty"`
 }

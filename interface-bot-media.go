@@ -27,7 +27,7 @@ type BotMediaInterface interface {
 	// Bots can currently send video files of up to 50 MB in size,
 	// this limit may be changed in the future.
 	//
-	// chatID: (uint64 or string) Unique identifier for the target chat
+	// chatID: (int64 or string) is unique identifier for the target chat
 	// or username of the target channel (in the format @channelusername)
 	//
 	// video: (*InputFile or string) Video to send. Pass a file_id as string to send
@@ -46,7 +46,7 @@ type BotMediaInterface interface {
 	//
 	// For sending voice messages, use the SendVoice method instead.
 	//
-	// chatID: (uint64 or string) Unique identifier for the target chat
+	// chatID: (int64 or string) is unique identifier for the target chat
 	// or username of the target channel (in the format @channelusername)
 	//
 	// audio: (*InputFile or string) Audio to send. Pass a file_id as string to send
@@ -65,7 +65,7 @@ type BotMediaInterface interface {
 	// On success, the sent Message is returned. Bots can currently send voice messages
 	// of up to 50 MB in size, this limit may be changed in the future.
 	//
-	// chatID: (uint64 or string) Unique identifier for the target chat
+	// chatID: (int64 or string) is unique identifier for the target chat
 	// or username of the target channel (in the format @channelusername)
 	//
 	// voice: (*InputFile or string) Audio to send. Pass a file_id as String to send
@@ -82,7 +82,7 @@ type BotMediaInterface interface {
 	// Bots can currently send files of any type of up to 50 MB in size, t
 	// his limit may be changed in the future.
 	//
-	// chatID: (uint64 or string) Unique identifier for the target chat
+	// chatID: (int64 or string) is unique identifier for the target chat
 	// or username of the target channel (in the format @channelusername)
 	//
 	// document: (*InputFile or string) File to send. Pass a file_id as String to send
@@ -98,7 +98,7 @@ type BotMediaInterface interface {
 	// As of v.4.0, Telegram clients support rounded square mp4 videos of up to 1 minute long.
 	// Use this method to send video messages. On success, the sent Message is returned.
 	//
-	// chatID: (uint64 or string) Unique identifier for the target chat
+	// chatID: (int64 or string) is unique identifier for the target chat
 	// or username of the target channel (in the format @channelusername)
 	//
 	// video: (*InputFile or string) Video note to send.

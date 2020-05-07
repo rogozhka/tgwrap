@@ -11,34 +11,27 @@ import (
 type SendLocationOpt struct {
 	commonRequestOptions
 
-	//
-	// Period in seconds for which the location will be updated (see Live Locations), should be between 60 and 86400.
-	//
+	// LivePeriod is period in seconds for which the location
+	// will be updated (see Live Locations), should be between 60 and 86400.
 	LivePeriod uint `json:"live_period,omitempty"`
 
-	//
-	// Sends the message silently. Users will receive a notification with no sound.
-	//
+	// DisableNotification sends the message silently. Users will receive a notification with no sound.
 	DisableNotification bool `json:"disable_notification,omitempty"`
 
-	//
-	// If the message is a reply, ID of the original message
-	//
-	ReplyToID uint64 `json:"reply_to_message_id,omitempty"`
+	// ReplyToID is optional ID of the original message if the message is a reply.
+	ReplyToID int64 `json:"reply_to_message_id,omitempty"`
 
-	//
-	// Additional interface options. A JSON-serialized object
+	// ReplyMarkup - additional interface options. A JSON-serialized object
 	// for an inline keyboard, custom reply keyboard,
 	// instructions to remove reply keyboard
 	// or to force a reply from the user.
-	//
 	ReplyMarkup interface{} `json:"reply_markup,omitempty"`
 }
 
 // SendLocation is used to send point on the map.
 // On success, the sent Message is returned.
 //
-// chatID: (uint64 or string) Unique identifier for the target chat
+// chatID: (int64 or string) is unique identifier for the target chat
 // or username of the target channel (in the format @channelusername)
 //
 // latitude: (float64) Latitude of the location.

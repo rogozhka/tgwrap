@@ -10,7 +10,7 @@ type BotContactsInterface interface {
 	// SendContact is used to to send phone contacts.
 	// On success, the sent Message is returned.
 	//
-	// chatID: (uint64 or string) Unique identifier for the target chat
+	// chatID: (int64 or string) is unique identifier for the target chat
 	// or username of the target channel (in the format @channelusername)
 	//
 	// phoneNumber: (string) Contact's phone number.

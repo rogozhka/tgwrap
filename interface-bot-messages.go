@@ -36,5 +36,5 @@ type BotMessagesInterface interface {
 	// specified in fromChatID
 	//
 	ForwardMessage(chatID interface{}, fromChatID interface{},
-		disableNotification bool, messageID uint64) (*Message, error)
+		disableNotification bool, messageID int64) (*Message, error)
 }
