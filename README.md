@@ -89,11 +89,11 @@ func main() {
 
 ## Currently supported methods
 
-[IBotUpdates](https://godoc.org/github.com/rogozhka/tgwrap#IBotUpdates) to get updates and setup hooks:
+[BotUpdatesInterface](https://pkg.go.dev/github.com/rogozhka/tgwrap#BotUpdatesInterface) group of methods to get updates and setup hooks:
 
 - [x] [getUpdates](https://core.telegram.org/bots/api#getupdates)
 
-- [ ] setWebhook
+- [x] setWebhook
 
 - [ ] deleteWebhook
 
@@ -103,7 +103,7 @@ func main() {
 
 
 
-[IBotMessages](https://godoc.org/github.com/rogozhka/tgwrap#IBotMessages) to send messages and chat actions:
+[BotMessagesInterface](https://pkg.go.dev/github.com/rogozhka/tgwrap#BotMessagesInterface) to send messages and chat actions:
 
 - [x] [sendMessage](https://core.telegram.org/bots/api#sendmessage)
 - [x] [forwardMessage](https://core.telegram.org/bots/api#forwardmessage)
@@ -111,7 +111,7 @@ func main() {
 
 
 
-[IBotChat](https://godoc.org/github.com/rogozhka/tgwrap#IBotChat) to interact with chat state and settings:
+[BotChatInterface](https://pkg.go.dev/github.com/rogozhka/tgwrap#BotChatInterface) to interact with chat state and settings:
 
 - [x] [sendChatAction](https://core.telegram.org/bots/api#sendchataction)
 
@@ -120,7 +120,7 @@ func main() {
 
 
 
-[IBotMedia](https://godoc.org/github.com/rogozhka/tgwrap#IBotMedia) for sending media objects, encoding local files, by url, file_id:
+[BotMediaInterface](https://pkg.go.dev/github.com/rogozhka/tgwrap#BotMediaInterface) for sending media objects, encoding local files, by url, file_id:
 
 - [x] [sendPhoto](https://core.telegram.org/bots/api#sendphoto)
 
@@ -132,7 +132,7 @@ func main() {
 
 - [x] [sendDocument](https://core.telegram.org/bots/api#senddocument)
 
-- [ ] sendVideoNote
+- [x] sendVideoNote
 
 - [ ] sendMediaGroup
 
