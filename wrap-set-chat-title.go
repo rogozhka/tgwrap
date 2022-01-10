@@ -18,18 +18,14 @@ func (p *bot) SetChatTitle(chatID interface{}, title string) (bool, error) {
 		ChatID string `json:"chat_id"`
 		Title  string `json:"title"`
 	}
-
 	dataSend := sendFormat{
 		ChatID: fmt.Sprint(chatID),
 		Title:  title,
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result bool `json:"result"`
 	}
-
 	err := p.getAPIResponse(nil, "setChatTitle", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

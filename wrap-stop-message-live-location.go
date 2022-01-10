@@ -31,19 +31,14 @@ func (p *bot) StopMessageLiveLocation(opt *StopMessageLiveLocationOpt) (interfac
 	type sendFormat struct {
 		StopMessageLiveLocationOpt `json:",omitempty"`
 	}
-
 	dataSend := sendFormat{}
-
 	if opt != nil {
 		dataSend.StopMessageLiveLocationOpt = *opt
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result *Message `json:"result"`
 	}
-
 	err := p.getAPIResponse(opt.Context, "stopMessageLiveLocation", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

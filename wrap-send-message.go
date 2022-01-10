@@ -4,9 +4,7 @@ import (
 	"fmt"
 )
 
-//
-// SendMessageOpt represents optional params for SendMessage
-//
+// SendMessageOpt represents optional params for SendMessage.
 type SendMessageOpt struct {
 	commonRequestOptions
 
@@ -89,27 +87,21 @@ const (
 func (p *bot) SendMessage(chatID interface{}, text string, opt *SendMessageOpt) (*Message, error) {
 
 	type sendFormat struct {
-		ChatID string `json:"chat_id"`
-		Text   string `json:"text"`
-
-		SendMessageOpt // optional part
+		ChatID         string `json:"chat_id"`
+		Text           string `json:"text"`
+		SendMessageOpt        // optional part
 	}
-
 	dataSend := sendFormat{
 		ChatID: fmt.Sprint(chatID), // don't care about valid format, Telegram will response with error if invalid ID
 		Text:   text,
 	}
-
 	if opt != nil {
 		dataSend.SendMessageOpt = *opt
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result *Message `json:"result"`
 	}
-
 	err := p.getAPIResponse(opt.Context, "sendMessage", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

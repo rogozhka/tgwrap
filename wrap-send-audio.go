@@ -58,7 +58,6 @@ func (p *bot) SendAudio(chatID interface{}, audio interface{}, opt *SendAudioOpt
 
 		SendAudioOpt `json:",omitempty"`
 
-		//
 		// Audio to send. Pass a file_id as String to send a photo that exists
 		// on the Telegram servers (recommended), pass an HTTP URL as a String
 		// for Telegram to get a photo from the Internet,
@@ -73,24 +72,18 @@ func (p *bot) SendAudio(chatID interface{}, audio interface{}, opt *SendAudioOpt
 		ChatID: fmt.Sprint(chatID),
 		Audio:  audio,
 	}
-
 	if opt != nil {
 		dataSend.SendAudioOpt = *opt
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result *Message `json:"result"`
 	}
-
 	sender := p.sendJSON
-
 	tt := thestruct.Type(reflect.TypeOf(audio))
 	if "InputFileLocal" == tt.Name() {
 		sender = p.sendFormData
 	}
-
 	err := p.getAPIResponse(opt.Context, "sendAudio", sender, dataSend, &resp)
 	return resp.Result, err
 }

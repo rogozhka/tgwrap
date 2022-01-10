@@ -43,19 +43,14 @@ func (p *bot) GetUpdates(opt *GetUpdatesOpt) ([]Update, error) {
 	type sendFormat struct {
 		GetUpdatesOpt
 	}
-
 	dataSend := sendFormat{}
-
 	if opt != nil {
 		dataSend.GetUpdatesOpt = *opt
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result []Update `json:"result"`
 	}
-
 	err := p.getAPIResponse(opt.Context, "getUpdates", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

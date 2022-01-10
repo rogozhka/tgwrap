@@ -4,7 +4,6 @@ import (
 	"fmt"
 )
 
-//
 // ForwardMessage is used to forward messages of any kind.
 // On success, the sent Message is returned.
 //
@@ -46,10 +45,8 @@ func (p *bot) ForwardMessage(
 
 	var resp struct {
 		GenericResponse
-
 		Result *Message `json:"result"`
 	}
-
 	err := p.getAPIResponse(nil, "forwardMessage", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

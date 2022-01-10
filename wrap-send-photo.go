@@ -42,11 +42,9 @@ type SendPhotoOpt struct {
 func (p *bot) SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt) (*Message, error) {
 
 	type sendFormat struct {
-		ChatID string `json:"chat_id"`
-
+		ChatID       string `json:"chat_id"`
 		SendPhotoOpt `json:",omitempty"`
 
-		//
 		// Photo to send. Pass a file_id as String to send a photo that exists
 		// on the Telegram servers (recommended), pass an HTTP URL as a String
 		// for Telegram to get a photo from the Internet,
@@ -61,24 +59,18 @@ func (p *bot) SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt
 		ChatID: fmt.Sprint(chatID), // don't care about checking fmt, Telegram will response with error if invalid ID
 		Photo:  photo,
 	}
-
 	if opt != nil {
 		dataSend.SendPhotoOpt = *opt
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result *Message `json:"result"`
 	}
-
 	sender := p.sendJSON
-
 	tt := thestruct.Type(reflect.TypeOf(photo))
 	if "InputFileLocal" == tt.Name() {
 		sender = p.sendFormData
 	}
-
 	err := p.getAPIResponse(opt.Context, "sendPhoto", sender, dataSend, &resp)
 	return resp.Result, err
 }

@@ -6,9 +6,7 @@ type Invoice struct {
 	// Title is a Product name.
 	Title string `json:"title"`
 
-	//
-	// Description is a Product description
-	//
+	// Description is a Product description.
 	Description string `json:"description"`
 
 	// StartParameter - Unique bot deep-linking parameter that can be used to generate this invoice.

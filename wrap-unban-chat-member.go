@@ -16,21 +16,16 @@ func (p *bot) UnbanChatMember(chatID interface{}, userID int64) (bool, error) {
 
 	type sendFormat struct {
 		ChatID string `json:"chat_id"`
-
-		UserID int64 `json:"user_id"`
+		UserID int64  `json:"user_id"`
 	}
-
 	dataSend := sendFormat{
 		ChatID: fmt.Sprint(chatID),
 		UserID: userID,
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result bool `json:"result"`
 	}
-
 	err := p.getAPIResponse(nil, "unbanChatMember", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

@@ -19,23 +19,18 @@ func (p *bot) GetUserProfilePhotos(userID int64, opt *GetUserProfilePhotosOpt) (
 		GetUserProfilePhotosOpt `json:",omitempty"`
 		UserID                  int64 `json:"user_id"`
 	}
-
 	dataSend := sendFormat{
 		UserID: userID,
 	}
-
 	if opt != nil {
 		dataSend.GetUserProfilePhotosOpt = *opt
 	} else {
 		opt = &GetUserProfilePhotosOpt{}
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result *UserProfilePhotos `json:"result"`
 	}
-
 	err := p.getAPIResponse(opt.Context, "getUserProfilePhotos", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

@@ -5,9 +5,7 @@ import (
 	"reflect"
 )
 
-//
-// SendLocationOpt represents optional params for SendLocation
-//
+// SendLocationOpt represents optional params for SendLocation.
 type SendLocationOpt struct {
 	commonRequestOptions
 
@@ -43,13 +41,10 @@ type SendLocationOpt struct {
 func (p *bot) SendLocation(chatID interface{}, latitude float64, longitude float64, opt *SendLocationOpt) (*Message, error) {
 
 	type sendFormat struct {
-		ChatID string `json:"chat_id"`
-
+		ChatID          string `json:"chat_id"`
 		SendLocationOpt `json:",omitempty"`
-
-		Latitude float64 `json:"latitude"`
-
-		Longitude float64 `json:"longitude"`
+		Latitude        float64 `json:"latitude"`
+		Longitude       float64 `json:"longitude"`
 	}
 
 	dataSend := sendFormat{
@@ -57,7 +52,6 @@ func (p *bot) SendLocation(chatID interface{}, latitude float64, longitude float
 		Latitude:  latitude,
 		Longitude: longitude,
 	}
-
 	if opt != nil {
 		if lp := reflect.ValueOf(opt.LivePeriod); lp.IsValid() {
 			if lp.Uint() < 60 && lp.Uint() > 86400 {
@@ -66,13 +60,10 @@ func (p *bot) SendLocation(chatID interface{}, latitude float64, longitude float
 		}
 		dataSend.SendLocationOpt = *opt
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result *Message `json:"result"`
 	}
-
 	err := p.getAPIResponse(opt.Context, "sendLocation", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

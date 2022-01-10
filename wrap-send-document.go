@@ -27,7 +27,6 @@ type SendDocumentOpt struct {
 	ReplyMarkup interface{} `json:"reply_markup,omitempty"`
 }
 
-//
 // SendDocument to send general files. On success, the sent Message is returned.
 // Bots can currently send files of any type of up to 50 MB in size, t
 // his limit may be changed in the future.
@@ -45,35 +44,26 @@ type SendDocumentOpt struct {
 func (p *bot) SendDocument(chatID interface{}, document interface{}, opt *SendDocumentOpt) (*Message, error) {
 
 	type sendFormat struct {
-		ChatID string `json:"chat_id"`
-
+		ChatID          string `json:"chat_id"`
 		SendDocumentOpt `json:",omitempty"`
-
-		Document interface{} `json:"document" form:"file"`
+		Document        interface{} `json:"document" form:"file"`
 	}
-
 	dataSend := sendFormat{
 		ChatID:   fmt.Sprint(chatID),
 		Document: document,
 	}
-
 	if opt != nil {
 		dataSend.SendDocumentOpt = *opt
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result *Message `json:"result"`
 	}
-
 	sender := p.sendJSON
-
 	tt := thestruct.Type(reflect.TypeOf(document))
 	if "InputFileLocal" == tt.Name() {
 		sender = p.sendFormData
 	}
-
 	err := p.getAPIResponse(opt.Context, "sendDocument", sender, dataSend, &resp)
 	return resp.Result, err
 }

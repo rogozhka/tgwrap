@@ -1,12 +1,9 @@
 package tgwrap
 
-//
 // BotMessagesInterface is just a group of methods
-// to have smaller interface files
-//
+// to have smaller interface files.
 type BotMessagesInterface interface {
 
-	//
 	// SendMessage is used method to send text messages.
 	//
 	// chatID: unique identifier for the target chat
@@ -18,7 +15,6 @@ type BotMessagesInterface interface {
 	//
 	SendMessage(chatID interface{}, text string, opt *SendMessageOpt) (*Message, error)
 
-	//
 	// ForwardMessage is used to forward messages of any kind.
 	// On success, the sent Message is returned.
 	//

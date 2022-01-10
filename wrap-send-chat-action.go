@@ -51,18 +51,14 @@ func (p *bot) SendChatAction(chatID interface{}, action ChatActions) (bool, erro
 		ChatID string      `json:"chat_id"`
 		Action ChatActions `json:"action"`
 	}
-
 	dataSend := sendFormat{
 		ChatID: fmt.Sprint(chatID),
 		Action: action,
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result bool `json:"result"`
 	}
-
 	err := p.getAPIResponse(nil, "sendChatAction", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

@@ -48,10 +48,8 @@ type SendVoiceOpt struct {
 func (p *bot) SendVoice(chatID interface{}, voice interface{}, opt *SendVoiceOpt) (*Message, error) {
 
 	type sendFormat struct {
-		ChatID string `json:"chat_id"`
-
+		ChatID       string `json:"chat_id"`
 		SendVoiceOpt `json:",omitempty"`
-
 		// Voice is Audio file to send. Pass a file_id as String to send a photo that exists
 		// on the Telegram servers (recommended), pass an HTTP URL as a String
 		// for Telegram to get a photo from the Internet,
@@ -60,29 +58,22 @@ func (p *bot) SendVoice(chatID interface{}, voice interface{}, opt *SendVoiceOpt
 		// InputFile should have MarshalText interface
 		Voice interface{} `json:"voice" form:"file"`
 	}
-
 	dataSend := sendFormat{
 		ChatID: fmt.Sprint(chatID),
 		Voice:  voice,
 	}
-
 	if opt != nil {
 		dataSend.SendVoiceOpt = *opt
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result *Message `json:"result"`
 	}
-
 	sender := p.sendJSON
-
 	tt := thestruct.Type(reflect.TypeOf(voice))
 	if "InputFileLocal" == tt.Name() {
 		sender = p.sendFormData
 	}
-
 	err := p.getAPIResponse(opt.Context, "sendVoice", sender, dataSend, &resp)
 	return resp.Result, err
 }

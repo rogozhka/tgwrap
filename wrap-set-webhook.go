@@ -44,6 +44,5 @@ type SetWebhookOpt struct {
 //
 // Use an empty string as url to remove webhook integration.
 func (p *bot) SetWebhook(url string, opt *SetWebhookOpt) (bool, error) {
-
 	return false, fmt.Errorf("Not implemented yet")
 }
