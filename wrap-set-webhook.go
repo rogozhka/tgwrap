@@ -1,16 +1,25 @@
 package tgwrap
 
-import "fmt"
+import (
+	"reflect"
+
+	"github.com/rogozhka/thestruct"
+)
 
 // SetWebhookOpt represents optional params for SetWebhook.
 type SetWebhookOpt struct {
 	commonRequestOptions
 
-	// Certificate to upload your public key certificate
+	// Certificate is optional file, your public key certificate
 	// so that the root certificate in use can be checked.
-	// See our self-signed guide for details.
+	// See self-signed guide for details.
 	// https://core.telegram.org/bots/self-signed
 	Certificate *InputFile `json:"certificate,omitempty"`
+
+	// IPAddress is optional. The fixed IP address
+	// which will be used to send webhook requests
+	// instead of the IP address resolved through DNS.
+	IPAddress string `json:"ip_address,omitempty"`
 
 	// MaxConnections is maximum allowed number of simultaneous HTTPS connections
 	// to the webhook for update delivery, 1-100. Defaults to 40.
@@ -18,10 +27,10 @@ type SetWebhookOpt struct {
 	// and higher values to increase your bot’s throughput.
 	MaxConnections int `json:"max_connections,omitempty"`
 
-	// AllowedUpdates lists the types of updates you want your bot to receive.
+	// AllowedUpdates lists types of updates you want your bot to receive.
 	// For example, specify [“message”, “edited_channel_post”,
 	// “callback_query”] to only receive updates of these types.
-	// See Update for a complete list of available update types.
+	// See UpdateType for a complete list of available update types.
 	// Specify an empty list to receive all updates regardless
 	// of type (default). If not specified, the previous setting
 	// will be used.
@@ -30,6 +39,9 @@ type SetWebhookOpt struct {
 	// created before the call to the setWebhook, so unwanted
 	// updates may be received for a short period of time.
 	AllowedUpdates []UpdateType `json:"allowed_updates,omitempty"`
+
+	// DropPendingUpdates is optional. Pass True to drop all pending updates.
+	DropPendingUpdates bool `json:"drop_pending_updates,omitempty"`
 }
 
 // SetWebhook is used to specify a url and receive incoming updates
@@ -44,5 +56,26 @@ type SetWebhookOpt struct {
 //
 // Use an empty string as url to remove webhook integration.
 func (p *bot) SetWebhook(url string, opt *SetWebhookOpt) (bool, error) {
-	return false, fmt.Errorf("Not implemented yet")
+
+	type sendFormat struct {
+		URL           string `json:"url"`
+		SetWebhookOpt        // optional part
+	}
+	dataSend := sendFormat{
+		URL: url,
+	}
+	if opt != nil {
+		dataSend.SetWebhookOpt = *opt
+	}
+	var resp struct {
+		GenericResponse
+		Result bool `json:"result"`
+	}
+	sender := p.sendJSON
+	tt := thestruct.Type(reflect.TypeOf(dataSend.Certificate))
+	if "InputFileLocal" == tt.Name() {
+		sender = p.sendFormData
+	}
+	err := p.getAPIResponse(opt.Context, "setWebhook", sender, dataSend, &resp)
+	return resp.Result, err
 }
