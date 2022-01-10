@@ -95,7 +95,7 @@ func main() {
 
 - [x] setWebhook
 
-- [ ] deleteWebhook
+- [x] deleteWebhook
 
 - [ ] getWebhookInfo
 
