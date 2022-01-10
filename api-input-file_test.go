@@ -7,26 +7,20 @@ import (
 )
 
 func TestInputFileLocal(t *testing.T) {
-
+	is := assert.New(t)
 	path := "api-input-file.go"
-
 	f := NewInputFileLocal(path)
-
-	assert.Equal(t, path, f.String(), "String()")
+	is.Equal(path, f.String(), "String()")
 }
-
 func TestNewInputFileFromID(t *testing.T) {
-
+	is := assert.New(t)
 	id := "test-file-id"
 	f := NewInputFileFromID(id)
-
-	assert.Equal(t, id, f.String(), "String()")
+	is.Equal(id, f.String(), "String()")
 }
-
 func TestNewInputFileFromURL(t *testing.T) {
-
+	is := assert.New(t)
 	url := "http://example.com/test-file-path"
 	f := NewInputFileFromID(url)
-
-	assert.Equal(t, url, f.String(), "String()")
+	is.Equal(url, f.String(), "String()")
 }

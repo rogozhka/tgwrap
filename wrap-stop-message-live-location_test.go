@@ -7,21 +7,19 @@ import (
 )
 
 func Test_StopMessageLiveLocationWrap(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
 	chatID := requireEnv(envTestChatID)
-
 	opt := SendLocationOpt{
 		LivePeriod: 86000,
 	}
 	res, err := bot.SendLocation(chatID, 41.89, 12.50, &opt)
-	assert.Nil(t, err, "SendLocation err")
-
+	is.Nil(err, "SendLocation err")
 	_, err2 := bot.StopMessageLiveLocation(
 		&StopMessageLiveLocationOpt{
 			ChatID:    res.Chat.ID,
 			MessageID: res.ID,
 		})
-
-	assert.Nil(t, err2, "StopMessageLiveLocation err")
+	is.Nil(err2, "StopMessageLiveLocation err")
 }

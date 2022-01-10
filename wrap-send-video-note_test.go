@@ -9,23 +9,20 @@ import (
 )
 
 func Test_SendVideoNoteWrap(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
 	filePath := os.Getenv(envTestVideoPath)
 	if len(filePath) < 1 {
 		return
 	}
-
 	chatID := requireEnv(envTestChatID)
-
 	inputFile := NewInputFileLocal(filePath)
-
 	r, err := bot.SendVideoNote(chatID, inputFile,
 		&SendVideoNoteOpt{
 			DisableNotification: false,
 		})
-
-	assert.Nil(t, err, "SendVideoNote err")
-	assert.NotNil(t, r, "result")
-	assert.True(t, r.ID > 0, "positive message id")
+	is.Nil(err, "SendVideoNote err")
+	is.NotNil(r, "result")
+	is.True(r.ID > 0, "positive message id")
 }

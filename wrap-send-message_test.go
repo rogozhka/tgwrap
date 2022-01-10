@@ -7,6 +7,7 @@ import (
 )
 
 func Test_SendMessage(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
 	chatID := requireEnv(envTestPersonalChatID)
@@ -16,6 +17,6 @@ func Test_SendMessage(t *testing.T) {
 			DisableNotification: true,
 		})
 
-	assert.Nil(t, err, "SendMessage err")
-	assert.NotNil(t, m, "Message present")
+	is.Nil(err, "SendMessage err")
+	is.NotNil(m, "Message present")
 }

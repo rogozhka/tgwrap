@@ -7,6 +7,7 @@ import (
 )
 
 func Test_SendContactWrap(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
 	chatID := requireEnv(envTestChatID)
@@ -19,5 +20,5 @@ func Test_SendContactWrap(t *testing.T) {
 			LastName: "Official",
 		})
 
-	assert.Nil(t, err, "SendContact err")
+	is.Nil(err, "SendContact err")
 }

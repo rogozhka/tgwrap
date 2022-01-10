@@ -7,6 +7,7 @@ import (
 )
 
 func Test_SendDocument(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
 	chatID := requireEnv(envTestChatID)
@@ -18,5 +19,5 @@ func Test_SendDocument(t *testing.T) {
 			DisableNotification: true,
 		})
 
-	assert.Nil(t, err, "SendDocument err")
+	is.Nil(err, "SendDocument err")
 }

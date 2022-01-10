@@ -7,6 +7,7 @@ import (
 )
 
 func Test_SendLocationWrap(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
 	chatID := requireEnv(envTestChatID)
@@ -20,10 +21,11 @@ func Test_SendLocationWrap(t *testing.T) {
 			LivePeriod:          65,
 		})
 
-	assert.Nil(t, e, "SendLocation err")
+	is.Nil(e, "SendLocation err")
 }
 
 func Test_SendLocationWrap_outOfRange(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
 	chatID := requireEnv(envTestChatID)
@@ -37,5 +39,5 @@ func Test_SendLocationWrap_outOfRange(t *testing.T) {
 			LivePeriod:          10,
 		})
 
-	assert.NotNil(t, err, "SendLocation err")
+	is.NotNil(err, "SendLocation err")
 }

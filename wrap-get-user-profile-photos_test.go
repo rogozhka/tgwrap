@@ -7,14 +7,14 @@ import (
 )
 
 func TestBot_GetUserProfilePhotos(t *testing.T) {
-
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
 	userID := int64(testEnvIntValue(envTestUserID))
 
 	res, err := bot.GetUserProfilePhotos(userID, nil)
-	assert.Nil(t, err, userID)
-	assert.NotNil(t, res)
-	assert.True(t, res.TotalCount > 0)
-	assert.Equal(t, res.TotalCount, len(res.Photos))
+	is.Nil(err, userID)
+	is.NotNil(res)
+	is.True(res.TotalCount > 0)
+	is.Equal(res.TotalCount, len(res.Photos))
 }

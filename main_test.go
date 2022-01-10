@@ -28,9 +28,7 @@ func requireEnv(name string) string {
 }
 
 func testEnvStringValue(name string) string {
-
 	tr := strings.TrimSpace(name)
-
 	if v := os.Getenv(tr); len(v) < 1 {
 		panic(fmt.Errorf("env not set | %s", tr))
 	} else {
@@ -51,26 +49,21 @@ func testEnvUintValue(name string) uint {
 }
 
 func intFromString(s string) int {
-
 	res, err := strconv.Atoi(s)
 	if err != nil {
 		panic(err)
 	}
-
-	return int(res)
+	return res
 }
 
 func createTestBotFromEnv() *bot {
-
 	var url string
-
 	v := os.Getenv(envTestURL)
 	if len(v) < 1 {
 		url = TelegramBotAPI
 	} else {
 		url = v
 	}
-
 	return NewBotWithClientAndURL(getTokenEnv(), &http.Client{
 		Timeout: DefaultClientTimeout,
 	}, url)
