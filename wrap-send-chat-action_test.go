@@ -9,7 +9,7 @@ import (
 func Test_SendChatAction(t *testing.T) {
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	chatID := requireEnv(envTestChatID)
 
 	b2, err := bot.SendChatAction(chatID, ChatActionUploadPhoto)
 	assert.Nil(t, err, "SendChatAction err")

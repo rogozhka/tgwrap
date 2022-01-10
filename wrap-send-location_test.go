@@ -9,7 +9,7 @@ import (
 func Test_SendLocationWrap(t *testing.T) {
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	chatID := requireEnv(envTestChatID)
 
 	longitude := 12.50
 	latitude := 41.89
@@ -26,7 +26,7 @@ func Test_SendLocationWrap(t *testing.T) {
 func Test_SendLocationWrap_outOfRange(t *testing.T) {
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	chatID := requireEnv(envTestChatID)
 
 	longitude := 12.50
 	latitude := 41.89

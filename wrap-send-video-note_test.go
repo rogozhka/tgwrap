@@ -11,13 +11,12 @@ import (
 func Test_SendVideoNoteWrap(t *testing.T) {
 	bot := createTestBotFromEnv()
 
-	envFilePath := "TGWRAP_TEST_VIDEO_PATH"
-	filePath := os.Getenv(envFilePath)
+	filePath := os.Getenv(envTestVideoPath)
 	if len(filePath) < 1 {
 		return
 	}
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	chatID := requireEnv(envTestChatID)
 
 	inputFile := NewInputFileLocal(filePath)
 

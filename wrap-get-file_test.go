@@ -10,7 +10,7 @@ func TestBot_GetFile(t *testing.T) {
 
 	bot := createTestBotFromEnv()
 
-	fileID := testEnvStringValue("TGWRAP_TEST_FILE_ID")
+	fileID := testEnvStringValue(envTestFileID)
 
 	file, err := bot.GetFile(fileID)
 	assert.Nil(t, err)

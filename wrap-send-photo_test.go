@@ -13,7 +13,7 @@ import (
 func Test_SendPhotoWrap(t *testing.T) {
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	chatID := requireEnv(envTestChatID)
 
 	photo := NewInputFileLocal("test/gray.png")
 
@@ -29,7 +29,7 @@ func Test_SendPhotoWrap(t *testing.T) {
 func Test_SendPhotoURL(t *testing.T) {
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	chatID := requireEnv(envTestChatID)
 
 	photo := NewInputFileFromURL("https://raw.githubusercontent.com/rogozhka/tgwrap/master/test/rogozhka-digital.png")
 

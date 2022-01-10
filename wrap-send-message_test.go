@@ -9,7 +9,7 @@ import (
 func Test_SendMessage(t *testing.T) {
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_PERSONAL_CHAT_ID")
+	chatID := requireEnv(envTestPersonalChatID)
 
 	m, err := bot.SendMessage(chatID, "test message ;)",
 		&SendMessageOpt{

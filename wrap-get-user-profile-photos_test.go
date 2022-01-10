@@ -10,7 +10,7 @@ func TestBot_GetUserProfilePhotos(t *testing.T) {
 
 	bot := createTestBotFromEnv()
 
-	userID := int64(testEnvIntValue("TGWRAP_TEST_USER_ID"))
+	userID := int64(testEnvIntValue(envTestUserID))
 
 	res, err := bot.GetUserProfilePhotos(userID, nil)
 	assert.Nil(t, err, userID)

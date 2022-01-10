@@ -9,7 +9,7 @@ import (
 func Test_EditMessageLiveLocationWrap(t *testing.T) {
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	chatID := requireEnv(envTestChatID)
 
 	opt := SendLocationOpt{
 		LivePeriod: 86000,

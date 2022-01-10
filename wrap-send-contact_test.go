@@ -9,7 +9,7 @@ import (
 func Test_SendContactWrap(t *testing.T) {
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	chatID := requireEnv(envTestChatID)
 
 	firstName := "CIA"
 	phoneNumber := "(703) 482-0623"

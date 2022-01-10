@@ -8,8 +8,19 @@ import (
 	"strings"
 )
 
+const (
+	envTestToken          = "TGWRAP_TOKEN"
+	envTestURL            = "TGWRAP_API_URL"
+	envTestChatID         = "TGWRAP_TEST_CHAT_ID"
+	envTestPersonalChatID = "TGWRAP_TEST_PERSONAL_CHAT_ID"
+	envTestFileID         = "TGWRAP_TEST_FILE_ID"
+	envTestUserID         = "TGWRAP_TEST_USER_ID"
+	envTestAudioPath      = "TGWRAP_TEST_AUDIO_PATH"
+	envTestVideoPath      = "TGWRAP_TEST_VIDEO_PATH"
+)
+
 func getTokenEnv() string {
-	return requireEnv("TGWRAP_TOKEN")
+	return requireEnv(envTestToken)
 }
 
 func requireEnv(name string) string {
@@ -53,7 +64,7 @@ func createTestBotFromEnv() *bot {
 
 	var url string
 
-	v := os.Getenv("TGWRAP_API_URL")
+	v := os.Getenv(envTestURL)
 	if len(v) < 1 {
 		url = TelegramBotAPI
 	} else {
