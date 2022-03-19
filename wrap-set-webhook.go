@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"reflect"
 
 	"github.com/rogozhka/thestruct"
@@ -64,13 +65,19 @@ func (p *bot) SetWebhook(url string, opt *SetWebhookOpt) (bool, error) {
 	dataSend := sendFormat{
 		URL: url,
 	}
-	if opt != nil {
-		dataSend.SetWebhookOpt = *opt
-	}
-	var resp struct {
+	resp := struct {
 		GenericResponse
 		Result bool `json:"result"`
+	}{}
+
+	if opt == nil {
+		opt = &SetWebhookOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SetWebhookOpt = *opt
+
 	sender := p.sendJSON
 	tt := thestruct.Type(reflect.TypeOf(dataSend.Certificate))
 	if "InputFileLocal" == tt.Name() {
