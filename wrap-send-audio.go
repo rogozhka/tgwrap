@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 
@@ -72,7 +73,10 @@ func (p *bot) SendAudio(chatID interface{}, audio interface{}, opt *SendAudioOpt
 		ChatID: fmt.Sprint(chatID),
 		Audio:  audio,
 	}
-	if opt != nil {
+	if opt == nil {
+		opt = &SendAudioOpt{}
+		opt.Context = context.Background()
+	} else {
 		dataSend.SendAudioOpt = *opt
 	}
 	var resp struct {
