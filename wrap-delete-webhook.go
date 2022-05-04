@@ -1,5 +1,7 @@
 package tgwrap
 
+import "context"
+
 // DeleteWebhookOpt represents optional params for DeleteWebhook.
 type DeleteWebhookOpt struct {
 	commonRequestOptions
@@ -14,10 +16,16 @@ func (p *bot) DeleteWebhook(opt *DeleteWebhookOpt) (bool, error) {
 	type sendFormat struct {
 		DeleteWebhookOpt // optional part
 	}
-	dataSend := sendFormat{}
-	if opt != nil {
-		dataSend.DeleteWebhookOpt = *opt
+
+	if opt == nil {
+		opt = &DeleteWebhookOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+
+	dataSend := sendFormat{}
+	dataSend.DeleteWebhookOpt = *opt
 	var resp struct {
 		GenericResponse
 		Result bool `json:"result"`
