@@ -75,10 +75,12 @@ func (p *bot) SendAudio(chatID interface{}, audio interface{}, opt *SendAudioOpt
 	}
 	if opt == nil {
 		opt = &SendAudioOpt{}
-		opt.Context = context.Background()
-	} else {
-		dataSend.SendAudioOpt = *opt
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SendAudioOpt = *opt
+
 	var resp struct {
 		GenericResponse
 		Result *Message `json:"result"`

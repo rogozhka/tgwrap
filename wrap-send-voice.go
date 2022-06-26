@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 
@@ -62,9 +63,15 @@ func (p *bot) SendVoice(chatID interface{}, voice interface{}, opt *SendVoiceOpt
 		ChatID: fmt.Sprint(chatID),
 		Voice:  voice,
 	}
-	if opt != nil {
-		dataSend.SendVoiceOpt = *opt
+
+	if opt == nil {
+		opt = &SendVoiceOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SendVoiceOpt = *opt
+
 	var resp struct {
 		GenericResponse
 		Result *Message `json:"result"`

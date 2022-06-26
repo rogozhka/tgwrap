@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 )
 
@@ -13,7 +14,10 @@ import (
 // or username of the target channel (in the format @channelusername)
 // userID is unique identifier of the target user.
 func (p *bot) UnbanChatMember(chatID interface{}, userID int64) (bool, error) {
+	return p.UnbanChatMemberContext(nil, chatID, userID)
+}
 
+func (p *bot) UnbanChatMemberContext(ctx context.Context, chatID interface{}, userID int64) (bool, error) {
 	type sendFormat struct {
 		ChatID string `json:"chat_id"`
 		UserID int64  `json:"user_id"`
@@ -26,6 +30,6 @@ func (p *bot) UnbanChatMember(chatID interface{}, userID int64) (bool, error) {
 		GenericResponse
 		Result bool `json:"result"`
 	}
-	err := p.getAPIResponse(nil, "unbanChatMember", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(ctx, "unbanChatMember", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

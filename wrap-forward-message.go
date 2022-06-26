@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 )
 
@@ -26,7 +27,16 @@ func (p *bot) ForwardMessage(
 	disableNotification bool,
 	messageID int64,
 ) (*Message, error) {
+	return p.ForwardMessageContext(nil, chatID, fromChatID, disableNotification, messageID)
+}
 
+func (p *bot) ForwardMessageContext(
+	ctx context.Context,
+	chatID interface{},
+	fromChatID interface{},
+	disableNotification bool,
+	messageID int64,
+) (*Message, error) {
 	type sendFormat struct {
 		ChatID              string `json:"chat_id"`
 		FromChatID          string `json:"from_chat_id"`
@@ -47,6 +57,6 @@ func (p *bot) ForwardMessage(
 		GenericResponse
 		Result *Message `json:"result"`
 	}
-	err := p.getAPIResponse(nil, "forwardMessage", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(ctx, "forwardMessage", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

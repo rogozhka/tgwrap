@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 )
 
@@ -39,7 +40,13 @@ type SendVenueOpt struct {
 // address: (string) Address of the venue.
 //
 // opt: (can be nil) optional params
-func (p *bot) SendVenue(chatID interface{}, latitude float64, longitude float64, title string, address string, opt *SendVenueOpt) (*Message, error) {
+func (p *bot) SendVenue(chatID interface{},
+	latitude float64,
+	longitude float64,
+	title string,
+	address string,
+	opt *SendVenueOpt,
+) (*Message, error) {
 
 	type sendFormat struct {
 		ChatID       string `json:"chat_id"`
@@ -56,9 +63,15 @@ func (p *bot) SendVenue(chatID interface{}, latitude float64, longitude float64,
 		Title:     title,
 		Address:   address,
 	}
-	if opt != nil {
-		dataSend.SendVenueOpt = *opt
+
+	if opt == nil {
+		opt = &SendVenueOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SendVenueOpt = *opt
+
 	var resp struct {
 		GenericResponse
 		Result *Message `json:"result"`

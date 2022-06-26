@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 
@@ -72,9 +73,15 @@ func (p *bot) SendVideo(chatID interface{}, video interface{}, opt *SendVideoOpt
 		ChatID: fmt.Sprint(chatID),
 		Video:  video,
 	}
-	if opt != nil {
-		dataSend.SendVideoOpt = *opt
+
+	if opt == nil {
+		opt = &SendVideoOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SendVideoOpt = *opt
+
 	var resp struct {
 		GenericResponse
 		Result *Message `json:"result"`

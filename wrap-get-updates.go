@@ -1,5 +1,7 @@
 package tgwrap
 
+import "context"
+
 // GetUpdatesOpt represents optional params for GetUpdates.
 type GetUpdatesOpt struct {
 	commonRequestOptions
@@ -44,9 +46,13 @@ func (p *bot) GetUpdates(opt *GetUpdatesOpt) ([]Update, error) {
 		GetUpdatesOpt
 	}
 	dataSend := sendFormat{}
-	if opt != nil {
-		dataSend.GetUpdatesOpt = *opt
+	if opt == nil {
+		opt = &GetUpdatesOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.GetUpdatesOpt = *opt
 	var resp struct {
 		GenericResponse
 		Result []Update `json:"result"`

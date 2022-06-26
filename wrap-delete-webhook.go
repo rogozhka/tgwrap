@@ -16,14 +16,12 @@ func (p *bot) DeleteWebhook(opt *DeleteWebhookOpt) (bool, error) {
 	type sendFormat struct {
 		DeleteWebhookOpt // optional part
 	}
-
 	if opt == nil {
 		opt = &DeleteWebhookOpt{}
 	}
 	if opt.Context == nil {
 		opt.Context = context.Background()
 	}
-
 	dataSend := sendFormat{}
 	dataSend.DeleteWebhookOpt = *opt
 	var resp struct {

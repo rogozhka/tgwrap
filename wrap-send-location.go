@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 )
@@ -52,14 +53,20 @@ func (p *bot) SendLocation(chatID interface{}, latitude float64, longitude float
 		Latitude:  latitude,
 		Longitude: longitude,
 	}
-	if opt != nil {
-		if lp := reflect.ValueOf(opt.LivePeriod); lp.IsValid() {
-			if lp.Uint() < 60 && lp.Uint() > 86400 {
-				return nil, fmt.Errorf("invalid live period")
-			}
-		}
-		dataSend.SendLocationOpt = *opt
+
+	if opt == nil {
+		opt = &SendLocationOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+
+	if lp := reflect.ValueOf(opt.LivePeriod); lp.IsValid() {
+		if lp.Uint() < 60 && lp.Uint() > 86400 {
+			return nil, fmt.Errorf("invalid live period")
+		}
+	}
+	dataSend.SendLocationOpt = *opt
 	var resp struct {
 		GenericResponse
 		Result *Message `json:"result"`

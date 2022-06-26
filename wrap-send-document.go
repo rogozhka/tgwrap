@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 
@@ -52,9 +53,15 @@ func (p *bot) SendDocument(chatID interface{}, document interface{}, opt *SendDo
 		ChatID:   fmt.Sprint(chatID),
 		Document: document,
 	}
-	if opt != nil {
-		dataSend.SendDocumentOpt = *opt
+
+	if opt == nil {
+		opt = &SendDocumentOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SendDocumentOpt = *opt
+
 	var resp struct {
 		GenericResponse
 		Result *Message `json:"result"`

@@ -1,5 +1,7 @@
 package tgwrap
 
+import "context"
+
 type GetUserProfilePhotosOpt struct {
 	commonRequestOptions
 
@@ -22,11 +24,13 @@ func (p *bot) GetUserProfilePhotos(userID int64, opt *GetUserProfilePhotosOpt) (
 	dataSend := sendFormat{
 		UserID: userID,
 	}
-	if opt != nil {
-		dataSend.GetUserProfilePhotosOpt = *opt
-	} else {
+	if opt == nil {
 		opt = &GetUserProfilePhotosOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.GetUserProfilePhotosOpt = *opt
 	var resp struct {
 		GenericResponse
 		Result *UserProfilePhotos `json:"result"`

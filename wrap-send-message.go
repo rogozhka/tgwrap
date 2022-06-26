@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 )
 
@@ -95,9 +96,15 @@ func (p *bot) SendMessage(chatID interface{}, text string, opt *SendMessageOpt) 
 		ChatID: fmt.Sprint(chatID), // don't care about valid format, Telegram will response with error if invalid ID
 		Text:   text,
 	}
-	if opt != nil {
-		dataSend.SendMessageOpt = *opt
+
+	if opt == nil {
+		opt = &SendMessageOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SendMessageOpt = *opt
+
 	var resp struct {
 		GenericResponse
 		Result *Message `json:"result"`

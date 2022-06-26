@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 
@@ -59,9 +60,15 @@ func (p *bot) SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt
 		ChatID: fmt.Sprint(chatID), // don't care about checking fmt, Telegram will response with error if invalid ID
 		Photo:  photo,
 	}
-	if opt != nil {
-		dataSend.SendPhotoOpt = *opt
+
+	if opt == nil {
+		opt = &SendPhotoOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SendPhotoOpt = *opt
+
 	var resp struct {
 		GenericResponse
 		Result *Message `json:"result"`

@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 )
 
@@ -46,7 +47,10 @@ const (
 //
 // action: type of action to broadcast.
 func (p *bot) SendChatAction(chatID interface{}, action ChatActions) (bool, error) {
+	return p.SendChatActionContext(nil, chatID, action)
+}
 
+func (p *bot) SendChatActionContext(ctx context.Context, chatID interface{}, action ChatActions) (bool, error) {
 	type sendFormat struct {
 		ChatID string      `json:"chat_id"`
 		Action ChatActions `json:"action"`
@@ -59,6 +63,6 @@ func (p *bot) SendChatAction(chatID interface{}, action ChatActions) (bool, erro
 		GenericResponse
 		Result bool `json:"result"`
 	}
-	err := p.getAPIResponse(nil, "sendChatAction", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(ctx, "sendChatAction", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

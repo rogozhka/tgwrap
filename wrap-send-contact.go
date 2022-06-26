@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 )
 
@@ -44,9 +45,15 @@ func (p *bot) SendContact(chatID interface{}, phoneNumber string, firstName stri
 		PhoneNumber: phoneNumber,
 		FirstName:   firstName,
 	}
-	if opt != nil {
-		dataSend.SendContactOpt = *opt
+
+	if opt == nil {
+		opt = &SendContactOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SendContactOpt = *opt
+
 	var resp struct {
 		GenericResponse
 		Result *Message `json:"result"`
