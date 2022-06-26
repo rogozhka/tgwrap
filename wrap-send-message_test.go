@@ -7,15 +7,16 @@ import (
 )
 
 func Test_SendMessage(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_PERSONAL_CHAT_ID")
+	chatID := requireEnv(envTestPersonalChatID)
 
 	m, err := bot.SendMessage(chatID, "test message ;)",
 		&SendMessageOpt{
 			DisableNotification: true,
 		})
 
-	assert.Nil(t, err, "SendMessage err")
-	assert.NotNil(t, m, "Message present")
+	is.Nil(err, "SendMessage err")
+	is.NotNil(m, "Message present")
 }

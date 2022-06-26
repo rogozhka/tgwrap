@@ -13,8 +13,8 @@ func Test_UnbanChatMember(t *testing.T) {
 	//return // till decision how to test supergroups
 	//
 	//userID, err := strconv.Atoi(strUserID)
-	//assert.Nil(t, err, "Atoi err")
+	//is.Nil( err, "Atoi err")
 	//
 	//_, err4 := bot.UnbanChatMember(chatID, uint64(userID))
-	//assert.Nil(t, err4, "UnbanChatMember err")
+	//is.Nil( err4, "UnbanChatMember err")
 }

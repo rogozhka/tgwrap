@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 
@@ -37,7 +38,6 @@ type SendVideoOpt struct {
 	ReplyMarkup interface{} `json:"reply_markup,omitempty"`
 }
 
-//
 // SendVideo is used to send video files, Telegram clients support mp4 videos
 // (other formats may be sent as Document). On success, the sent Message is returned.
 // Bots can currently send video files of up to 50 MB in size,
@@ -56,11 +56,9 @@ type SendVideoOpt struct {
 func (p *bot) SendVideo(chatID interface{}, video interface{}, opt *SendVideoOpt) (*Message, error) {
 
 	type sendFormat struct {
-		ChatID string `json:"chat_id"`
-
+		ChatID       string `json:"chat_id"`
 		SendVideoOpt `json:",omitempty"`
 
-		//
 		// Video to send. Pass a file_id as String to send a photo that exists
 		// on the Telegram servers (recommended), pass an HTTP URL as a String
 		// for Telegram to get a photo from the Internet,
@@ -76,23 +74,23 @@ func (p *bot) SendVideo(chatID interface{}, video interface{}, opt *SendVideoOpt
 		Video:  video,
 	}
 
-	if opt != nil {
-		dataSend.SendVideoOpt = *opt
+	if opt == nil {
+		opt = &SendVideoOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SendVideoOpt = *opt
 
 	var resp struct {
 		GenericResponse
-
 		Result *Message `json:"result"`
 	}
-
 	sender := p.sendJSON
-
 	tt := thestruct.Type(reflect.TypeOf(video))
 	if "InputFileLocal" == tt.Name() {
 		sender = p.sendFormData
 	}
-
 	err := p.getAPIResponse(opt.Context, "sendVideo", sender, dataSend, &resp)
 	return resp.Result, err
 }

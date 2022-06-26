@@ -1,12 +1,9 @@
 package tgwrap
 
-//
 // BotMediaInterface is a group of methods for sending media
 // used as a part of common BotInterface API interface
-//
 type BotMediaInterface interface {
 
-	//
 	// SendPhoto is used to send photos.
 	//
 	// chatID: (Integer or String) Unique identifier
@@ -21,7 +18,6 @@ type BotMediaInterface interface {
 	//
 	SendPhoto(chatID interface{}, photo interface{}, opt *SendPhotoOpt) (*Message, error)
 
-	//
 	// SendVideo is used to send video files, Telegram clients support mp4 videos
 	// (other formats may be sent as Document). On success, the sent Message is returned.
 	// Bots can currently send video files of up to 50 MB in size,
@@ -39,7 +35,6 @@ type BotMediaInterface interface {
 	//
 	SendVideo(chatID interface{}, video interface{}, opt *SendVideoOpt) (*Message, error)
 
-	//
 	// SendAudio is used to send audio files, if you want Telegram clients to display them in the music player.
 	// Your audio must be in the .mp3 format. On success, the sent Message is returned. Bots can currently
 	// send audio files of up to 50 MB in size, this limit may be changed in the future.
@@ -58,7 +53,6 @@ type BotMediaInterface interface {
 	//
 	SendAudio(chatID interface{}, audio interface{}, opt *SendAudioOpt) (*Message, error)
 
-	//
 	// SendVoice to send audio files, if you want Telegram clients to display the file
 	// as a playable voice message. For this to work, your audio must be in an .ogg file
 	// encoded with OPUS (other formats may be sent as Audio or Document).
@@ -77,7 +71,6 @@ type BotMediaInterface interface {
 	//
 	SendVoice(chatID interface{}, voice interface{}, opt *SendVoiceOpt) (*Message, error)
 
-	//
 	// SendDocument to send general files. On success, the sent Message is returned.
 	// Bots can currently send files of any type of up to 50 MB in size, t
 	// his limit may be changed in the future.

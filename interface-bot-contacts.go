@@ -1,12 +1,9 @@
 package tgwrap
 
-//
 // BotContactsInterface is a group of methods for sending contact-related
-// information; used as a part of common BotInterface API interface
-//
+// information; used as a part of common BotInterface API interface.
 type BotContactsInterface interface {
 
-	//
 	// SendContact is used to to send phone contacts.
 	// On success, the sent Message is returned.
 	//

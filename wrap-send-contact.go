@@ -1,12 +1,11 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 )
 
-//
-// SendContactOpt represents optional params for SendContact
-//
+// SendContactOpt represents optional params for SendContact.
 type SendContactOpt struct {
 	commonRequestOptions
 
@@ -36,31 +35,29 @@ type SendContactOpt struct {
 func (p *bot) SendContact(chatID interface{}, phoneNumber string, firstName string, opt *SendContactOpt) (*Message, error) {
 
 	type sendFormat struct {
-		ChatID string `json:"chat_id"`
-
-		PhoneNumber string `json:"phone_number"`
-
-		FirstName string `json:"first_name"`
-
+		ChatID         string `json:"chat_id"`
+		PhoneNumber    string `json:"phone_number"`
+		FirstName      string `json:"first_name"`
 		SendContactOpt `json:",omitempty"`
 	}
-
 	dataSend := sendFormat{
 		ChatID:      fmt.Sprint(chatID),
 		PhoneNumber: phoneNumber,
 		FirstName:   firstName,
 	}
 
-	if opt != nil {
-		dataSend.SendContactOpt = *opt
+	if opt == nil {
+		opt = &SendContactOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SendContactOpt = *opt
 
 	var resp struct {
 		GenericResponse
-
 		Result *Message `json:"result"`
 	}
-
 	err := p.getAPIResponse(opt.Context, "sendContact", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

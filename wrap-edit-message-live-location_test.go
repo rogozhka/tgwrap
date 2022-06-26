@@ -7,15 +7,15 @@ import (
 )
 
 func Test_EditMessageLiveLocationWrap(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
-
+	chatID := requireEnv(envTestChatID)
 	opt := SendLocationOpt{
 		LivePeriod: 86000,
 	}
 	res, err := bot.SendLocation(chatID, 41.89, 12.50, &opt)
-	assert.Nil(t, err, "SendLocation err")
+	is.Nil(err, "SendLocation err")
 
 	longitude := 12.45
 	latitude := 41.88
@@ -25,6 +25,5 @@ func Test_EditMessageLiveLocationWrap(t *testing.T) {
 			ChatID:    res.Chat.ID,
 			MessageID: res.ID,
 		})
-
-	assert.Nil(t, err4, "EditMessageLiveLocation err")
+	is.Nil(err4, "EditMessageLiveLocation err")
 }

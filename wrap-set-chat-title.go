@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 )
 
@@ -13,23 +14,22 @@ import (
 // this method will only work if the ‘All Members Are Admins’
 // setting is off in the target group.
 func (p *bot) SetChatTitle(chatID interface{}, title string) (bool, error) {
+	return p.SetChatTitleContext(nil, chatID, title)
+}
 
+func (p *bot) SetChatTitleContext(ctx context.Context, chatID interface{}, title string) (bool, error) {
 	type sendFormat struct {
 		ChatID string `json:"chat_id"`
 		Title  string `json:"title"`
 	}
-
 	dataSend := sendFormat{
 		ChatID: fmt.Sprint(chatID),
 		Title:  title,
 	}
-
 	var resp struct {
 		GenericResponse
-
 		Result bool `json:"result"`
 	}
-
-	err := p.getAPIResponse(nil, "setChatTitle", p.sendJSON, dataSend, &resp)
+	err := p.getAPIResponse(ctx, "setChatTitle", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }

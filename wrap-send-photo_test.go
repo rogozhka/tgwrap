@@ -11,33 +11,29 @@ import (
 )
 
 func Test_SendPhotoWrap(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
-
+	chatID := requireEnv(envTestChatID)
 	photo := NewInputFileLocal("test/gray.png")
-
 	_, err4 := bot.SendPhoto(chatID, photo,
 		&SendPhotoOpt{
 			DisableNotification: true,
 			Caption:             fmt.Sprintf("Background: gray %v", md5.Sum([]byte(time.Now().String()))),
 		})
-
-	assert.Nil(t, err4, "SendPhoto err")
+	is.Nil(err4, "SendPhoto err")
 }
 
 func Test_SendPhotoURL(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
-
+	chatID := requireEnv(envTestChatID)
 	photo := NewInputFileFromURL("https://raw.githubusercontent.com/rogozhka/tgwrap/master/test/rogozhka-digital.png")
-
 	_, err := bot.SendPhoto(chatID, photo,
 		&SendPhotoOpt{
 			DisableNotification: true,
 			Caption:             fmt.Sprintf("Background:%v", md5.Sum([]byte(time.Now().String()))),
 		})
-
-	assert.Nil(t, err, "SendPhoto err")
+	is.Nil(err, "SendPhoto err")
 }

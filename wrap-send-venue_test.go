@@ -7,19 +7,17 @@ import (
 )
 
 func Test_SendVenueWrap(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
-
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	chatID := requireEnv(envTestChatID)
 
 	longitude := 12.51
 	latitude := 41.89
 	title := "Rome"
 	address := "Center"
-
 	_, err := bot.SendVenue(chatID, latitude, longitude, title, address,
 		&SendVenueOpt{
 			DisableNotification: false,
 		})
-
-	assert.Nil(t, err, "SendVenue err")
+	is.Nil(err, "SendVenue err")
 }

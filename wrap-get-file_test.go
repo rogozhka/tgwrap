@@ -7,14 +7,14 @@ import (
 )
 
 func TestBot_GetFile(t *testing.T) {
-
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
-	fileID := testEnvStringValue("TGWRAP_TEST_FILE_ID")
+	fileID := testEnvStringValue(envTestFileID)
 
 	file, err := bot.GetFile(fileID)
-	assert.Nil(t, err)
-	assert.NotNil(t, file)
-	assert.True(t, len(file.FilePath) > 0)
-	assert.True(t, file.FileSize > 0)
+	is.Nil(err)
+	is.NotNil(file)
+	is.True(len(file.FilePath) > 0)
+	is.True(file.FileSize > 0)
 }

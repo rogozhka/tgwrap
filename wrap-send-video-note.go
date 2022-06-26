@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 
@@ -46,8 +47,7 @@ type SendVideoNoteOpt struct {
 func (p *bot) SendVideoNote(chatID interface{}, video interface{}, opt *SendVideoNoteOpt) (*Message, error) {
 
 	type sendFormat struct {
-		ChatID string `json:"chat_id"`
-
+		ChatID           string `json:"chat_id"`
 		SendVideoNoteOpt `json:",omitempty"`
 
 		// VideoNote to send. Pass a file_id as String to send a photo that exists
@@ -59,29 +59,28 @@ func (p *bot) SendVideoNote(chatID interface{}, video interface{}, opt *SendVide
 		//
 		VideoNote interface{} `json:"video_note" form:"file"`
 	}
-
 	dataSend := sendFormat{
 		ChatID:    fmt.Sprint(chatID),
 		VideoNote: video,
 	}
 
-	if opt != nil {
-		dataSend.SendVideoNoteOpt = *opt
+	if opt == nil {
+		opt = &SendVideoNoteOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SendVideoNoteOpt = *opt
 
 	var resp struct {
 		GenericResponse
-
 		Result *Message `json:"result"`
 	}
-
 	sender := p.sendJSON
-
 	tt := thestruct.Type(reflect.TypeOf(video))
 	if "InputFileLocal" == tt.Name() {
 		sender = p.sendFormData
 	}
-
 	err := p.getAPIResponse(opt.Context, "sendVideoNote", sender, dataSend, &resp)
 	return resp.Result, err
 }

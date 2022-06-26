@@ -7,11 +7,12 @@ import (
 )
 
 func Test_SendChatAction(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	chatID := requireEnv(envTestChatID)
 
 	b2, err := bot.SendChatAction(chatID, ChatActionUploadPhoto)
-	assert.Nil(t, err, "SendChatAction err")
-	assert.True(t, b2, "ChatActionTyping")
+	is.Nil(err, "SendChatAction err")
+	is.True(b2, "ChatActionTyping")
 }

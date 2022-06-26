@@ -1,12 +1,9 @@
 package tgwrap
 
-//
 // BotChatInterface is a group of methods for chat manipulation
-// used as a part of common BotInterface API interface
-//
+// used as a part of common BotInterface API interface.
 type BotChatInterface interface {
 
-	//
 	// SendChatAction is used when you need to tell the user
 	// that something is happening on the bot's side. The status
 	// is set for 5 seconds or less (when a message arrives from

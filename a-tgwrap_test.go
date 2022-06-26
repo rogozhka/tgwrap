@@ -7,10 +7,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-//
-// TestNewBotWithClientAndURL validates variables passed
-//
+// TestNewBotWithClientAndURL validates variables passed.
 func TestNewBotWithClientAndURL(t *testing.T) {
+	is := assert.New(t)
 
 	strToken := "dummy-token"
 	client := &http.Client{}
@@ -18,50 +17,47 @@ func TestNewBotWithClientAndURL(t *testing.T) {
 
 	bot := NewBotWithClientAndURL(strToken, client, apiURL)
 
-	assert.NotNil(t, bot, "NewBotWithClientAndURL")
-	assert.Equal(t, strToken, bot.token, "token")
-	assert.Equal(t, client, bot.client, "client")
-	assert.Equal(t, apiURL, bot.apiURL, "apiURL")
+	is.NotNil(bot, "NewBotWithClientAndURL")
+	is.Equal(strToken, bot.token, "token")
+	is.Equal(client, bot.client, "client")
+	is.Equal(apiURL, bot.apiURL, "apiURL")
 }
 
-//
-// TestNewBot validates variables passed
-//
+// TestNewBot validates variables passed.
 func TestNewBot(t *testing.T) {
+	is := assert.New(t)
 
 	strToken := "dummy-test-token"
 	bot := NewBot(strToken)
 
-	assert.NotNil(t, bot, "NewBot")
-	assert.Equal(t, strToken, bot.token, "token")
-	assert.Equal(t, TelegramBotAPI, bot.apiURL, "apiURL")
+	is.NotNil(bot, "NewBot")
+	is.Equal(strToken, bot.token, "token")
+	is.Equal(TelegramBotAPI, bot.apiURL, "apiURL")
 }
 
-//
-// TestNewBotWithClient validates variables passed
-//
+// TestNewBotWithClient validates variables passed.
 func TestNewBotWithClient(t *testing.T) {
+	is := assert.New(t)
 
 	strToken := "dummy-test-token"
 	client := &http.Client{}
 
 	bot := NewBotWithClient(strToken, client)
 
-	assert.NotNil(t, bot, "NewBotWithClient")
-	assert.Equal(t, strToken, bot.token, "token")
-	assert.Equal(t, client, bot.client, "client")
+	is.NotNil(bot, "NewBotWithClient")
+	is.Equal(strToken, bot.token, "token")
+	is.Equal(client, bot.client, "client")
 }
 
-//
-// TestNewBotWithClient validates variables passed
-//
+// TestNewBotWithClient validates variables passed.
 func TestNewBotWithClient_nil(t *testing.T) {
+	is := assert.New(t)
 
 	strToken := "dummy-test-token"
 
 	bot := NewBotWithClient(strToken, nil)
 
-	assert.NotNil(t, bot, "NewBotWithClient")
-	assert.Equal(t, strToken, bot.token, "token")
-	assert.NotNil(t, bot.client, "client should be created internally")
+	is.NotNil(bot, "NewBotWithClient")
+	is.Equal(strToken, bot.token, "token")
+	is.NotNil(bot.client, "client should be created internally")
 }

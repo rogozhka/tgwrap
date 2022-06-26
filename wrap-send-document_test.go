@@ -7,9 +7,10 @@ import (
 )
 
 func Test_SendDocument(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	chatID := requireEnv(envTestChatID)
 
 	inputFile := NewInputFileLocal("wrap-send-document.go")
 
@@ -18,5 +19,5 @@ func Test_SendDocument(t *testing.T) {
 			DisableNotification: true,
 		})
 
-	assert.Nil(t, err, "SendDocument err")
+	is.Nil(err, "SendDocument err")
 }

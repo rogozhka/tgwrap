@@ -7,17 +7,16 @@ import (
 )
 
 func Test_SendVideoWrap(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
-	filePath := requireEnv("TGWRAP_TEST_VIDEO_PATH")
+	chatID := requireEnv(envTestChatID)
+	filePath := requireEnv(envTestVideoPath)
 
 	inputFile := NewInputFileLocal(filePath)
-
 	_, err := bot.SendVideo(chatID, inputFile,
 		&SendVideoOpt{
 			DisableNotification: true,
 		})
-
-	assert.Nil(t, err, "SendVideo err")
+	is.Nil(err, "SendVideo err")
 }

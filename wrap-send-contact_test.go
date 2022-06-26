@@ -7,9 +7,10 @@ import (
 )
 
 func Test_SendContactWrap(t *testing.T) {
+	is := assert.New(t)
 	bot := createTestBotFromEnv()
 
-	chatID := requireEnv("TGWRAP_TEST_CHAT_ID")
+	chatID := requireEnv(envTestChatID)
 
 	firstName := "CIA"
 	phoneNumber := "(703) 482-0623"
@@ -19,5 +20,5 @@ func Test_SendContactWrap(t *testing.T) {
 			LastName: "Official",
 		})
 
-	assert.Nil(t, err, "SendContact err")
+	is.Nil(err, "SendContact err")
 }

@@ -1,5 +1,7 @@
 package tgwrap
 
+import "context"
+
 // EditMessageLiveLocationOpt represents optional params for EditMessageLiveLocation.
 type EditMessageLiveLocationOpt struct {
 	commonRequestOptions
@@ -41,15 +43,19 @@ func (p *bot) EditMessageLiveLocation(latitude float64, longitude float64, opt *
 
 		Longitude float64 `json:"longitude"`
 	}
+	if opt == nil {
+		opt = &EditMessageLiveLocationOpt{}
+	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
 
 	dataSend := sendFormat{
 		Latitude:  latitude,
 		Longitude: longitude,
 	}
 
-	if opt != nil {
-		dataSend.EditMessageLiveLocationOpt = *opt
-	}
+	dataSend.EditMessageLiveLocationOpt = *opt
 
 	var resp struct {
 		GenericResponse

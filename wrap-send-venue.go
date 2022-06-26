@@ -1,6 +1,7 @@
 package tgwrap
 
 import (
+	"context"
 	"fmt"
 )
 
@@ -39,22 +40,22 @@ type SendVenueOpt struct {
 // address: (string) Address of the venue.
 //
 // opt: (can be nil) optional params
-func (p *bot) SendVenue(chatID interface{}, latitude float64, longitude float64, title string, address string, opt *SendVenueOpt) (*Message, error) {
+func (p *bot) SendVenue(chatID interface{},
+	latitude float64,
+	longitude float64,
+	title string,
+	address string,
+	opt *SendVenueOpt,
+) (*Message, error) {
 
 	type sendFormat struct {
-		ChatID string `json:"chat_id"`
-
+		ChatID       string `json:"chat_id"`
 		SendVenueOpt `json:",omitempty"`
-
-		Latitude float64 `json:"latitude"`
-
-		Longitude float64 `json:"longitude"`
-
-		Title string `json:"title"`
-
-		Address string `json:"address"`
+		Latitude     float64 `json:"latitude"`
+		Longitude    float64 `json:"longitude"`
+		Title        string  `json:"title"`
+		Address      string  `json:"address"`
 	}
-
 	dataSend := sendFormat{
 		ChatID:    fmt.Sprint(chatID),
 		Latitude:  latitude,
@@ -63,16 +64,18 @@ func (p *bot) SendVenue(chatID interface{}, latitude float64, longitude float64,
 		Address:   address,
 	}
 
-	if opt != nil {
-		dataSend.SendVenueOpt = *opt
+	if opt == nil {
+		opt = &SendVenueOpt{}
 	}
+	if opt.Context == nil {
+		opt.Context = context.Background()
+	}
+	dataSend.SendVenueOpt = *opt
 
 	var resp struct {
 		GenericResponse
-
 		Result *Message `json:"result"`
 	}
-
 	err := p.getAPIResponse(opt.Context, "sendVenue", p.sendJSON, dataSend, &resp)
 	return resp.Result, err
 }
