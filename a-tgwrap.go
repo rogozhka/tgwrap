@@ -22,8 +22,8 @@ type BotOpt struct {
 	// API is optional apiURL; used default if "".
 	API string
 
-	// HideToken indicates apiKey should be excluded from logs.
-	HideToken bool
+	// ShowToken indicates apiKey should not hide token in err messages.
+	ShowToken bool
 }
 
 func optRefined(opt *BotOpt) *BotOpt {
@@ -52,7 +52,7 @@ type bot struct {
 
 	apiURL string
 
-	hideToken bool
+	showToken bool
 }
 
 // NewBot creates new object with associated token inside.
@@ -90,7 +90,7 @@ func NewBotWithOpt(token string, optRaw *BotOpt) *bot {
 		token:     strings.TrimSpace(token),
 		client:    opt.Client,
 		apiURL:    opt.API,
-		hideToken: opt.HideToken,
+		showToken: opt.ShowToken,
 	}
 
 	return p
@@ -111,11 +111,9 @@ func (e *wrapError) Unwrap() error {
 
 // maskToken wraps error replacing token.
 func (p *bot) maskToken(err error) error {
-
-	if !p.hideToken {
+	if p.showToken {
 		return err
 	}
-
 	return &wrapError{
 		msg: strings.Replace(err.Error(), p.token, "Token", -1),
 		err: err,
