@@ -1,4 +1,4 @@
-module git.firmus.ru/backend/tgwrap
+module github.com/rogozhka/tgwrap
 
 go 1.13
 
