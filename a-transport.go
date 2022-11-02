@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"mime/multipart"
 	"net/http"
 	"os"
@@ -41,7 +40,7 @@ func (p *bot) sendJSON(ctx context.Context, methodName string, bodyStruct interf
 	}
 
 	// empty result to return with errors
-	res := []byte{}
+	var res []byte
 
 	url := fmt.Sprintf("%s%s/%s", p.apiURL, p.token, methodName)
 
@@ -58,7 +57,6 @@ func (p *bot) sendJSON(ctx context.Context, methodName string, bodyStruct interf
 func (p *bot) postRequest(ctx context.Context, url string, contentType string, body io.Reader) ([]byte, error) {
 
 	var res []byte
-
 	req, err := http.NewRequest("POST", url, body)
 	if err != nil {
 		return nil, err
@@ -89,15 +87,15 @@ func (p *bot) postRequest(ctx context.Context, url string, contentType string, b
 // although should work with other API methods w/o
 // nested structures
 //
-// 2) it's unknown how to encode request with
-//    nested structures like ReplyMarkup so they are ignored.
+//  2. it's unknown how to encode request with
+//     nested structures like ReplyMarkup so they are ignored.
 func (p *bot) sendFormData(ctx context.Context, methodName string, bodyStruct interface{}) ([]byte, error) {
 
 	// empty result to return with errors
-	res := []byte{}
+	var res []byte
 	url := fmt.Sprintf("%s%s/%s", p.apiURL, p.token, methodName)
 
-	var buf bytes.Buffer
+	buf := bytes.Buffer{}
 	mpw := multipart.NewWriter(&buf)
 
 	t := reflect.TypeOf(bodyStruct)
@@ -106,31 +104,24 @@ func (p *bot) sendFormData(ctx context.Context, methodName string, bodyStruct in
 	// iterate over bodyStruct fields including contents
 	// of the embedded struct
 	for _, fieldT := range thestruct.Fields(t, thestruct.FieldsFilterDefault) {
-
 		v := r.FieldByName(fieldT.Name)
-
 		// ignore fields w/o struct tags
 		if len(fieldT.Tag) < 1 {
 			continue
 		}
-
 		stags, err := thestruct.ParseStructTagLiteral(string(fieldT.Tag))
 		if err != nil {
 			return res, err
 		}
-
 		jsonTag := stags.Tag("json")
 		formTag := stags.Tag("form")
 
-		//
 		// do not encode fields w/o "json" struct tag
 		// it's form encoding but we use json tags
 		// as universal encoding markup
-		//
 		if jsonTag == nil {
 			continue
 		}
-
 		if jsonTag.IsOpt("omitempty") && thestruct.IsEmptyValue(v) {
 			continue
 		}
@@ -139,7 +130,6 @@ func (p *bot) sendFormData(ctx context.Context, methodName string, bodyStruct in
 		if len(typeName) == 0 && formTag != nil && formTag.Value == "file" {
 
 			path := fmt.Sprint(v.Interface())
-
 			if len(path) < 1 {
 				// file member has all the tags
 				// but initialized as file_id || url
@@ -156,21 +146,16 @@ func (p *bot) sendFormData(ctx context.Context, methodName string, bodyStruct in
 				// but there can be not so many files in request struct ;)
 				defer f.Close()
 			}
-
 			part, err := mpw.CreateFormFile(jsonTag.Value, filepath.Base(path))
 			if err != nil {
 				return res, err
 			}
-
 			if _, err = io.Copy(part, f); err != nil {
 				return res, err
 			}
-
 			continue
 		}
-
 	writeField:
-
 		mpw.WriteField(jsonTag.Value, fmt.Sprintf("%v", v.Interface()))
 	}
 
@@ -189,16 +174,13 @@ func (p *bot) getAPIResponse(
 	bodyStruct interface{},
 	resultStruct interface{},
 ) error {
-
 	if nil == ctx {
 		ctx = context.Background()
 	}
-
 	data, err := sender(ctx, methodName, bodyStruct)
 	if err != nil {
 		return fmt.Errorf("%s | %w", methodName, err)
 	}
-
 	if err := json.Unmarshal(data, resultStruct); err != nil {
 		return fmt.Errorf("unmarshal | %w | %s", err, data)
 	}
@@ -211,17 +193,14 @@ func (p *bot) getAPIResponse(
 	if !f.IsValid() {
 		return fmt.Errorf("%v not found in target struct | %T", commonStruct, resultStruct)
 	}
-
 	// see "type assertion" topic ;)
 	resp, ok := f.Interface().(GenericResponse)
 	if !ok {
 		// field is not embedded but has (commonStruct) name
 		return fmt.Errorf("unmarshal target field is not %v | %T", commonStruct, resultStruct)
 	}
-
 	if !resp.OK {
 		return fmt.Errorf("API | %v | %v | %v", methodName, resp.ErrorCode, resp.Description)
 	}
-
 	return nil
 }
